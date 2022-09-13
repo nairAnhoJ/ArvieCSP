@@ -1,9 +1,9 @@
 Landing Page
 
-*Navbar - Ongoing
-*Content
+Navbar - Ongoing
+Content
   -Home
   -Products
   -About
   -Contact
-*Footer
+Footer
