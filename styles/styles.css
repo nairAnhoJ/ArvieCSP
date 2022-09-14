@@ -1,9 +1,3 @@
-.navbar {
-  transition: height 2s;
-}
-.navbar .container {
-  transition: height 2s;
-}
 .navbar .container .nav-items ul li {
   position: relative;
   padding: 0 25px;
