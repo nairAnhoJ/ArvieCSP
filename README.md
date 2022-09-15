@@ -14,12 +14,8 @@ master
       <li>Products</li>
       <li>About</li>
       <li>Contact</li>
-      master
-      <li>Login - Ongoing</li>
-
-      <li>Login</li>
-master
-      <li>Signup</li>
+      <li>Login - Done</li>
+      <li>Signup - Ongoing</li>
     </ul>
   <li>Footer</li>
 </ul>
