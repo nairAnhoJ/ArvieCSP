@@ -10,8 +10,8 @@
       <li>Products</li>
       <li>About</li>
       <li>Contact</li>
-      <li>Login - Ongoing</li>
-      <li>Signup</li>
+      <li>Login - Done</li>
+      <li>Signup - Ongoing</li>
     </ul>
   <li>Footer</li>
 </ul>
