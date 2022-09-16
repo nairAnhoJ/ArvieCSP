@@ -1,4 +1,7 @@
-<?php $loginPage = false; ?>
+<?php
+    $loginPage = false;
+    $memberID = '001';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
