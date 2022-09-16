@@ -3,11 +3,7 @@
 <h2>Front End</h2>
 <h4>Landing Page</h4>
 <ul>
-master
   <li>Navbar/Header - Done</li>
-
-  <li>Navbar/Header - Ongoing</li>
-master
   <li>Content</li>
     <ul>
       <li>Home</li>
