@@ -11,9 +11,14 @@
       <li>About</li>
       <li>Contact</li>
       <li>Login - Done</li>
-      <li>Signup - Ongoing</li>
+      <li>Signup - Done</li>
     </ul>
   <li>Footer</li>
+  <li>Member Page</li>
+  <ul>
+    <li>Dashboard - Ongoing</li>
+    <li>Edit Profile</li>
+  </ul>
 </ul>
 <br>
 <hr>
