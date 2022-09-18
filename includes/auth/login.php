@@ -2,27 +2,18 @@
 session_start();
  
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: ../index.php");
+    header("location: ../K/index.php");
     exit;
     
 }
-    include "./includes/config/conn.php";
+include_once ("../includes/D/config.php");
  
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
  
 if(isset($_POST["login"])){
-
-    include "./includes/config/conn.php";
-    $access_select = "SELECT access from accounts where $email_address = email_address";
-    $access_check = mysqli_query($conn, $access_select);
-    while($access_user = mysqli_fetch_assoc($access_check)){
-        $access = $access_user['access'];
-    }
-    if($access = false){
-        echo "bye bye bitch";
-    } else {
-    if(empty(trim($_POST["username"]))){
+ 
+if(empty(trim($_POST["username"]))){
     $username_err = "Please enter username.";
     }else{
         $username = trim($_POST["username"]);
@@ -35,8 +26,9 @@ if(isset($_POST["login"])){
     }
     
     if(empty($username_err) && empty($password_err)){
-        $login_auth = "SELECT id, first_name, lastname, user, pass, access, email_address, contact_number FROM accounts WHERE member_id = ?";
-        if($stmt = mysqli_prepare($conn, $login_auth)){
+        $sql = "SELECT id, user_uid, user_pwd, first_name, last_name, user_level, email_address FROM accounts WHERE user_uid = ?";
+        
+        if($stmt = mysqli_prepare($db_conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_username);
             
             $param_username = $username;
@@ -45,19 +37,20 @@ if(isset($_POST["login"])){
                 mysqli_stmt_store_result($stmt);
                 
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
-                    mysqli_stmt_bind_result($stmt, id, $first_name, $last_name, $user, $hashed_password, $contact_number, $email_address, $access);
+                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $last_name, $first_name, $user_level, $email_address);
                     if(mysqli_stmt_fetch($stmt)){
-                        if(password_verify($pass, $hashed_password)){
+                        if(password_verify($password, $hashed_password)){
                             session_start();
                             
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["member_id"] = $member_id;
-                            $_SESSION["access"] = true;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["user_level"] = $user_level;
                             $_SESSION["email_address"] = $email_address;
-                            $_SESSION["user"] = $user;
+                            $_SESSION["username"] = $username;
+                            $_SESSION["user_level"] = $user_level;
                             $_SESSION["first_name"] = $first_name;
                             $_SESSION["last_name"] = $last_name;
-                            header("location: /ARVIECSP/index.php");
+                            header("location: /RNA/K/index.php");
                         }else{
                             $login_err = "Invalid username or password.";
                         }
@@ -72,7 +65,7 @@ if(isset($_POST["login"])){
             mysqli_stmt_close($stmt);
         }
     }
-}
     mysqli_close($db_conn);
 }
+
 ?>

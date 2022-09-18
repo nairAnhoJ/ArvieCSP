@@ -3,21 +3,21 @@
 session_start();
  
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: ../index.php");
+    header("location: ./index.php");
     exit;
     
 }
-    include "./includes/config/conn.php";
+include "./includes/config/conn.php";
  
-$username = $password = "";
-$username_err = $password_err = $login_err = "";
+$email = $password = "";
+$email_err = $password_err = $login_err = "";
  
 if(isset($_POST["login"])){
  
-if(empty(trim($_POST["username"]))){
-    $username_err = "Please enter username.";
+if(empty(trim($_POST["email"]))){
+    $email_err = "Please enter username.";
     }else{
-        $username = trim($_POST["username"]);
+        $email = trim($_POST["email"]);
     }
     
     if(empty(trim($_POST["password"]))){
@@ -26,31 +26,31 @@ if(empty(trim($_POST["username"]))){
         $password = trim($_POST["password"]);
     }
     
-    if(empty($username_err) && empty($password_err)){
-        $login_auth = "SELECT member_id, first_name, lastname, user, pass, confirm_pass, access, email_address,contact_number FROM accounts WHERE member_id = ?";
+    if(empty($email_err) && empty($password_err)){
+        $login_select = "SELECT id, email_address, pass, first_name, last_name, access FROM accounts WHERE id = ?";
         
-        if($stmt = mysqli_prepare($conn, $login_auth)){
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
+        if($stmt = mysqli_prepare($conn, $login_select)){
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
             
-            $param_username = $username;
+            $param_email = $email;
             
             if(mysqli_stmt_execute($stmt)){
                 mysqli_stmt_store_result($stmt);
                 
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
-                    mysqli_stmt_bind_result($stmt, $member_id, $first_name, $last_name, $user, $hashed_password, $contact_number, $email_address, $access);
+                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $first_name, $last_name, $access);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             session_start();
                             
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["member_id"] = $member_id;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["email_address"] = $email;
                             $_SESSION["access"] = $access;
-                            $_SESSION["email_address"] = $email_address;
-                            $_SESSION["user"] = $user;
                             $_SESSION["first_name"] = $first_name;
                             $_SESSION["last_name"] = $last_name;
-                            header("location: /ARVIECSP/index.php");
+                            header("location: ./index.php");
+                            
                         }else{
                             $login_err = "Invalid username or password.";
                         }
@@ -61,12 +61,12 @@ if(empty(trim($_POST["username"]))){
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
             }
-
             mysqli_stmt_close($stmt);
         }
     }
     mysqli_close($conn);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -104,16 +104,16 @@ if(empty(trim($_POST["username"]))){
             </div>
 
             <!-- Login Form -->
-            <form class="mt-5">
+            <form class="mt-5" action="login.php" method="POST">
                 <div class="mb-6">
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Member ID or Email</label>
-                    <input type="text" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                    <input type="text" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                 </div>
                 <div class="mb-6">
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                    <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                    <label for="pass" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                    <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                 </div>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">Sign In</button>
+                <button type="submit" name="login" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">Sign In</button>
             </form>
 
         </div>
