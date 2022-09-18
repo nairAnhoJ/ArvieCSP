@@ -1,4 +1,5 @@
 <?php $loginPage = true; ?>
+<?php include_once "/ARVIECSP/includes/auth/login.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
