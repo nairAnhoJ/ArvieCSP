@@ -6,14 +6,23 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     exit;
     
 }
-include_once ("../includes/config/conn.php");
+    include "./includes/config/conn.php";
  
 $username = $password = "";
 $username_err = $password_err = $login_err = "";
  
 if(isset($_POST["login"])){
- 
-if(empty(trim($_POST["username"]))){
+
+    include "./includes/config/conn.php";
+    $access_select = "SELECT access from accounts where $email_address = email_address";
+    $access_check = mysqli_query($conn, $access_select);
+    while($access_user = mysqli_fetch_assoc($access_check)){
+        $access = $access_user['access'];
+    }
+    if($access = false){
+        echo "bye bye bitch";
+    } else {
+    if(empty(trim($_POST["username"]))){
     $username_err = "Please enter username.";
     }else{
         $username = trim($_POST["username"]);
@@ -26,8 +35,7 @@ if(empty(trim($_POST["username"]))){
     }
     
     if(empty($username_err) && empty($password_err)){
-        $login_auth = "SELECT member_id, first_name, lastname, user, pass, confirm_pass, access, email_address,contact_number FROM accounts WHERE member_id = ?";
-        
+        $login_auth = "SELECT id, first_name, lastname, user, pass, access, email_address, contact_number FROM accounts WHERE member_id = ?";
         if($stmt = mysqli_prepare($conn, $login_auth)){
             mysqli_stmt_bind_param($stmt, "s", $param_username);
             
@@ -37,14 +45,14 @@ if(empty(trim($_POST["username"]))){
                 mysqli_stmt_store_result($stmt);
                 
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
-                    mysqli_stmt_bind_result($stmt, $member_id, $first_name, $last_name, $user, $hashed_password, $contact_number, $email_address, $access);
+                    mysqli_stmt_bind_result($stmt, id, $first_name, $last_name, $user, $hashed_password, $contact_number, $email_address, $access);
                     if(mysqli_stmt_fetch($stmt)){
-                        if(password_verify($password, $hashed_password)){
+                        if(password_verify($pass, $hashed_password)){
                             session_start();
                             
                             $_SESSION["loggedin"] = true;
                             $_SESSION["member_id"] = $member_id;
-                            $_SESSION["access"] = $access;
+                            $_SESSION["access"] = true;
                             $_SESSION["email_address"] = $email_address;
                             $_SESSION["user"] = $user;
                             $_SESSION["first_name"] = $first_name;
@@ -64,6 +72,7 @@ if(empty(trim($_POST["username"]))){
             mysqli_stmt_close($stmt);
         }
     }
+}
     mysqli_close($db_conn);
 }
 ?>
