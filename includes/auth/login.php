@@ -28,7 +28,6 @@ if(isset($_POST["login"])){
     if(empty($email_address_err) && empty($password_err)){
         $login_select = "SELECT id, email_address, pass, first_name, last_name, access FROM accounts WHERE id = ?";
         
-        $test = mysqli_query($conn, $login_select);
         if($stmt = mysqli_prepare($conn, $login_select)){
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             
@@ -50,7 +49,6 @@ if(isset($_POST["login"])){
                             $_SESSION["last_name"] = $last_name;
                             $_SESSION["access"] = $access;
                             header("location: ./index.php");
-                            
                         }else{
                             $login_err = "Invalid username or password.";
                         }
@@ -64,7 +62,7 @@ if(isset($_POST["login"])){
             mysqli_stmt_close($stmt);
         }
     }
-        mysqli_close($db_conn);
-    }
+    mysqli_close($conn);
+}
 
 ?>
