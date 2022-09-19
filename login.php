@@ -1,73 +1,6 @@
 <?php $loginPage = true; ?>
-<?php
-session_start();
- 
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: ./index.php");
-    exit;
-    
-}
-include "./includes/config/conn.php";
- 
-$email = $password = "";
-$email_err = $password_err = $login_err = "";
- 
-if(isset($_POST["login"])){
- 
-if(empty(trim($_POST["email"]))){
-    $email_err = "Please enter username.";
-    }else{
-        $email = trim($_POST["email"]);
-    }
-    
-    if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
-    }else{
-        $password = trim($_POST["password"]);
-    }
-    
-    if(empty($email_err) && empty($password_err)){
-        $login_select = "SELECT id, email_address, pass, first_name, last_name, access FROM accounts WHERE id = ?";
-        
-        if($stmt = mysqli_prepare($conn, $login_select)){
-            mysqli_stmt_bind_param($stmt, "s", $param_email);
-            
-            $param_email = $email;
-            
-            if(mysqli_stmt_execute($stmt)){
-                mysqli_stmt_store_result($stmt);
-                
-                if(mysqli_stmt_num_rows($stmt) == 1){                    
-                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $first_name, $last_name, $access);
-                    if(mysqli_stmt_fetch($stmt)){
-                        if(password_verify($password, $hashed_password)){
-                            session_start();
-                            
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["email_address"] = $email;
-                            $_SESSION["access"] = $access;
-                            $_SESSION["first_name"] = $first_name;
-                            $_SESSION["last_name"] = $last_name;
-                            header("location: ./index.php");
-                            
-                        }else{
-                            $login_err = "Invalid username or password.";
-                        }
-                    }
-                } else{
-                    $login_err = "Invalid username or password.";
-                }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-            mysqli_stmt_close($stmt);
-        }
-    }
-    mysqli_close($conn);
-}
+<?php include "./includes/auth/login.php"; ?>
 
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -106,14 +39,14 @@ if(empty(trim($_POST["email"]))){
             <!-- Login Form -->
             <form class="mt-5" action="login.php" method="POST">
                 <div class="mb-6">
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Member ID or Email</label>
-                    <input type="text" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900"> <?php echo "$test"; ?>Member ID or Email</label>
+                    <input type="text" id="email" name="email_address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                 </div>
                 <div class="mb-6">
                     <label for="pass" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
                     <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                 </div>
-                <button type="submit" name="login" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">Sign In</button>
+                <button type="submit" name="login" id="login" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">Sign In</button>
             </form>
 
         </div>
