@@ -30,8 +30,8 @@
         <!-- Dropdown menu -->
         <div id="dropdownAvatarName" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-300 drop-shadow-xl" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 352px);" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom">
             <div class="py-3 px-4 text-sm text-gray-900">
-            <div class="font-medium ">John Arian Malondras</div>
-            <div class="truncate">john.arian@gmail.com</div>
+            <div class="font-medium "><?php echo $_SESSION["first_name"],' ', $_SESSION["last_name"]; ?></div>
+            <div class="truncate"><?php echo $_SESSION["email_address"];?></div>
             </div>
             <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
             <li>
@@ -45,7 +45,7 @@
             </li>
             </ul>
             <div class="py-1">
-            <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-200">Sign out</a>
+            <a href="./includes/auth/signout.php" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-200">Sign out</a>
             </div>
         </div>
     </div>

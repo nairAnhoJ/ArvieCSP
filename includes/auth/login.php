@@ -6,7 +6,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     exit;
     
 }
-include_once "./includes/config/conn.php";
+include_once ("./includes/config/conn.php");
  
 $email_address  = $password = "";
 $email_address_err = $password_err = $login_err = "";
@@ -26,9 +26,9 @@ if(isset($_POST["login"])){
     }
 
     if(empty($email_address_err) && empty($password_err)){
-        $login_select = "SELECT id, email_address, pass, first_name, last_name, access FROM accounts WHERE id = ?";
+        $sql = "SELECT id, email_address, pass, first_name, last_name, access FROM accounts WHERE email_address = ?";
         
-        if($stmt = mysqli_prepare($conn, $login_select)){
+        if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             
             $param_email = $email_address;
@@ -64,5 +64,4 @@ if(isset($_POST["login"])){
     }
     mysqli_close($conn);
 }
-
 ?>
