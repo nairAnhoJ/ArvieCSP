@@ -1,4 +1,6 @@
 <?php
+include "./includes/auth/session.php";
+
     $loginPage = false;
     $memberID = '001';
 ?>
@@ -20,7 +22,6 @@
 <body>
     <?php include_once "./header.php"; ?>
     
-
     
 </body>
 </html>

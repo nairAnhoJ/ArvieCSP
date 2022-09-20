@@ -1,6 +1,7 @@
 <?php $loginPage = false; ?>
+<?php include "./includes/auth/signup.php"; ?>
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,32 +36,32 @@
             </div>
 
             <!-- Sign up Form -->
-            <form class="mt-5">
+            <form class="mt-5" action="signup.php" method="POST">
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">First name</label>
-                        <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                        <input type="text" id="first_name" name="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                     </div>
                     <div>
                         <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Last name</label>
-                        <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                        <input type="text" id="last_name" name="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                     </div> 
                 </div>
                 <div class="mb-6">
-                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 ">Phone number</label>
-                    <input type="text" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxlength="11" required="">
+                    <label for="contact_number" class="block mb-2 text-sm font-medium text-gray-900 ">Contact Number</label>
+                    <input type="text" name="contact_number" id="contact_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxlength="11" required="">
                 </div>
                 <div class="mb-6">
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email address</label>
-                    <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                    <label for="email_address" class="block mb-2 text-sm font-medium text-gray-900">Email address</label>
+                    <input type="email" name="email_address" id="email_address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                 </div> 
                 <div class="mb-6">
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                    <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                    <label for="pass" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                    <input type="password" name="pass" id="pass" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                 </div> 
                 <div class="mb-6">
-                    <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900">Confirm password</label>
-                    <input type="password" id="confirm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                    <label for="confirm_pass" class="block mb-2 text-sm font-medium text-gray-900">Confirm password</label>
+                    <input type="password" name="confirm_pass" id="confirm_pass" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                 </div> 
                 <div class="flex items-start mb-6">
                     <div class="flex items-center h-5">
@@ -68,7 +69,7 @@
                     </div>
                     <label for="remember" class="ml-2 text-sm font-medium text-gray-900">I agree with the <a href="#" class="text-blue-600 hover:underline">terms and conditions</a>.</label>
                 </div>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">Sign Up</button>
+                <button type="submit" name="register"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focusr:ing-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">Sign Up</button>
             </form>
         </div>
         <p class="text-center mt-3 pb-5">Already have an account? <a href="./login.php" class="text-blue-700">Sign in</a></p>
