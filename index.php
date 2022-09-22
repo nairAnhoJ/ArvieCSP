@@ -1,6 +1,5 @@
 <?php
-include "./includes/auth/session.php";
-
+    include "./includes/auth/session.php";
     $loginPage = false;
     $memberID = '001';
 ?>

@@ -1,4 +1,4 @@
-<nav class="navbar px-2 sm:px-4 py-2.5 sm:pt-2.5 bg-emerald-800 fixed w-full z-20 top-0 left-0 border-b border-gray-600">
+<nav class="navbar px-2 sm:px-4 py-2.5 sm:pt-2.5 bg-emerald-800 fixed w-full z-50 top-0 left-0 border-b border-gray-600">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
 
     <div class="w-2/6 md:hidden flex">
@@ -21,8 +21,7 @@
             
         <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="float-right flex items-center text-sm font-medium text-neutral-400 rounded-full hover:text-white md:mr-0" type="button">
             <span class="sr-only">Open user menu</span>
-            <img class="w-11 h-11 rounded-full" src="../images/user/default-user.png" alt="user photo">
-            <!-- John Arian -->
+            <img class="w-11 h-11 rounded-full" src="../images/user/profile-pic/me.jpeg" alt="user photo">
             <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
 
@@ -53,7 +52,7 @@
         <div class="nav-items hidden justify-between items-center md:flex md:m-auto" id="navbar-sticky">
             <ul class="flex flex-col md:py-4 pt-6 pb-3 mt-3 bg-emerald-800 border-t border-gray-800 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
                 <li>
-                    <a href="#" class="block py-2 pr-4 pl-3 text-white bg-emerald-700 rounded md:bg-transparent md:text-white md:p-0" aria-current="page">Home</a>
+                    <a href="#" class="block py-2 pr-4 pl-3 text-neutral-400 bg-emerald-700 rounded md:bg-transparent md:text-neutral-400 md:p-0" aria-current="page">Home</a>
                 </li>
                 <li>
                     <a href="#" class="block py-2 pr-4 pl-3 text-neutral-400 hover:text-white rounded hover:bg-emerald-700 md:hover:bg-transparent md:p-0">Products</a>
@@ -67,6 +66,5 @@
             </ul>
         </div>
     </div>
-
   </div>
 </nav>
