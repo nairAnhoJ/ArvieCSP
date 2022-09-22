@@ -17,6 +17,25 @@
 </head>
 <body>
     <?php include_once "./user-header.php"; ?>
-    
+    <div class="flex flex-row">
+        <div class="basis-80 h-screen">
+            <?php include_once "./user-nav.php"; ?>
+        </div>
+        <div style="width: calc(100vw - 320px);" class="pt-24 px-6 pb-6 bg-emerald-100 h-screen">
+            <!-- Top Content -->
+            <div class="h-60 bg-emerald-800 rounded-2xl">
+                <div class="h-full pl-6 py-5 grid grid-rows-9 text-white items-center">
+                    <div class="font-medium text-xl">Overall Income</div>
+                    <div class="row-span-2 text-3xl font-black">₱ 169,000,069.00</div>
+                    <div class="row-span-2 text-3xl font-medium">Available Balance as of Sept 22, 2022</div>
+                    <div class="row-span-4 text-5xl font-black">₱ 6,900,069.00</div>
+                </div>
+            </div>
+            <!-- Bottom Content -->
+            <div style="height: calc(100% - 264px);" class="mt-6 bg-gray-300 rounded-2xl">
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>

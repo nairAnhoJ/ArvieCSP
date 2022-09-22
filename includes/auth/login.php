@@ -48,7 +48,7 @@ if(isset($_POST["login"])){
                             $_SESSION["first_name"] = $first_name;
                             $_SESSION["last_name"] = $last_name;
                             $_SESSION["access"] = $access;
-                            header("location: ./index.php");
+                            header("location: ./user/index.php");
                         }else{
                             $login_err = "Invalid username or password.";
                         }
