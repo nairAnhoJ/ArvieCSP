@@ -40,8 +40,6 @@ if(isset($_POST["login"])){
                     mysqli_stmt_bind_result($stmt, $id, $email_address, $hashed_password, $first_name, $last_name, $access);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
-                            session_start();
-                            
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["email_address"] = $email_address;
