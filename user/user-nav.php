@@ -1,14 +1,13 @@
-<div id="drawer-navigation" class="hidden md:block pt-24 drop-shadow-2xl border br-2 fixed z-40 h-screen p-4 overflow-y-auto bg-white w-80" tabindex="-1" aria-labelledby="drawer-navigation-label">
-    <div class="w-full h-16 mb-5">
-        <div class="grid grid-rows-3 grid-cols-4 h-full">
-            <div class="row-span-3">
-                <img src="../images/user/profile-pic/me.jpeg" class="h-full rounded-lg" alt="profile_pic">
+<div id="drawer-navigation" class="hidden overflow-hidden md:block pt-24 drop-shadow-2xl border br-2 fixed z-40 h-screen p-4 overflow-y-auto bg-white w-80 md:w-64 xl:w-72" tabindex="-1" aria-labelledby="drawer-navigation-label">
+    <div class="w-full h-16 md:h-14 xl:h-16 mb-5">
+        <div class="grid grid-rows-3 grid-cols-4 h-full w-full">
+            <div class="row-span-3 w-16 md:w-14  xl:w-16">
+                <img src="../images/user/profile-pic/me.jpeg" class="rounded-lg" alt="profile_pic">
             </div>
-            <div class="table col-span-3 row-span-2 pl-1 text-xl overflow-hidden">
-                <b class="table-cell align-bottom">John Arian Malondras</b>
+            <div class="table col-span-3 row-span-2 md:pl-2 text-xl md:text-base">
+                <b class="table-cell align-bottom whitespace-nowrap">John Arian Malondras</b>
             </div>
-            <div class="col-span-3 pl-1 flex">
-                <!-- <img src="../images/user/icons/members-icon.png" class="h-full" alt="members_icon"> -->
+            <div class="col-span-3 pl-2 md:text-base">
                 <span class="">SE22-000001</span>
             </div>
         </div>

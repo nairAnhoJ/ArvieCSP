@@ -1,5 +1,5 @@
-<nav class="navbar px-2 sm:px-4 py-2.5 sm:pt-2.5 bg-emerald-800 fixed w-full z-50 top-0 left-0 border-b border-gray-600">
-  <div class="container flex flex-wrap justify-between items-center mx-auto">
+<nav class="navbar px-4 py-2.5 sm:pt-2.5 bg-emerald-800 fixed w-full z-50 top-0 left-0 border-b border-gray-600">
+  <div class="flex flex-wrap justify-between items-center w-full">
 
     <div class="w-2/6 md:hidden flex">
         <button data-collapse-toggle="navbar-sticky" type="button" class="burger-button inline-flex items-center p-2 text-sm text-white rounded-lg focus:outline-none" aria-controls="navbar-sticky" aria-expanded="false">
