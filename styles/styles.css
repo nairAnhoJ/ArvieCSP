@@ -14,4 +14,11 @@
     height: 10px;
     background-color: #374151;
   }
+}
+
+.user-dashboard {
+  background-color: red;
+}
+.user-dashboard div .user-dashboard-content-container {
+  background-color: aqua;
 }/*# sourceMappingURL=styles.css.map */
