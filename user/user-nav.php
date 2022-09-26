@@ -5,10 +5,10 @@
                 <img src="../images/user/profile-pic/me.jpeg" class="rounded-lg" alt="profile_pic">
             </div>
             <div class="table col-span-3 row-span-2 md:pl-2 text-xl md:text-base">
-                <b class="table-cell align-bottom whitespace-nowrap">John Arian Malondras</b>
+                <b class="table-cell align-bottom whitespace-nowrap"><?php echo $_SESSION["first_name"],' ', $_SESSION["last_name"]; ?></b>
             </div>
             <div class="col-span-3 pl-2 md:text-base">
-                <span class="">SE22-000001</span>
+                <span class=""><?php echo $_SESSION["id"];?></span>
             </div>
         </div>
     </div>
