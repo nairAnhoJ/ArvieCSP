@@ -1,5 +1,59 @@
 <?php
 session_start();
+include_once ("../includes/config/conn.php");
+$db= $conn;
+date_default_timezone_set("Asia/Singapore");
+$dateNow = new DateTime(); 
+$dateNow  = $dateNow->format('M d, Y'); 
+
+$id = $_SESSION["id"];
+$SelectPresentBalance ="SELECT * FROM `totalbalance` WHERE `userID` = '$id';";
+$resultPresentBalance = mysqli_query($conn, $SelectPresentBalance);
+
+while($userRow = mysqli_fetch_assoc($resultPresentBalance)){
+    $totalBalance = $userRow['totalBalance'];
+
+}
+
+
+
+// code for getting the accounts//
+$tableNameTransaction="transaction";
+$columnsTransaction= ['transactionId', 'type','userName','userId','inviteName','inviteeName' ,'addedAmount', 'TotalBalance'];
+$fetchDataTransaction= fetch_transaction($db, $tableNameTransaction, $columnsTransaction);
+
+
+function fetch_transaction($db, $tableNameTransaction, $columnsTransaction){
+
+
+ if(empty($db)){
+  $msg= "Database connection error";
+ }elseif (empty($columnsTransaction) || !is_array($columnsTransaction)) {
+  $msg="columns Name must be defined in an indexed array";
+ }elseif(empty($tableNameTransaction)){
+   $msg= "Table Name is empty";
+}else{
+$columnName = implode(", ", $columnsTransaction);
+$id = $_SESSION["id"];
+$query = "SELECT * FROM `transaction` WHERE `userId` = '$id'";
+
+//  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
+$result = $db->query($query);
+if($result== true){ 
+ if ($result->num_rows > 0) {
+    $row= mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $msg= $row;
+ } else {
+    $msg= "No Data Found"; 
+ }
+}else{
+  $msg= mysqli_error($db);
+}
+}
+return $msg;
+}
+// end of code for getting the accounts//
+
 
 ?>
 <!DOCTYPE html>
@@ -79,8 +133,8 @@ session_start();
                 <div class="h-full pl-5 py-5 md:pl-3 md:py-2 grid grid-rows-9 text-white items-center">
                     <div class="font-medium text-xl md:text-lg xl:text-xl">Overall Income</div>
                     <div class="row-span-2 text-3xl md:text-2xl xl:text-3xl font-black">₱ 169,000,069.00</div>
-                    <div class="row-span-2 text-3xl md:text-2xl xl:text-3xl font-medium">Available Balance as of Sept 22, 2022</div>
-                    <div class="row-span-4 text-5xl md:text-4xl xl:text-5xl font-black">₱ 6,900,069.00</div>
+                    <div class="row-span-2 text-3xl md:text-2xl xl:text-3xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
+                    <div class="row-span-4 text-5xl md:text-4xl xl:text-5xl font-black">₱ <?php echo $totalBalance;?></div>
                 </div>
             </div>
 
@@ -92,26 +146,46 @@ session_start();
                     <!-- i-while loop lang to -->
 
                         <!-- Pag from Direct Referral -->
-                        <div class="w-full h-24 md:h-20 bg-neutral-200 mt-3 rounded-xl grid grid-cols-5 grid-rows-2">
+                        <?php           if(is_array($fetchDataTransaction)){      
+                         
+                                 foreach($fetchDataTransaction as $data){
+                                    $type = $data['type'];
+                                    $inviteName = $data['inviteName'];
+                                    $inviteeName = $data['inviteeName'];
+                                    $addedAmount = $data['addedAmount'];
+                                    if($type=="Direct Referral"){
+
+                                    
+                                 ?>
+
+                            <div class="w-full h-24 md:h-20 bg-neutral-200 mt-3 rounded-xl grid grid-cols-5 grid-rows-2">
                             <div class="self-end text-center pl-2 text-lg md:text-sm xl:text-base font-medium">Category</div>
                             <div class="self-end text-center text-lg md:text-sm xl:text-base font-medium">Invite's Name</div>
                             <div></div>
-                            <div class="row-span-2 col-span-2 self-center text-end mr-5 text-4xl md:text-2xl xl:text-3xl font-black">+ ₱ 500.00</div>
-                            <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold text-green-600">Direct Referral</div>
-                            <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold">J. Murphy</div>
+                            <div class="row-span-2 col-span-2 self-center text-end mr-5 text-4xl md:text-2xl xl:text-3xl font-black">+  ₱ <?php echo $addedAmount; ?></div>
+                            <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold text-green-600"> <?php echo $type; ?></div>
+                            <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold"><?php echo $inviteName; ?></div>
                         </div>
+                        <?php 
+                                    }
+                                    elseif($type=="Indirect Referral"){
+                                        ?>
 
-                        <!-- Pag from Indirect Referral -->
+                                         <!-- Pag from Indirect Referral -->
                         <div class="w-full h-24 md:h-20 bg-neutral-200 mt-3 rounded-xl grid grid-cols-5 grid-rows-2">
                             <div class="self-end text-center text-xl md:text-sm xl:text-base font-medium">Category</div>
                             <div class="self-end text-center text-xl md:text-sm xl:text-base font-medium">Downline Name</div>
                             <div class="self-end text-center text-xl md:text-sm xl:text-base font-medium">Invite's Name</div>
-                            <div class="row-span-2 col-span-2 self-center text-end mr-5 text-4xl md:text-2xl xl:text-3xl font-black">+ ₱ 10.00</div>
-                            <div class="self-start text-center text-2xl md:text-base xl:text-xl font-bold text-green-600">Indirect Referral</div>
-                            <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold">J. Murphy</div>
-                            <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold">J. Malondras</div>
+                            <div class="row-span-2 col-span-2 self-center text-end mr-5 text-4xl md:text-2xl xl:text-3xl font-black">+ ₱ <?php echo $addedAmount; ?></div>
+                            <div class="self-start text-center text-2xl md:text-base xl:text-xl font-bold text-green-600"><?php echo $type; ?></div>
+                            <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold"><?php echo $inviteeName; ?></div>
+                            <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold"><?php echo $inviteName; ?></div>
                         </div>
 
+                                    <?php 
+                                    }
+                                    elseif($type=="Rebate"){
+                                        ?>
                         <!-- Pag from rebate -->
                         <div class="w-full h-24 md:h-20 bg-neutral-200 mt-3 rounded-xl grid grid-cols-5 grid-rows-2">
                             <div class="self-end text-center text-xl md:text-sm xl:text-base font-medium">Category</div>
@@ -122,9 +196,12 @@ session_start();
                             <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold">Botanical</div>
                             <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold">B. Black</div>
                         </div>
-
-                        <!-- Pag out or withdraw -->
-                        <div class="w-full h-24 md:h-20 bg-neutral-200 mt-3 rounded-xl grid grid-cols-5 grid-rows-2">
+                                    <?php 
+                                    }
+                                    elseif($type=="Withdrawal"){
+                                        ?>
+                         <!-- Pag out or withdraw -->
+                         <div class="w-full h-24 md:h-20 bg-neutral-200 mt-3 rounded-xl grid grid-cols-5 grid-rows-2">
                             <div class="self-end text-center text-xl md:text-sm font-medium">Category</div>
                             <div class="self-end text-center text-xl font-medium"></div>
                             <div class="self-end text-center text-xl font-medium"></div>
@@ -132,6 +209,15 @@ session_start();
                             <div class="self-start text-center text-2xl md:text-lg font-bold text-red-600">Withdrawal</div>
                             <div class="self-start text-center text-2xl font-bold"></div>
                         </div>
+                                    <?php 
+                                    }
+                             }}else{
+                                 }
+                                ?>
+                  
+                    
+
+                       
 
                     <!-- end -->
                 </div>
