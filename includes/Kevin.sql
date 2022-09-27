@@ -24,7 +24,8 @@ create table accounts (
 CREATE table payments (
 	transaction_id int(60) not null,
 	id int(60) PRIMARY KEY NOT NULL,
-	parent_id int(60) not null);
+	parent_id int(60) not null
+	total_amount int(60) not null);
 
 CREATE table relationship(
 	level int(7) NOT NULL,
@@ -43,3 +44,15 @@ INSERT INTO relationship (level, dl, rbt) VALUES
 	(9,500000,10),
 	(10,500000,10); 
 
+CREATE TABLE `invites` (
+  `invitesID` int(30) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `idOfInvite` int(30) NOT NULL,
+  `invitee` varchar(20) NOT NULL,
+  `member_id` int(30) NOT NULL);
+	
+select Name,
+-> @counter:=@counter+1 as IncrementingValuebyOne
+-> from incrementCounterDemo;
+
+SELECT  FROM invites where (insert conditions here) @counter LIMIT 10;
