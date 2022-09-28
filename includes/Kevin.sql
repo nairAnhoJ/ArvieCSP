@@ -45,12 +45,12 @@ INSERT INTO relationship (level, dl, rbt) VALUES
 	(10,500000,10); 
 
 CREATE TABLE `invites` (
-  `invitesID` int(30) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `idOfInvite` int(30) NOT NULL,
-  `invitee` varchar(20) NOT NULL,
+  `user_relation` varchar(60) NOT NULL,
+  `parent_name` varchar(20) NOT NULL,
+  `member_name` int(30) NOT NULL,
+  `parent_id` varchar(20) NOT NULL,
   `member_id` int(30) NOT NULL);
-	
+
 select Name,
 -> @counter:=@counter+1 as IncrementingValuebyOne
 -> from incrementCounterDemo;
