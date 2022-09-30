@@ -7,6 +7,8 @@ date_default_timezone_set("Asia/Singapore");
 $dateNow = new DateTime(); 
 $dateNow  = $dateNow->format('M d, Y'); 
 
+
+
 $id = $_SESSION["id"];
 $SelectPresentBalance ="SELECT * FROM `totalbalance` WHERE `userID` = '$id';";
 $resultPresentBalance = mysqli_query($conn, $SelectPresentBalance);
