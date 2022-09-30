@@ -3,17 +3,22 @@
 <h2>Front End</h2>
 <h4>Landing Page</h4>
 <ul>
-  <li>Navbar/Header - Ongoing</li>
+  <li>Navbar/Header - Done</li>
   <li>Content</li>
     <ul>
       <li>Home</li>
       <li>Products</li>
       <li>About</li>
       <li>Contact</li>
-      <li>Login</li>
-      <li>Signup</li>
+      <li>Login - Done</li>
+      <li>Signup - Done</li>
     </ul>
   <li>Footer</li>
+  <li>Member Page</li>
+  <ul>
+    <li>Dashboard - Ongoing</li>
+    <li>Edit Profile</li>
+  </ul>
 </ul>
 <br>
 <hr>

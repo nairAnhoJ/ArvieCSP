@@ -1,3 +1,9 @@
+<?php
+    // include "./includes/auth/session.php";
+    session_start();
+    $loginPage = false;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,15 +13,14 @@
     <link rel="stylesheet" href="./styles/styles.css">
     <!-- <link rel="stylesheet" href="./dist/output.css"> -->
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
-    <title>Arvie Cosmetic & Skincare  ProductsTrading</title>
+    <title>Arvie Direct Sales</title>
     <script src="./js/tailwind-3.1.8.js"></script>
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script src="./js/jquery-3.6.1.min.js"></script>
 </head>
 <body>
-    <?php include_once "./header.php"; ?>
+    <?php include_once "./header.php"; echo $_SESSION["id"]; ?>
     
-
     
 </body>
 </html>
