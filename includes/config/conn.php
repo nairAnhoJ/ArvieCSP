@@ -1,10 +1,14 @@
 <?php
     $server = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "ArvieDS";
+    $username = "arviecsp";
+    $password = "p@55w0rd";
+    $database = "arvieds";
 
     if(!$conn = mysqli_connect($server, $username, $password, $database)){
         die("Failed to Connect to Database!");
-    } else $conn = mysqli_connect($server, $username, $password, $database);
+    }
+
+    // if(!$conn = mysqli_connect($server, $username, $password, $database)){
+    //     die("Failed to Connect to Database!");
+    // } else $conn = mysqli_connect($server, $username, $password, $database);
 ?>

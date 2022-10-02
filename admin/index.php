@@ -141,6 +141,11 @@ if(isset($_GET['Approve'])){
     <title>Arvie Cosmetic & Skincare  ProductsTrading</title>
 
     <style>
+        @media screen and (max-width: 767px) {
+            .sales-dashboard{
+                height: 66vh !important;
+            }
+        }
         @media screen and (min-width: 768px) {
             .user-dashboard-content-container {
                 width: calc(100vw - 256px);
@@ -162,6 +167,9 @@ if(isset($_GET['Approve'])){
                 width: 1px;
                 height: 10px;
                 background-color: #374151;
+            }
+            .sales-dashboard{
+                height: calc(33% - 15px) !important;
             }
         }
         @media screen and (min-width: 1280px) {
@@ -190,166 +198,108 @@ if(isset($_GET['Approve'])){
     </style>
 </head>
 <body>
-    
+  <?php include_once "./admin-header.php"; ?>
+  <div class="md:flex md:flex-row w-full">
+    <div class="display-none md:display-block md:w-1/4 2xl:w-1/5">
+      <?php include_once "./admin-nav.php"; ?>
+    </div>
+    <div class="user-dashboard-content-container pt-5 px-6 pb-5 bg-emerald-100 w-full md:w-3/4 2xl:w-4/5">
+        <!-- SALES -->
+        <div class="sales-dashboard grid mb-5 rounded-lg border border-gray-200 shadow-sm md:grid-cols-4 shadow-xl">
+            <figure class="flex flex-col justify-center items-center text-center bg-white rounded-t-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg md:border-r">
+                    <h1 class="mb-2 font-black text-4xl md:text-2xl">Total Sales</h1>
+                    <p class="mt-2 font-medium text-2xl md:text-xl">₱ 999,999,999.00</p>
+            </figure>
 
-    <?php include_once "./user-header.php"; ?>
-    <div class="flex flex-row">
-        <div class="basis-80 md:basis-64 xl:basis-72 h-screen">
-            <?php include_once "./user-nav.php"; ?>
+            <figure class="flex flex-col justify-center items-center text-center bg-white border-b border-gray-200 md:border-r">
+                    <h1 class="mb-2 font-black text-2xl md:text-xl">Sales Today</h1>
+                    <p class="mt-2 font-medium text-xl">₱ 999,999,999.00</p>
+            </figure>
+
+            <figure class="flex flex-col justify-center items-center text-center bg-white border-b border-gray-200 md:border-b-0 md:border-r">
+                    <h1 class="mb-2 font-black text-2xl md:text-xl">Sales This Month</h1>
+                    <p class="mt-2 font-medium text-xl">₱ 999,999,999.00</p>
+            </figure>
+
+            <figure class="flex flex-col justify-center items-center text-center bg-white rounded-b-lg border-gray-200 md:rounded-br-lg">
+                    <h1 class="mb-2 font-black text-2xl md:text-xl">Sales This Year</h1>
+                    <p class="mt-2 font-medium text-xl">₱ 999,999,999.00</p>
+            </figure>
         </div>
-       
 
-        <div class="user-dashboard-content-container pt-24 px-6 pb-6 bg-emerald-100 h-screen">
-        <div class="flex flex-col">
-          <!-- Button trigger modal -->
+        <div style="height: 66%;" class="grid grid-rows-4 md:grid-rows-2 grid-cols-2 md:grid-cols-4 gap-4">
+            <!-- MEMBERS -->
+            <div class="order-first row-span-1 col-span-2 grid mb-6 rounded-lg border border-gray-200 shadow-sm grid-cols-2 shadow-xl w-full h-full">
+                <figure class="flex flex-col justify-center items-center text-center bg-white rounded-l-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg border-r">
+                    <h1 class="mb-2 font-black md:text-xl">Total Members</h1>
+                    <p class="mt-2 font-medium">999,999</p>
+                </figure>
 
-  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-    <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
-      <div class="overflow-hidden">
-        <table class="min-w-full text-center">
-          <thead class="border-b bg-gray-800">
-            <tr>
-              <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                #
-              </th>
-              <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                Id
-              </th>
-              <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                Email
-              </th>
-              <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                Name
-              </th>
-              <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                Invitee
-              </th>
-              <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                Action
-              </th>
-            </tr>
-          </thead class="border-b">
-          <tbody>
-            <?php           if(is_array($fetchDataAccounts)){      
-                         $number = 1;
-                                 foreach($fetchDataAccounts as $data){
-                                    $fname = $data['first_name'];
-                                    $lname = $data['last_name'];
-                                    $email = $data['email_address'];
-                                    $id = $data['id'];
+                <figure class="flex flex-col justify-center items-center text-center bg-white border-b border-gray-200 rounded-r-lg">
+                    <h1 class="mb-2 font-black md:text-md">New Members Today</h1>
+                    <p class="mt-2 font-medium">999,999</p>
+                </figure>
+            </div>
+            <!-- MEMBERS WITH MOST INVITES -->
+            <div class="order-last md:order-12 row-span-2 col-span-2 grid mb-6 rounded-lg border border-gray-200 shadow-sm md:grid-cols-1 shadow-xl w-full h-full">
+                <figure class="overflow-auto flex flex-col pt-2 text-center  bg-white rounded-l-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg md:border-r">
+                    <h1 class="pb-2 font-black md:text-md sticky top-0 bg-white">Top Points Earner</h1>
+                    <span class="mt-2">
+                        <p class="ml-5 inline-block font-medium float-left">1. JOHN ARIAN MALONDRAS</p>
+                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                    </span>
+                    <span class="mt-2">
+                        <p class="ml-5 inline-block font-medium float-left">2. CEDRICK JAMES OROZO</p>
+                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                    </span>
+                    <span class="mt-2">
+                        <p class="ml-5 inline-block font-medium float-left">3. KEVIN ROY MARERO</p>
+                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                    </span>
+                    <span class="mt-2">
+                        <p class="ml-5 inline-block font-medium float-left">4. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                    </span>
+                    <span class="mt-2">
+                        <p class="ml-5 inline-block font-medium float-left">5. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                    </span>
+                    <span class="mt-2">
+                        <p class="ml-5 inline-block font-medium float-left">6. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                    </span>
+                    <span class="mt-2">
+                        <p class="ml-5 inline-block font-medium float-left">7. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                    </span>
+                    <span class="mt-2">
+                        <p class="ml-5 inline-block font-medium float-left">8. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                    </span>
+                    <span class="mt-2">
+                        <p class="ml-5 inline-block font-medium float-left">9. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                    </span>
+                    <span class="mt-2">
+                        <p class="ml-5 inline-block font-medium float-left">10. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                    </span>
+                </figure>
+            </div>
+            <!-- PAYOUT -->
+            <div class="md:order-last col-span-2 grid mb-6 rounded-lg border border-gray-200 shadow-sm grid-cols-2 shadow-xl w-full h-full">
+                <figure class="flex flex-col justify-center items-center text-center bg-white rounded-l-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg border-r">
+                    <h1 class="mb-2 font-black md:text-2xl">Total Payout</h1>
+                    <p class="mt-2 font-medium">₱ 999,999,999.00</p>
+                </figure>
 
+                <figure class="flex flex-col justify-center items-center text-center bg-white border-b border-gray-200 rounded-r-lg">
+                    <h1 class="mb-2 font-black md:text-lg">Payout This Month</h1>
+                    <p class="mt-2 font-medium">₱ 999,999,999.00</p>
+                </figure>
+            </div>
 
-                                 
-
-                                 ?>
-
-            <tr class="bg-white border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><?php echo $number ?></td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              <?php echo $id ;?>
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              <?php echo $email ;?>
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              <?php echo $fname . " ". $lname; ?>
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              <?php echo "Invitee Name" ;?>
-              </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                <a href="index.php?Approve=<?php echo $id; ?>"   id= "finished<?php echo $id; ?>"class=" inline-block px-6 py-2 border-2 border-green-500 text-green-500 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" >Approve</a>
-                <!-- <button type="button" class="inline-block px-6 py-2 border-2 border-green-500 text-green-500 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                     Approve
-                </button> -->
-                
-                
-            </td>
-
-            </tr class="bg-white border-b">
-            <?php 
-         $number++; }}else{
-            }
-                ?>
-          </tbody>
-        </table>
-        
-      </div>
-    </div>
-  </div>
-</div>
         </div>
     </div>
-
-    <!-- <div class="">
-  <button type="button" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-    Vertically centered modal
-  </button>
-  <button type="button" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">
-    Vertically centered scrollable modal
-  </button>
-</div> -->
-<!-- 
-<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
-  <div class="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
-    <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-      <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-        <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalScrollableLabel">
-          Modal title
-        </h5>
-        <button type="button"
-          class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-          data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body relative p-4">
-        <p>This is a vertically centered modal.</p>
-      </div>
-      <div
-        class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-        <button type="button"
-          class="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
-          data-bs-dismiss="modal">
-          Close
-        </button>
-        <button type="button"
-          class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
-          Save changes
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenteredScrollable" aria-modal="true" role="dialog">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
-    <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-      <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-        <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalCenteredScrollableLabel">
-          Modal title
-        </h5>
-        <button type="button"
-          class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-          data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body relative p-4">
-        <p>This is some placeholder content to show a vertically centered modal. We've added some extra copy here to show how vertically centering the modal works when combined with scrollable modals. We also use some repeated line breaks to quickly extend the height of the content, thereby triggering the scrolling. When content becomes longer than the predefined max-height of modal, content will be cropped and scrollable within the modal.</p>
-    <br><br><br><br><br><br><br><br><br><br>
-    <p>Just like that.</p>
-      </div>
-      <div
-        class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-        <button type="button"
-          class="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
-          data-bs-dismiss="modal">
-          Close
-        </button>
-        <button type="button"
-          class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
-          Save changes
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
 </body>
 </html>
