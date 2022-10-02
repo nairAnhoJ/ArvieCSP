@@ -20,7 +20,7 @@
     
     <div class="container bg-white relative top-20 mx-auto w-11/12 max-w-sm md:max-w-xl">
         <div class="container shadow-xl p-5 rounded-lg">
-            <h1 class="text-emerald-800 text-2xl text-center mb-5">Welcome to<br>Arvie Cosmetics<br>And<br>Skin Products Trading</h1>
+            <h1 class="text-emerald-800 text-2xl text-center mb-5">Welcome to<br>Arvie Direct Sales</h1>
             <hr>
 
             <!-- Error Message (Normally Hidden)-->
@@ -37,6 +37,10 @@
 
             <!-- Sign up Form -->
             <form class="mt-5" action="signup.php" method="POST">
+                <div class="mb-6">
+                    <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Referral Code</label>
+                    <input type="text" name="ref_code" id="ref_code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                </div>
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">First name</label>
@@ -48,13 +52,31 @@
                     </div> 
                 </div>
                 <div class="mb-6">
+                    <label for="contact_number" class="block mb-2 text-sm font-medium text-gray-900 ">Address</label>
+                    <input type="text" name="contact_number" id="contact_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxlength="11" required="">
+                </div>
+                <div class="mb-6">
+                    <label for="contact_number" class="block mb-2 text-sm font-medium text-gray-900 ">Birthday</label>
+                    <input type="date" name="contact_number" id="contact_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxlength="11" required="">
+                </div>
+                <div class="mb-6">
                     <label for="contact_number" class="block mb-2 text-sm font-medium text-gray-900 ">Contact Number</label>
                     <input type="text" name="contact_number" id="contact_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxlength="11" required="">
                 </div>
                 <div class="mb-6">
                     <label for="email_address" class="block mb-2 text-sm font-medium text-gray-900">Email address</label>
                     <input type="email" name="email_address" id="email_address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
-                </div> 
+                </div>
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">SSS Number</label>
+                        <input type="text" id="sss_num" name="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                    </div>
+                    <div>
+                        <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">TIN</label>
+                        <input type="text" id="tin" name="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                    </div> 
+                </div>
                 <div class="mb-6">
                     <label for="pass" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
                     <input type="password" name="pass" id="pass" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">

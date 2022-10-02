@@ -23,7 +23,7 @@ $loginPage = true; ?>
     
     <div class="container bg-white relative top-24 md:top-28 mx-auto w-11/12 max-w-sm">
         <div class="container shadow-xl p-5 rounded-lg">
-            <h1 class="text-emerald-800 text-2xl text-center mb-5">Welcome to<br>Arvie Cosmetics<br>And<br>Skin Products Trading</h1>
+            <h1 class="text-emerald-800 text-2xl text-center mb-5">Welcome to<br>Arvie Direct Sales</h1>
             <hr>
 
             <!-- Error Message (Normally Hidden)-->
