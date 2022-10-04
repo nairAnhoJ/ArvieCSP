@@ -46,6 +46,8 @@ if(isset($_POST["login"])){
                             $_SESSION["first_name"] = $first_name;
                             $_SESSION["last_name"] = $last_name;
                             $_SESSION["access"] = $access;
+                            $_SESSION["admin"] = $admin;
+
 
                             if($admin==true){
                                 header("location: ./admin/index.php");
