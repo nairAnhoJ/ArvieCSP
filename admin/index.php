@@ -141,12 +141,12 @@ if(isset($_GET['Approve'])){
     <title>Arvie Cosmetic & Skincare  ProductsTrading</title>
 
     <style>
-        @media screen and (max-width: 767px) {
+        @media screen and (max-width: 1023px) {
             .sales-dashboard{
                 height: 66vh !important;
             }
         }
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 1024px) {
             .user-dashboard-content-container {
                 width: calc(100vw - 256px);
             }
@@ -170,6 +170,9 @@ if(isset($_GET['Approve'])){
             }
             .sales-dashboard{
                 height: calc(33% - 15px) !important;
+            }
+            .content-container{
+                height: calc(100vh - 73px);
             }
         }
         @media screen and (min-width: 1280px) {
@@ -199,107 +202,115 @@ if(isset($_GET['Approve'])){
 </head>
 <body>
   <?php include_once "./admin-header.php"; ?>
-  <div class="md:flex md:flex-row w-full">
-    <div class="display-none md:display-block md:w-1/4 2xl:w-1/5">
+  <div class="content-container lg:flex lg:flex-row w-full">
+    <div class="display-none lg:display-block lg:w-1/4 xl:w-1/5 2xl:w-1/5">
       <?php include_once "./admin-nav.php"; ?>
     </div>
-    <div class="user-dashboard-content-container pt-5 px-6 pb-5 bg-emerald-100 w-full md:w-3/4 2xl:w-4/5">
+    <div class="user-dashboard-content-container pt-5 px-6 pb-5 bg-emerald-100 w-full lg:w-3/4 xl:w-4/5 2xl:w-4/5">
         <!-- SALES -->
-        <div class="sales-dashboard grid mb-5 rounded-lg border border-gray-200 shadow-sm md:grid-cols-4 shadow-xl">
-            <figure class="flex flex-col justify-center items-center text-center bg-white rounded-t-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg md:border-r">
-                    <h1 class="mb-2 font-black text-4xl md:text-2xl">Total Sales</h1>
-                    <p class="mt-2 font-medium text-2xl md:text-xl">₱ 999,999,999.00</p>
+        <div class="sales-dashboard grid mb-5 rounded-lg border border-gray-200 shadow-sm lg:grid-cols-4 shadow-xl">
+            <figure class="flex flex-col justify-center items-center text-center bg-white rounded-t-lg border-b border-gray-200 lg:rounded-t-none lg:rounded-tl-lg lg:border-r">
+                    <h1 class="mb-2 font-medium text-2xl md:text-3xl lg:text-lg xl:text-xl 2xl:text-3xl">Total Sales</h1>
+                    <p class="mt-2 font-bold text-4xl md:text-5xl lg:text-xl xl:text-2xl 2xl:text-4xl">₱ 999,999,999.00</p>
             </figure>
 
-            <figure class="flex flex-col justify-center items-center text-center bg-white border-b border-gray-200 md:border-r">
-                    <h1 class="mb-2 font-black text-2xl md:text-xl">Sales Today</h1>
-                    <p class="mt-2 font-medium text-xl">₱ 999,999,999.00</p>
+            <figure class="flex flex-col justify-center items-center text-center bg-white border-b border-gray-200 lg:border-r">
+                    <h1 class="mb-2 font-medium text-xl md:text-2xl lg:text-lg xl:text-xl 2xl:text-2xl">Sales Today</h1>
+                    <p class="mt-2 font-bold text-2xl md:text-4xl lg:text-xl xl:text-2xl 2xl:text-3xl">₱ 999,999,999.00</p>
             </figure>
 
-            <figure class="flex flex-col justify-center items-center text-center bg-white border-b border-gray-200 md:border-b-0 md:border-r">
-                    <h1 class="mb-2 font-black text-2xl md:text-xl">Sales This Month</h1>
-                    <p class="mt-2 font-medium text-xl">₱ 999,999,999.00</p>
+            <figure class="flex flex-col justify-center items-center text-center bg-white border-b border-gray-200 lg:border-b-0 lg:border-r">
+                    <h1 class="mb-2 font-medium text-xl md:text-2xl lg:text-lg xl:text-xl 2xl:text-2xl">Sales This Month</h1>
+                    <p class="mt-2 font-bold text-2xl md:text-4xl lg:text-xl xl:text-2xl 2xl:text-3xl">₱ 999,999,999.00</p>
             </figure>
 
-            <figure class="flex flex-col justify-center items-center text-center bg-white rounded-b-lg border-gray-200 md:rounded-br-lg">
-                    <h1 class="mb-2 font-black text-2xl md:text-xl">Sales This Year</h1>
-                    <p class="mt-2 font-medium text-xl">₱ 999,999,999.00</p>
+            <figure class="flex flex-col justify-center items-center text-center bg-white rounded-b-lg border-gray-200 lg:rounded-br-lg">
+                    <h1 class="mb-2 font-medium text-xl md:text-2xl lg:text-lg xl:text-xl 2xl:text-2xl">Sales This Year</h1>
+                    <p class="mt-2 font-bold text-2xl md:text-4xl lg:text-xl xl:text-2xl 2xl:text-3xl">₱ 999,999,999.00</p>
             </figure>
         </div>
 
-        <div style="height: 66%;" class="grid grid-rows-4 md:grid-rows-2 grid-cols-2 md:grid-cols-4 gap-4">
+        <div style="height: 66%;" class="grid grid-rows-4 lg:grid-rows-2 grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- MEMBERS -->
             <div class="order-first row-span-1 col-span-2 grid mb-6 rounded-lg border border-gray-200 shadow-sm grid-cols-2 shadow-xl w-full h-full">
-                <figure class="flex flex-col justify-center items-center text-center bg-white rounded-l-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg border-r">
-                    <h1 class="mb-2 font-black md:text-xl">Total Members</h1>
-                    <p class="mt-2 font-medium">999,999</p>
+                <figure class="flex flex-col justify-center items-center text-center bg-white rounded-l-lg border-b border-gray-200 lg:rounded-t-none lg:rounded-tl-lg border-r">
+                    <h1 class="mb-2 font-medium text-lg md:text-3xl lg:text-lg xl:text-2xl 2xl:text-3xl">Total Members</h1>
+                    <p class="mt-2 font-bold text-xl md:text-5xl lg:text-xl xl:text-2xl 2xl:text-4xl">999,999</p>
                 </figure>
 
                 <figure class="flex flex-col justify-center items-center text-center bg-white border-b border-gray-200 rounded-r-lg">
-                    <h1 class="mb-2 font-black md:text-md">New Members Today</h1>
-                    <p class="mt-2 font-medium">999,999</p>
+                    <h1 class="mb-2 font-medium text-lg md:text-2xl lg:text-lg xl:text-2xl 2xl:text-2xl">New Members Today</h1>
+                    <p class="mt-2 font-bold text-xl md:text-4xl lg:text-xl xl:text-2xl 2xl:text-3xl">999,999</p>
                 </figure>
             </div>
             <!-- MEMBERS WITH MOST INVITES -->
-            <div class="order-last md:order-12 row-span-2 col-span-2 grid mb-6 rounded-lg border border-gray-200 shadow-sm md:grid-cols-1 shadow-xl w-full h-full">
-                <figure class="overflow-auto flex flex-col pt-2 text-center  bg-white rounded-l-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg md:border-r">
-                    <h1 class="pb-2 font-black md:text-md sticky top-0 bg-white">Top Points Earner</h1>
+            <div class="order-last lg:order-12 row-span-2 col-span-2 grid mb-6 rounded-lg border border-gray-200 shadow-sm lg:grid-cols-1 shadow-xl w-full h-full">
+                <figure class="overflow-auto flex flex-col pt-2 md:pt-3 2xl:pt-5 text-center  bg-white rounded-lg border-b border-gray-200 lg:rounded-t-none lg:rounded-tl-lg lg:border-r">
+                    <h1 class="pb-2 2xl:pb-5 font-black md:text-3xl lg:text-lg xl:text-2xl 2xl:text-5xl sticky top-0 bg-white">Top Points Earner</h1>
                     <span class="mt-2">
-                        <p class="ml-5 inline-block font-medium float-left">1. JOHN ARIAN MALONDRAS</p>
-                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                        <p class="ml-5 inline-block font-medium float-left md:text-xl 2xl:text-3xl">1. JOHN ARIAN MALONDRAS</p>
+                        <p class="mr-5 inline-block font-medium float-right md:text-xl 2xl:text-3xl">999</p>
                     </span>
                     <span class="mt-2">
-                        <p class="ml-5 inline-block font-medium float-left">2. CEDRICK JAMES OROZO</p>
-                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                        <p class="ml-5 inline-block font-medium float-left md:text-xl 2xl:text-3xl">2. CEDRICK JAMES OROZO</p>
+                        <p class="mr-5 inline-block font-medium float-right md:text-xl 2xl:text-3xl">999</p>
                     </span>
                     <span class="mt-2">
-                        <p class="ml-5 inline-block font-medium float-left">3. KEVIN ROY MARERO</p>
-                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                        <p class="ml-5 inline-block font-medium float-left md:text-xl 2xl:text-3xl">3. KEVIN ROY MARERO</p>
+                        <p class="mr-5 inline-block font-medium float-right md:text-xl 2xl:text-3xl">999</p>
                     </span>
                     <span class="mt-2">
-                        <p class="ml-5 inline-block font-medium float-left">4. C.J. Orozo</p>
-                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                        <p class="ml-5 inline-block font-medium float-left md:text-xl 2xl:text-3xl">4. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right md:text-xl 2xl:text-3xl">999</p>
                     </span>
                     <span class="mt-2">
-                        <p class="ml-5 inline-block font-medium float-left">5. C.J. Orozo</p>
-                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                        <p class="ml-5 inline-block font-medium float-left md:text-xl 2xl:text-3xl">5. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right md:text-xl 2xl:text-3xl">999</p>
                     </span>
                     <span class="mt-2">
-                        <p class="ml-5 inline-block font-medium float-left">6. C.J. Orozo</p>
-                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                        <p class="ml-5 inline-block font-medium float-left md:text-xl 2xl:text-3xl">6. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right md:text-xl 2xl:text-3xl">999</p>
                     </span>
                     <span class="mt-2">
-                        <p class="ml-5 inline-block font-medium float-left">7. C.J. Orozo</p>
-                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                        <p class="ml-5 inline-block font-medium float-left md:text-xl 2xl:text-3xl">7. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right md:text-xl 2xl:text-3xl">999</p>
                     </span>
                     <span class="mt-2">
-                        <p class="ml-5 inline-block font-medium float-left">8. C.J. Orozo</p>
-                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                        <p class="ml-5 inline-block font-medium float-left md:text-xl 2xl:text-3xl">8. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right md:text-xl 2xl:text-3xl">999</p>
                     </span>
                     <span class="mt-2">
-                        <p class="ml-5 inline-block font-medium float-left">9. C.J. Orozo</p>
-                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                        <p class="ml-5 inline-block font-medium float-left md:text-xl 2xl:text-3xl">9. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right md:text-xl 2xl:text-3xl">999</p>
                     </span>
                     <span class="mt-2">
-                        <p class="ml-5 inline-block font-medium float-left">10. C.J. Orozo</p>
-                        <p class="mr-5 inline-block font-medium float-right">999</p>
+                        <p class="ml-5 inline-block font-medium float-left md:text-xl 2xl:text-3xl">10. C.J. Orozo</p>
+                        <p class="mr-5 inline-block font-medium float-right md:text-xl 2xl:text-3xl">999</p>
                     </span>
                 </figure>
             </div>
             <!-- PAYOUT -->
-            <div class="md:order-last col-span-2 grid mb-6 rounded-lg border border-gray-200 shadow-sm grid-cols-2 shadow-xl w-full h-full">
-                <figure class="flex flex-col justify-center items-center text-center bg-white rounded-l-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg border-r">
-                    <h1 class="mb-2 font-black md:text-2xl">Total Payout</h1>
-                    <p class="mt-2 font-medium">₱ 999,999,999.00</p>
+            <div class="lg:order-last col-span-2 grid mb-6 rounded-lg border border-gray-200 shadow-sm grid-cols-2 shadow-xl w-full h-full">
+                <figure class="flex flex-col justify-center items-center text-center bg-white rounded-l-lg border-b border-gray-200 lg:rounded-t-none lg:rounded-tl-lg border-r">
+                    <h1 class="mb-2 font-medium text-lg md:text-2xl lg:text-lg xl:text-2xl 2xl:text-3xl">Total Payout</h1>
+                    <p class="mt-2 font-bold text-xl md:text-4xl lg:text-xl xl:text-2xl 2xl:text-4xl">₱ 999,999,999.00</p>
                 </figure>
 
                 <figure class="flex flex-col justify-center items-center text-center bg-white border-b border-gray-200 rounded-r-lg">
-                    <h1 class="mb-2 font-black md:text-lg">Payout This Month</h1>
-                    <p class="mt-2 font-medium">₱ 999,999,999.00</p>
+                    <h1 class="mb-2 font-medium text-lg md:text-xl lg:text-lg xl:text-2xl 2xl:text-2xl">Payout This Month</h1>
+                    <p class="mt-2 font-bold text-xl md:text-3xl lg:text-xl xl:text-2xl 2xl:text-3xl">₱ 999,999,999.00</p>
                 </figure>
             </div>
 
         </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#dashboard").addClass("bg-emerald-700");
+            $("#dashboard").addClass("text-white");
+            $("#dashboard").removeClass("text-gray-600");
+        });
+    </script>
 </body>
 </html>
