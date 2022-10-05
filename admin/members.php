@@ -305,11 +305,8 @@ if(isset($_GET['Approve'])){
                 Members
             </h1>
 
-
-            <!--Card-->
+            <!--Table-->
             <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
-
-
                 <table id="membersTable" class="stripe hover nowrap row-border dt-body-center" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                     <thead>
                         <tr>
@@ -329,209 +326,14 @@ if(isset($_GET['Approve'])){
                             <td class="text-center">3</td>
                             <td class="text-center">₱ 999,999,999.00</td>
                             <td class="text-center">Kevin Marero</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
+                            <td class="text-center"><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
                         </tr>
                         <!-- end -->
-
-
-                        <tr>
-                            <td class="text-center">John Arian Malondras</td>
-                            <td class="text-center">Reseller</td>
-                            <td class="text-center">5</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Cedrick Orozo</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-
-
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-
-
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Nathan Nemedez</td>
-                            <td><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
-                        </tr>
-
                     </tbody>
 
                 </table>
-
-
             </div>
-            <!--/Card-->
-
-
+            <!--/Table-->
         </div>
         <!--/container-->
 

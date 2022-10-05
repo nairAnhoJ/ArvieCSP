@@ -117,7 +117,7 @@
             </a>
          </li>
          <li>
-            <a href="#" id="code" class="flex items-center p-2 text-base font-normal text-gray-600 rounded-lg hover:bg-emerald-600 hover:text-white">
+            <a href="./codes.php" id="code" class="flex items-center p-2 text-base font-normal text-gray-600 rounded-lg hover:bg-emerald-600 hover:text-white">
             <svg class="flex-shrink-0 w-7 h-7" viewBox="0 0 512 512" fill="currentColor"  xmlns="http://www.w3.org/2000/svg" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
                     <path d="M401 4504 c-100 -21 -168 -60 -247 -138 -77 -77 -123 -159 -143 -254 -15 -71 -15 -623 0 -694 26 -123 119 -258 228 -327 200 -129 491 -99 660 68 105 103 151 216 151 368 l0 83 -150 0 -150 0 0 -70 c0 -82 -20 -130 -73 -177 -89 -78 -261 -63 -330 29 -45 59 -48 94 -45 393 3 322 6 334 91 392 116 78 277 41 338 -78 13 -27 19 -59 19 -109 l0 -70 150 0 150 0 0 83 c-1 101 -12 153 -53 237 -102 208 -350 318 -596 264z"/>

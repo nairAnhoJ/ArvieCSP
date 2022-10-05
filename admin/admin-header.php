@@ -39,7 +39,7 @@
                 <a href="./members.php" class="block lg:hidden py-2 px-4 hover:bg-gray-200 bg-gray-100">Members</a>
             </li>
             <li>
-                <a href="#" class="block lg:hidden py-2 px-4 hover:bg-gray-200 bg-gray-100">Codes</a>
+                <a href="./codes.php" class="block lg:hidden py-2 px-4 hover:bg-gray-200 bg-gray-100">Codes</a>
             </li>
             <li>
                 <a href="#" class="block lg:hidden py-2 px-4 hover:bg-gray-200 bg-gray-100">Payout Request</a>
