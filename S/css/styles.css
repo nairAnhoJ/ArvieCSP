@@ -1,0 +1,24 @@
+.navbar .container .nav-items ul li {
+  position: relative;
+  padding: 0 25px;
+  margin-left: 0 !important;
+}
+@media screen and (min-width: 768px) {
+  .navbar .container .nav-items ul li:not(:last-child):after {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    content: "";
+    width: 1px;
+    height: 10px;
+    background-color: #374151;
+  }
+}
+
+.user-dashboard {
+  background-color: red;
+}
+.user-dashboard div .user-dashboard-content-container {
+  background-color: aqua;
+}/*# sourceMappingURL=styles.css.map */
