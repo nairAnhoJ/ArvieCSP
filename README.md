@@ -29,6 +29,14 @@
   <li>Accounts</li>
   <ul>
     <li>Registration</li>
+      <ul>
+    <li>Levels</li>
+      <ul>
+      <li>Reseller</li>
+      <li>Stockist</li>
+      <li>Administ</li>
+      </ul>
+      </ul>
     <li>Login</li>
   </ul>
 </ul>

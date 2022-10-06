@@ -54,7 +54,7 @@ if(isset($_POST["login"])){
                             }else if($access != "approved") {
                                 echo "<script> alert('You do not have access in this website')</script>";
                             }else{
-                                // header("location" ./) enter code chorva
+                                header("location: ./signup.php");
                             }
                         }else{
                             $login_err = "Invalid username or password.";
