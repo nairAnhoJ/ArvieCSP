@@ -24,4 +24,11 @@
 <hr>
 <br>
 <h2>Back End</h2>
-<h4 style="color:red; weight:100px;">Login and registration logic</h4>
+<h4 style="color:red; weight:100px;">Logic</h4>
+<ul>
+  <li>Accounts</li>
+  <ul>
+    <li>Registration</li>
+    <li>Login</li>
+  </ul>
+</ul>
