@@ -126,28 +126,28 @@ return $msg;
 <body>
     <?php include_once "./user-header.php"; ?>
     <div class="flex flex-row">
-        <div class="basis-80 md:basis-64 xl:basis-72 hidden md:flex h-screen">
+        <div class="basis-80 md:basis-64 xl:basis-72 h-screen">
             <?php include_once "./user-nav.php"; ?>
         </div>
         <div class=" user-dashboard-content-container pt-24 px-6 pb-6 bg-emerald-100 h-screen">
             <!-- Top Content -->
-            <div class=" relative z-0 h-60 md:h-40 xl:h-48 bg-gradient rounded-2xl">
-                <div class="absolute bottom-0 z-10 right-0 h-full w-8/12 side-coffeebeans "> </div>
-                <!-- <div class="absolute bottom-0 z-10 right-0 h-40 w-full side-coffeebeans hidden md:flex"> </div> -->
+            <div class="relative z-0 h-60 md:h-40 xl:h-48 bg-gradient rounded-2xl">
+                <div class="absolute bottom-0 z-10 right-0 h-full w-80 side-coffee"> </div>
+                <div class="absolute bottom-0 z-10  h-40 w-8/12 side-coffeebeans"> </div>
                 <div class="absolute top-0 z-20 h-60 md:h-40 xl:h-48 rounded-2xl" >
                     <div class="h-full pl-5 py-5 md:pl-3 md:py-2 grid grid-rows-9 text-white items-center">
                         <div class="font-medium text-xl md:text-lg xl:text-xl">Overall Income</div>
                         <div class="row-span-2 text-3xl md:text-2xl xl:text-3xl font-black">₱ 169,000,069.00</div>
-                        <div class="row-span-2 text-xl md:text-2xl xl:text-3xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
+                        <div class="row-span-2 text-3xl md:text-2xl xl:text-3xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
                         <div class="row-span-4 text-5xl md:text-4xl xl:text-5xl font-black glow-font">₱ <?php $totalBalance = number_format($totalBalance, 2);echo $totalBalance; //cedrick code?></div>
                     </div>
                 </div>
             </div>
 
             <!-- Bottom Content -->
-            <div class=" z-0 bottom-content mt-6  bg-gradient-transaction rounded-2xl">
-            <!-- <div class="absolute  z-10 h-full w-full coffee-pattern bottom-content rounded-2xl"> </div> -->
-            <div class=" top-0 z-10 w-full h-full bottom-content px-3 p2-3 md:px-3 md:py-2  rounded-2xl">
+            <div class="relative z-0 bottom-content mt-6  bg-gradient-transaction rounded-2xl">
+            <div class="absolute  z-10 h-full w-full coffee-pattern bottom-content rounded-2xl"> </div>
+            <div class="absolute top-0 z-10 w-full h-full bottom-content px-3 p2-3 md:px-3 md:py-2  rounded-2xl">
                 <h1 class="text-2xl md:text-xl xl:text-2xl font-black text-white">Income Details</h1>
                 <h2 class="text-xl md:text-lg xl:text-xl font-black text-neutral-300">Today</h2>
                 <div style="height: calc(100% - 60px);" class="w-full h-full overflow-auto">
