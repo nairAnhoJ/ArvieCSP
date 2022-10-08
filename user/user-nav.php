@@ -2,7 +2,8 @@
     <div class="w-full h-16 md:h-14 xl:h-16 mb-5">
         <div class="grid grid-rows-3 grid-cols-4 h-full w-full">
             <div class="row-span-3 w-16 md:w-14  xl:w-16">
-                <img src="../images/user/profile-pic/me.jpeg" class="rounded-lg" alt="profile_pic">
+                <!-- <img src="../images/user/profile-pic/me.jpeg" class="rounded-lg" alt="profile_pic"> -->
+                <div class="initialsOfName"style=" background-image: url('../images/user/profile-pic/5R (3).jpg')"></div>
             </div>
             <div class="table col-span-3 row-span-2 md:pl-2 text-xl md:text-base">
                 <b class="table-cell align-bottom whitespace-nowrap"><?php echo $_SESSION["first_name"]." ". $_SESSION["last_name"];?></b>
