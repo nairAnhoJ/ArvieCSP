@@ -21,7 +21,8 @@
             
         <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="float-right flex items-center text-sm font-medium text-neutral-400 rounded-full hover:text-white md:mr-0" type="button">
             <span class="sr-only">Open user menu</span>
-            <img class="w-11 h-11 rounded-full" src="../images/user/profile-pic/me.jpeg" alt="user photo">
+            <!-- <img class="w-11 h-11 rounded-full bg-cover bg-no-repeat" src="../images/user/profile-pic/5R (3).jpg" alt="user photo"> -->
+            <div class="pictureBadge m-0" style=" background-image: url('../images/user/profile-pic/5R (3).jpg')"></div>
             <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
 

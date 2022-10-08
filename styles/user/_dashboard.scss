@@ -6,3 +6,47 @@
         }
     }
 }
+
+//cedrick code
+.bg-gradient{
+    // background: rgb(2,27,20);
+    // background: linear-gradient(54deg, rgba(2,27,20,1) 7%, rgba(42,223,219,1) 69%, rgba(4,116,84,1) 100%);
+    background-image: url("../images/user/others/Green Gradient.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bg-gradient-transaction{
+    // background: rgb(2,27,20);
+    // background: linear-gradient(54deg, rgba(2,27,20,1) 7%, rgb(28, 134, 132) 69%, rgba(4,116,84,1) 100%);
+    background-image: url("../images/user/others/Green Gradient2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.side-coffee{
+    // background: rgb(2,27,20);
+    // background: linear-gradient(54deg, rgba(2,27,20,1) 7%, rgb(28, 134, 132) 69%, rgba(4,116,84,1) 100%);
+    background-image: url("../images/user/others/Cup of coffee.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.2;
+}
+.coffee-pattern{
+    background-image: url("../images/user/others/Coffee bean pattern.png");
+    background-repeat:repeat;
+    background-size: 300px;
+    opacity: 0.2;
+    // height: 95%;
+}
+.side-coffeebeans{
+    // background: rgb(2,27,20);
+    // background: linear-gradient(54deg, rgba(2,27,20,1) 7%, rgb(28, 134, 132) 69%, rgba(4,116,84,1) 100%);
+    background-image: url("../images/user/others/Coffee beans.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.5;
+    left: 150px;
+}
+.glow-font{
+    text-shadow: 1px 0 8px #01f5f1;
+}
+// end of cedrick code

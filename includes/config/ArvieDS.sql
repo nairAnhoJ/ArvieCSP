@@ -35,27 +35,33 @@ CREATE TABLE `accounts` (
   `pass` varchar(255) NOT NULL,
   `contact_number` int(15) NOT NULL,
   `date` datetime NOT NULL,
-  `access` varchar(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `access` varchar(8) NOT NULL,
+  `permission` varchar(8) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `first_name`, `last_name`, `email_address`, `pass`, `contact_number`, `date`, `access`) VALUES
-(1, 'Admin', '', 'admin@arvie.com', '$2y$10$5dv34bmJwmcU5WpObF5ebeMvJZdkdZDiUgIZ4qPMX9IDIPmFJUVXy', 123123123, '2022-09-18 15:04:41', 'admin'),
-(2, 'Cedrick James', 'Domo', 'test@glory.com', '$2y$10$X9GEBKzy1YYUq5K010m.M.k7NdLUCn57X6bPVX1E0baev7s5MvDh6', 123123123, '2022-09-18 15:17:13', ''),
-(3, 'read', 'me', 'readme@gmail.com', '$2y$10$zZJRgeINR/yYpXgI5O9skONZou79fYF96Nf5cP/uJv2ICFMgrNrry', 123123123, '2022-09-18 22:35:05', ''),
-(4, 'Marero', '123', 'marerokevin@gmail.com', '$2y$10$MgbnTX/izVUCpeldQyhnceKlm9GLjWfzoefbO6cs4Jdqu46b2oqQu', 123123, '2022-09-18 22:49:40', ''),
-(5, 'test', 'test', 'test@gmail.com.ph', '$2y$10$Xks2lk2/VZAoMWautPTKB.aAJODfpYqil9nLe3.MjakZLQUW1nqPq', 123123123, '2022-09-18 23:15:57', ''),
-(6, 'kevin', 'marero', 'test@tmail.com', '$2y$10$5CJfQLwRqp.PD3ClnQkFJuV893QopQet7t.txh6YAW/vAsN3fsML6', 123123123, '2022-09-18 23:19:36', ''),
-(7, 'toys', 'lol', 'latoy@gmail.com', '$2y$10$7R.bKBPMqK2GlsvQ464GVu52uyFZzCPU8pDANZ5geh5m9nhdfNlkS', 123123132, '2022-09-18 23:20:48', ''),
-(8, 'test', 'sdaasd', 'rwqer@gmail.com', '$2y$10$46uNbWFECLnPmngFX0jFD.hI2bV96OdqNCSYw6ALqkdPOwL3EVk12', 123123123, '2022-09-18 23:30:43', ''),
-(9, 'test123', 'test123', 'lalisa@glory.com.ph', '$2y$10$S2.vwY8Dc6OOPEVYpKdV6uCJKrac1TU46lkGnzlBPK3Otb/fXggDO', 123123345, '2022-09-19 23:15:26', ''),
-(10, 'asd123', 'asd123', 'waiting@glory.com.ph', '$2y$10$yP8UwkcmHJrIj4rdJ4OZZO5mjb9n5eT3TEl7QZQ4anD01gAWiDOvu', 123456, '2022-09-19 23:16:41', ''),
-(11, 'Kevin Roy', 'marero', 'marero@gmail.com', '$2y$10$wX0.cTEeBO1P/wujdA6gtu5cchj.7WD9S7J1qS1oYg7kGTK.VD3yO', 123123, '2022-09-20 00:16:50', '');
 
--- --------------------------------------------------------
+LOCK TABLES `accounts` WRITE;
+/*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
+INSERT INTO `accounts` VALUES
+(1,'test','test','test@glory.com.ph','$2y$10$sEWksoBuM7DPCeHAZywmo.pIyU6qGfRufSF/28lPniQBm.W6FveS.',123123123,'2022-09-18 15:04:41','',''),
+(2,'Cedrick James','Domo','test@glory.com','$2y$10$X9GEBKzy1YYUq5K010m.M.k7NdLUCn57X6bPVX1E0baev7s5MvDh6',123123123,'2022-09-18 15:17:13','',''),
+(3,'read','me','readme@gmail.com','$2y$10$zZJRgeINR/yYpXgI5O9skONZou79fYF96Nf5cP/uJv2ICFMgrNrry',123123123,'2022-09-18 22:35:05','',''),
+(4,'Marero','123','marerokevin@gmail.com','$2y$10$MgbnTX/izVUCpeldQyhnceKlm9GLjWfzoefbO6cs4Jdqu46b2oqQu',123123,'2022-09-18 22:49:40','approved','administ'),
+(5,'test','test','test@gmail.com.ph','$2y$10$Xks2lk2/VZAoMWautPTKB.aAJODfpYqil9nLe3.MjakZLQUW1nqPq',123123123,'2022-09-18 23:15:57','',''),
+(6,'kevin','marero','test@tmail.com','$2y$10$5CJfQLwRqp.PD3ClnQkFJuV893QopQet7t.txh6YAW/vAsN3fsML6',123123123,'2022-09-18 23:19:36','',''),
+(7,'toys','lol','latoy@gmail.com','$2y$10$7R.bKBPMqK2GlsvQ464GVu52uyFZzCPU8pDANZ5geh5m9nhdfNlkS',123123132,'2022-09-18 23:20:48','',''),
+(8,'test','sdaasd','rwqer@gmail.com','$2y$10$46uNbWFECLnPmngFX0jFD.hI2bV96OdqNCSYw6ALqkdPOwL3EVk12',123123123,'2022-09-18 23:30:43','',''),
+(9,'test123','test123','lalisa@glory.com.ph','$2y$10$S2.vwY8Dc6OOPEVYpKdV6uCJKrac1TU46lkGnzlBPK3Otb/fXggDO',123123345,'2022-09-19 23:15:26','',''),
+(10,'asd123','asd123','waiting@glory.com.ph','$2y$10$yP8UwkcmHJrIj4rdJ4OZZO5mjb9n5eT3TEl7QZQ4anD01gAWiDOvu',123456,'2022-09-19 23:16:41','',''),
+(11,'Kevin Roy','marero','marero@gmail.com','$2y$10$wX0.cTEeBO1P/wujdA6gtu5cchj.7WD9S7J1qS1oYg7kGTK.VD3yO',123123,'2022-09-20 00:16:50','','');
+/*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `invites`
@@ -216,3 +222,6 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-10-08 16:58:17

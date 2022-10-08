@@ -129,22 +129,28 @@ return $msg;
         <div class="basis-80 md:basis-64 xl:basis-72 h-screen">
             <?php include_once "./user-nav.php"; ?>
         </div>
-        <div class="user-dashboard-content-container pt-24 px-6 pb-6 bg-emerald-100 h-screen">
+        <div class=" user-dashboard-content-container pt-24 px-6 pb-6 bg-emerald-100 h-screen">
             <!-- Top Content -->
-            <div class="h-60 md:h-40 xl:h-48 bg-emerald-700 rounded-2xl">
-                <div class="h-full pl-5 py-5 md:pl-3 md:py-2 grid grid-rows-9 text-white items-center">
-                    <div class="font-medium text-xl md:text-lg xl:text-xl">Overall Income</div>
-                    <div class="row-span-2 text-3xl md:text-2xl xl:text-3xl font-black">₱ 169,000,069.00</div>
-                    <div class="row-span-2 text-3xl md:text-2xl xl:text-3xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
-                    <div class="row-span-4 text-5xl md:text-4xl xl:text-5xl font-black">₱ <?php echo $totalBalance;?></div>
+            <div class="relative z-0 h-60 md:h-40 xl:h-48 bg-gradient rounded-2xl">
+                <div class="absolute bottom-0 z-10 right-0 h-full w-80 side-coffee"> </div>
+                <div class="absolute bottom-0 z-10  h-40 w-8/12 side-coffeebeans"> </div>
+                <div class="absolute top-0 z-20 h-60 md:h-40 xl:h-48 rounded-2xl" >
+                    <div class="h-full pl-5 py-5 md:pl-3 md:py-2 grid grid-rows-9 text-white items-center">
+                        <div class="font-medium text-xl md:text-lg xl:text-xl">Overall Income</div>
+                        <div class="row-span-2 text-3xl md:text-2xl xl:text-3xl font-black">₱ 169,000,069.00</div>
+                        <div class="row-span-2 text-3xl md:text-2xl xl:text-3xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
+                        <div class="row-span-4 text-5xl md:text-4xl xl:text-5xl font-black glow-font">₱ <?php $totalBalance = number_format($totalBalance, 2);echo $totalBalance; //cedrick code?></div>
+                    </div>
                 </div>
             </div>
 
             <!-- Bottom Content -->
-            <div class="bottom-content mt-6 px-5 py-5 md:px-3 md:py-2 bg-emerald-700 rounded-2xl">
+            <div class="relative z-0 bottom-content mt-6  bg-gradient-transaction rounded-2xl">
+            <div class="absolute  z-10 h-full w-full coffee-pattern bottom-content rounded-2xl"> </div>
+            <div class="absolute top-0 z-10 w-full h-full bottom-content px-3 p2-3 md:px-3 md:py-2  rounded-2xl">
                 <h1 class="text-2xl md:text-xl xl:text-2xl font-black text-white">Income Details</h1>
                 <h2 class="text-xl md:text-lg xl:text-xl font-black text-neutral-300">Today</h2>
-                <div style="height: calc(100% - 60px);" class="w-full overflow-auto">
+                <div style="height: calc(100% - 60px);" class="w-full h-full overflow-auto">
                     <!-- i-while loop lang to -->
 
                         <!-- Pag from Direct Referral -->
@@ -160,11 +166,11 @@ return $msg;
                                     
                                  ?>
 
-                            <div class="w-full h-24 md:h-20 bg-neutral-200 mt-3 rounded-xl grid grid-cols-5 grid-rows-2">
+                            <div class="w-full h-24 md:h-20 bg-white mt-3 rounded-xl grid grid-cols-5 grid-rows-2">
                             <div class="self-end text-center pl-2 text-lg md:text-sm xl:text-base font-medium">Category</div>
                             <div class="self-end text-center text-lg md:text-sm xl:text-base font-medium">Invite's Name</div>
                             <div></div>
-                            <div class="row-span-2 col-span-2 self-center text-end mr-5 text-4xl md:text-2xl xl:text-3xl font-black">+  ₱ <?php echo $addedAmount; ?></div>
+                            <div class="row-span-2 col-span-2 self-center text-end mr-5 text-4xl md:text-2xl xl:text-3xl font-black">+  ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;//cedrick code ?></div> 
                             <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold text-green-600"> <?php echo $type; ?></div>
                             <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold"><?php echo $inviteName; ?></div>
                         </div>
@@ -178,7 +184,7 @@ return $msg;
                             <div class="self-end text-center text-xl md:text-sm xl:text-base font-medium">Category</div>
                             <div class="self-end text-center text-xl md:text-sm xl:text-base font-medium">Downline Name</div>
                             <div class="self-end text-center text-xl md:text-sm xl:text-base font-medium">Invite's Name</div>
-                            <div class="row-span-2 col-span-2 self-center text-end mr-5 text-4xl md:text-2xl xl:text-3xl font-black">+ ₱ <?php echo $addedAmount; ?></div>
+                            <div class="row-span-2 col-span-2 self-center text-end mr-5 text-4xl md:text-2xl xl:text-3xl font-black">+ ₱ <?php $addedAmount = number_format($addedAmount, 2); echo $addedAmount;?></div>
                             <div class="self-start text-center text-2xl md:text-base xl:text-xl font-bold text-green-600"><?php echo $type; ?></div>
                             <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold"><?php echo $inviteeName; ?></div>
                             <div class="self-start text-center text-2xl md:text-lg xl:text-xl font-bold"><?php echo $inviteName; ?></div>
@@ -224,6 +230,7 @@ return $msg;
                     <!-- end -->
                 </div>
             </div>
+          </div>   
         </div>
     </div>
 </body>
