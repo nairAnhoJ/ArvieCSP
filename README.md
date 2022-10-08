@@ -3,15 +3,15 @@
 <h2>Front End</h2>
 <h4>Landing Page</h4>
 <ul>
-  <li>Navbar/Header - Done</li>
+  <li>Navbar/Header - Done ⭐</li>
   <li>Content</li>
     <ul>
       <li>Home</li>
       <li>Products</li>
       <li>About</li>
       <li>Contact</li>
-      <li>Login - Done</li>
-      <li>Signup - Done</li>
+      <li>Login - Done ⭐</li>
+      <li>Signup - Done ⭐</li>
     </ul>
   <li>Footer</li>
   <li>Member Page</li>
@@ -37,6 +37,6 @@
       <li>Administ</li>
       </ul>
       </ul>
-    <li>Login</li>
+    <li>Login - Done ⭐</li>
   </ul>
 </ul>
