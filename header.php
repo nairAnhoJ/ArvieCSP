@@ -35,7 +35,7 @@
             </div>
             <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
             <li>
-                <a href="./user/index.php" class="block py-2 px-4 hover:bg-gray-200 bg-gray-300">Dashboard</a>
+                <a href="<?php if($admin==true){echo './admin/index.php';}else{echo './user/index.php';} ?>" class="block py-2 px-4 hover:bg-gray-200 bg-gray-300">Dashboard</a>
             </li>
             <li>
                 <a href="#" class="block py-2 px-4 hover:bg-gray-200">Edit Profile</a>
