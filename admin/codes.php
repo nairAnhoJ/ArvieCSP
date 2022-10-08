@@ -330,7 +330,7 @@ if(isset($_GET['Approve'])){
                             <td class="text-center">Botanical</td>
                             <td class="text-center">20</td>
                             <td class="text-center">
-                                <button class="text-blue-500">
+                                <button class="text-blue-500 viewBtn" data-tran-num="10050003">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
                                             <path d="M2486 5097 c-70 -40 -76 -63 -76 -302 0 -236 6 -260 69 -302 71 -48 175 -20 213 57 15 30 18 65 18 243 0 240 -8 270 -80 307 -51 26 -95 25 -144 -3z"/>
@@ -355,7 +355,7 @@ if(isset($_GET['Approve'])){
                             <td class="text-center">Kapenato & Cereal</td>
                             <td class="text-center">10</td>
                             <td class="text-center">
-                                <button class="text-blue-500">
+                                <button class="text-blue-500 viewBtn" data-tran-num="10040002">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
                                             <path d="M2486 5097 c-70 -40 -76 -63 -76 -302 0 -236 6 -260 69 -302 71 -48 175 -20 213 57 15 30 18 65 18 243 0 240 -8 270 -80 307 -51 26 -95 25 -144 -3z"/>
@@ -379,7 +379,7 @@ if(isset($_GET['Approve'])){
                             <td class="text-center">Direct Invite</td>
                             <td class="text-center">5</td>
                             <td class="text-center">
-                                <button class="text-blue-500">
+                                <button class="text-blue-500 viewBtn" data-tran-num="10030001">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
                                             <path d="M2486 5097 c-70 -40 -76 -63 -76 -302 0 -236 6 -260 69 -302 71 -48 175 -20 213 57 15 30 18 65 18 243 0 240 -8 270 -80 307 -51 26 -95 25 -144 -3z"/>
@@ -396,6 +396,7 @@ if(isset($_GET['Approve'])){
                             </td>
                         </tr>
                     </tbody>
+                    <button class="viewCodeBtn" type="button" data-modal-toggle="viewModal"></button>
 
                 </table>
             </div>
@@ -411,6 +412,16 @@ if(isset($_GET['Approve'])){
             $("#code").addClass("text-white");
             $("#code").removeClass("text-gray-600");
 
+            jQuery(document).on( "click", ".viewBtn", function(){
+                var tranNum = $(this).data('tran-num');
+                var currUrl = new URL(window.location.href);
+                window.location.href = currUrl + "?tranNum=" + tranNum;
+            });
+            
+            jQuery(document).on( "click", ".closeBtn", function(){
+                window.location.href = "./codes.php";
+            });
+
             var table = $('#codeTable').DataTable({
                 // 'columnDefs': [{ 'orderable': false, 'targets': 0 }],
                 // 'aaSorting': [[1, 'desc']],
@@ -420,5 +431,76 @@ if(isset($_GET['Approve'])){
             .responsive.recalc();
         });
     </script>
+    
+
+    <!-- PHP For querying the codes -->
+    <?php
+        if(isset($_GET['tranNum'])){
+            // Dito yung code sa pag query ng codes
+
+            
+            echo '
+                <script type="text/JavaScript">
+                    $(document).ready(function(){
+                        $(".viewCodeBtn").click();
+                    });
+                </script>
+            ';
+        }
+    ?>
+
+    <!-- View Modal -->
+    <div id="viewModal" tabindex="-1" aria-hidden="false" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-lg h-full md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow">
+                <!-- Modal header -->
+                <div class="flex justify-between items-start p-4 rounded-t border-b">
+                    <h3 class="text-xl font-semibold text-gray-900">
+                        Codes for Transaction #1003001<br>
+                        Date: 10/03/2022<br>
+                        Member Name: Cedrick Orozo<br>
+                        Code Type: Direct Invite<br>
+                        Total: 5
+                    </h3>
+                    <button type="button" class="closeBtn text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="viewModal">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-6 space-y-6">
+                    <ul class="space-y-1 max-w-md list-inside text-gray-800 text-lg text-center">
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 mr-1.5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            DR10-QWER1234
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 mr-1.5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            DR10-Q1W2E3R4
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 mr-1.5 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                            DR10-1Q2W3E4R
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 mr-1.5 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                            DR10-F93M5HD8
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-4 h-4 mr-1.5 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                            DR10-73BL29DH
+                        </li>
+                    </ul>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200">
+                    <button data-modal-toggle="viewModal" type="button" class="closeBtn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>
