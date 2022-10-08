@@ -52,12 +52,12 @@
                     </div> 
                 </div>
                 <div class="mb-6">
-                    <label for="contact_number" class="block mb-2 text-sm font-medium text-gray-900 ">Address</label>
-                    <input type="text" name="contact_number" id="contact_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxlength="11" required="">
+                    <label for="address" class="block mb-2 text-sm font-medium text-gray-900 ">Address</label>
+                    <input type="text" name="address" id="homeAddress" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxlength="11" required="">
                 </div>
                 <div class="mb-6">
-                    <label for="contact_number" class="block mb-2 text-sm font-medium text-gray-900 ">Birthday</label>
-                    <input type="date" name="contact_number" id="contact_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxlength="11" required="">
+                    <label for="birthday" class="block mb-2 text-sm font-medium text-gray-900 ">Birthday</label>
+                    <input type="date" name="birthday" id="birthday" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxlength="11" required="">
                 </div>
                 <div class="mb-6">
                     <label for="contact_number" class="block mb-2 text-sm font-medium text-gray-900 ">Contact Number</label>
@@ -69,12 +69,12 @@
                 </div>
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
-                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">SSS Number</label>
-                        <input type="text" id="sss_num" name="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                        <label for="sss_num" class="block mb-2 text-sm font-medium text-gray-900">SSS Number</label>
+                        <input type="text" id="sss_num" name="sss_num" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                     </div>
                     <div>
-                        <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">TIN</label>
-                        <input type="text" id="tin" name="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                        <label for="tin_acct" class="block mb-2 text-sm font-medium text-gray-900 ">TIN</label>
+                        <input type="text" id="tin_acct" name="tin_acct" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                     </div> 
                 </div>
                 <div class="mb-6">
