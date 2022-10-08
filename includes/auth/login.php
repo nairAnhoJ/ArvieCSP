@@ -48,12 +48,12 @@ if(isset($_POST["login"])){
                             $_SESSION["permission"] = $permission;
                             $_SESSION["access"] = $access;
 
-                            if($permission != "approved") {
+                            if($access != "approved") {
                                 echo "<script> alert('You do not have access in this website')</script>";
-                                if($access != "user") {
-                                    header("location: ./admin/index.php");
-                                }else{
+                                if($permission != "administ") {
                                     header("location: ./user/index.php");
+                                }else {
+                                    header("location: ./admin/index.php");
                                 }
                             }else{
                                 header("location: ./signup.php");
