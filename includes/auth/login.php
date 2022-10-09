@@ -50,10 +50,17 @@ if(isset($_POST["login"])){
                             $_SESSION["referralId"] = $referralId;
 
                             if($access == "approved") {
+
+
+                               
+
                                 if($permission == "administ") {
                                     header("location: ./admin/index.php");
                                 }elseif($permission == "userist") {
+
                                     header("location: ./user/index.php");
+                                }else {
+                                    header("location: ./admin/index.php");
                                 }
                             }elseif($access == "pending") {
                                 echo "<script> alert('You do not have access in this website')</script>";
