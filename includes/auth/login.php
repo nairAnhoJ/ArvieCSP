@@ -48,7 +48,7 @@ if(isset($_POST["login"])){
                             $_SESSION["permission"] = $permission;
                             $_SESSION["access"] = $access;
 
-                            if($access != "approved") {
+                            if($access == "approved") {
                                 echo "<script> alert('You do not have access in this website')</script>";
                                 if($permission != "administ") {
                                     header("location: ./user/index.php");
