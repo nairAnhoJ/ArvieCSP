@@ -123,6 +123,11 @@ if(isset($_GET['Approve'])){
     }
 
 }
+
+// Array ng ID Number at Name
+$idNum = array("123123123", "456456456", "789789789");
+$memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Orozo");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,94 +152,58 @@ if(isset($_GET['Approve'])){
     <title>Arvie Cosmetic & Skincare  ProductsTrading</title>
 
     <style>
-		/*Overrides for Tailwind CSS */
-
-		/*Form fields*/
 		.dataTables_wrapper select,
 		.dataTables_wrapper .dataTables_filter input {
 			color: #4a5568;
-			/* text-gray-700 */
 			padding-left: 1rem;
-			/*pl-4*/
 			padding-right: 1rem;
-			/*pl-4*/
 			padding-top: .5rem;
-			/*pl-2*/
 			padding-bottom: .5rem;
-			/*pl-2*/
 			line-height: 1.25;
-			/*leading-tight*/
 			border-width: 1px;
-			/*border-2*/
 			border-radius: .25rem;
 			border-color: #A1A1AA;
-			/*border-gray-200*/
 			background-color: #edf2f7;
-			/*bg-gray-200*/
 		}
 
-		/*Row Hover*/
 		table.dataTable.hover tbody tr:hover,
 		table.dataTable.display tbody tr:hover {
 			background-color: #ebf4ff;
-			/*bg-indigo-100*/
 		}
 
-		/*Pagination Buttons*/
 		.dataTables_wrapper .dataTables_paginate .paginate_button {
 			font-weight: 700;
-			/*font-bold*/
 			border-radius: .25rem;
-			/*rounded*/
 			border: 1px solid transparent;
-			/*border border-transparent*/
 		}
 
-		/*Pagination Buttons - Current selected */
 		.dataTables_wrapper .dataTables_paginate .paginate_button.current {
 			color: #fff !important;
-			/*text-white*/
 			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-			/*shadow*/
 			font-weight: 700;
-			/*font-bold*/
 			border-radius: .25rem;
-			/*rounded*/
 			background: #667eea !important;
-			/*bg-indigo-500*/
 			border: 1px solid transparent;
-			/*border border-transparent*/
 		}
 
-		/*Pagination Buttons - Hover */
 		.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
 			color: #fff !important;
-			/*text-white*/
 			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-			/*shadow*/
 			font-weight: 700;
-			/*font-bold*/
 			border-radius: .25rem;
-			/*rounded*/
 			background: #667eea !important;
-			/*bg-indigo-500*/
 			border: 1px solid transparent;
-			/*border border-transparent*/
 		}
 
-		/*Add padding to bottom border */
 		table.dataTable.no-footer {
 			border-bottom: 1px solid #e2e8f0;
-			/*border-b-1 border-gray-300*/
 			margin-top: 0.75em;
 			margin-bottom: 0.75em;
 		}
 
-		/*Change colour of responsive icon*/
 		table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
 		table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
 			background-color: #667eea !important;
-			/*bg-indigo-500*/
 		}
         .dataTables_length label select{
             border: 1px solid #A1A1AA;
@@ -304,8 +273,80 @@ if(isset($_GET['Approve'])){
             <h1 class="font-sans font-bold text-black px-2 lg:mb-3 text-5xl text-center ">
                 Codes
             </h1>
+
             <div class="relative text-center mt-3 lg:mt-1 h-10 lg:h-16">
-                <button type="button" class="m-auto lg:absolute lg:right-0 text-white bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-lg px-5 py-3 mr-2 mb-2 focus:outline-none">Generate New Codes</button>
+                <button type="button" data-modal-toggle="generateModal" class="genCode m-auto lg:absolute lg:right-0 text-white bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-lg px-5 py-3 mr-2 mb-2 focus:outline-none">Generate New Codes</button>
+            </div>
+
+            <!-- Generate Code Modal -->
+            <div id="generateModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+
+                <!-- Error Message -->
+                <div style="transform: translate(-50%, 0);" id="errorIDNum" class="hidden absolute top-24 left-1/2  flex items-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-red-300 rounded-lg shadow" role="alert">
+                    <div class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-red-500 bg-red-300 rounded-lg">
+                        <svg aria-hidden="true" class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        <span class="sr-only">Error icon</span>
+                    </div>
+                    <div class="ml-3 font-normal text-lg text-gray-900">Invalid ID Number!</div>
+                    <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-gray-100 text-gray-800 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" data-dismiss-target="#errorIDNum" aria-label="Close">
+                        <span class="sr-only">Close</span>
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                </div>
+
+                <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow">
+                        <!-- Modal header -->
+                        <div class="flex justify-between items-start p-4 rounded-t border-b">
+                            <h3 class="text-xl font-semibold text-gray-900">
+                                Generate New Codes
+                            </h3>
+                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="generateModal">
+                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <form action="" class="p-6">
+                            <div class="relative mb-6">
+                                <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">ID Number</label>
+                                <input type="search" id="id-search" list="idList" autocomplete="false" class="block p-4 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" required>
+                                <button type="button" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check ID Number</button>
+                                <datalist class="text-lg bg-blue-500" id="idList">
+                                    <?php
+                                        foreach($idNum as $x) {
+                                            ?>
+                                                <option value="<?php echo $x; ?>" class="bg-white"><?php echo $x; ?></option>
+                                            <?php
+                                        }
+                                    ?> 
+                                </datalist>
+                            </div>
+                            <div class="mb-6">
+                                <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">Name</label>
+                                <input type="text" id="name-input" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+                            <div class="mb-6">
+                                <label for="codeType" class="block mb-2 text-lg font-medium text-gray-900">Type</label>
+                                <select id="codeType" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    <option value="DI" selected>Direct Invite</option>
+                                    <option value="RA">Botanical</option>
+                                    <option value="RB">Kapenato & Cereal</option>
+                                </select>
+                            </div>
+                            <div class="mb-6">
+                                <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">Count</label>
+                                <input type="number" min="1" max="99" value="1" id="count-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+                        </form>
+                        <!-- Modal footer -->
+                        <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200">
+                            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Generate</button>
+                            <button data-modal-toggle="generateModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!--Table-->
@@ -330,7 +371,7 @@ if(isset($_GET['Approve'])){
                             <td class="text-center">Botanical</td>
                             <td class="text-center">20</td>
                             <td class="text-center">
-                                <button class="text-blue-500 viewBtn" data-tran-num="10050003">
+                                <button class="text-blue-500" data-tran-num="10050003" type="button" data-modal-toggle="viewModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
                                             <path d="M2486 5097 c-70 -40 -76 -63 -76 -302 0 -236 6 -260 69 -302 71 -48 175 -20 213 57 15 30 18 65 18 243 0 240 -8 270 -80 307 -51 26 -95 25 -144 -3z"/>
@@ -355,7 +396,7 @@ if(isset($_GET['Approve'])){
                             <td class="text-center">Kapenato & Cereal</td>
                             <td class="text-center">10</td>
                             <td class="text-center">
-                                <button class="text-blue-500 viewBtn" data-tran-num="10040002">
+                                <button class="text-blue-500" data-tran-num="10040002" type="button" data-modal-toggle="viewModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
                                             <path d="M2486 5097 c-70 -40 -76 -63 -76 -302 0 -236 6 -260 69 -302 71 -48 175 -20 213 57 15 30 18 65 18 243 0 240 -8 270 -80 307 -51 26 -95 25 -144 -3z"/>
@@ -379,7 +420,7 @@ if(isset($_GET['Approve'])){
                             <td class="text-center">Direct Invite</td>
                             <td class="text-center">5</td>
                             <td class="text-center">
-                                <button class="text-blue-500 viewBtn" data-tran-num="10030001">
+                                <button class="text-blue-500" data-tran-num="10030001" type="button" data-modal-toggle="viewModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
                                             <path d="M2486 5097 c-70 -40 -76 -63 -76 -302 0 -236 6 -260 69 -302 71 -48 175 -20 213 57 15 30 18 65 18 243 0 240 -8 270 -80 307 -51 26 -95 25 -144 -3z"/>
@@ -396,8 +437,7 @@ if(isset($_GET['Approve'])){
                             </td>
                         </tr>
                     </tbody>
-                    <button class="viewCodeBtn" type="button" data-modal-toggle="viewModal"></button>
-
+                    <!-- <button class="viewCodeBtn" type="button" data-modal-toggle="viewModal"></button> -->
                 </table>
             </div>
             <!--/Table-->
@@ -422,6 +462,35 @@ if(isset($_GET['Approve'])){
                 window.location.href = "./codes.php";
             });
 
+            $('.genCode').click(function(){
+                $('#id-search').val('');
+                $('#id-search').focus();
+                $('#name-input').val('');
+                $('#codeType').prop('selectedIndex', 0);
+                $('#count-input').val('1');
+            });
+
+            // Check ID Number
+            $('.checkID').click(function(){
+                var idNum = $('#id-search').val();
+                var idNumArray = <?php echo json_encode($idNum); ?>;
+                var memNameArray = <?php echo json_encode($memName); ?>;
+                let indexNum = idNumArray.indexOf(idNum);
+                if(indexNum == "-1"){
+                    $('#errorIDNum').removeClass('opacity-0');
+                    $('#errorIDNum').addClass('opacity-100');
+                    $('#errorIDNum').removeClass('hidden');
+                    $('#id-search').focus();
+                }else{
+                    $('#name-input').val(memNameArray[indexNum]);
+                    $('#codeType').focus();
+                }
+            });
+
+            $('#id-search').keydown(function(){
+                $('#name-input').val('');
+            });
+
             var table = $('#codeTable').DataTable({
                 // 'columnDefs': [{ 'orderable': false, 'targets': 0 }],
                 // 'aaSorting': [[1, 'desc']],
@@ -434,20 +503,21 @@ if(isset($_GET['Approve'])){
     
 
     <!-- PHP For querying the codes -->
-    <?php
-        if(isset($_GET['tranNum'])){
-            // Dito yung code sa pag query ng codes
+        <?php
+            if(isset($_GET['tranNum'])){
+                // Dito yung code sa pag query ng codes
 
-            
-            echo '
-                <script type="text/JavaScript">
-                    $(document).ready(function(){
-                        $(".viewCodeBtn").click();
-                    });
-                </script>
-            ';
-        }
-    ?>
+                
+                echo '
+                    <script type="text/JavaScript">
+                        $(document).ready(function(){
+                            $(".viewCodeBtn").click();
+                        });
+                    </script>
+                ';
+            }
+        ?>
+    <!-- END -->
 
     <!-- View Modal -->
     <div id="viewModal" tabindex="-1" aria-hidden="false" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
@@ -495,7 +565,7 @@ if(isset($_GET['Approve'])){
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200">
-                    <button data-modal-toggle="viewModal" type="button" class="closeBtn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Close</button>
+                    <button data-modal-toggle="viewModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Close</button>
                 </div>
             </div>
         </div>
