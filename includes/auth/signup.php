@@ -7,14 +7,19 @@ $exists=false;
 if(isset($_POST["register"])){
     include "./includes/config/conn.php";
 
+    $referralId = $_POST["ref_code"];
     $first_name = $_POST["first_name"];
     $last_name = $_POST["last_name"];
+    $homeAddress = $_POST["homeAddress"];
+    $birthday = date('M d Y', strtotime($_POST["birthday"]));
     $pass = $_POST["pass"];
     $confirm_pass = $_POST["confirm_pass"];
     $email_address = $_POST["email_address"];
     $contact_number = $_POST["contact_number"];
+    $sss_num = $_POST["sss_num"];
+    $tin_acct = $_POST["tin_acct"];
 
-    $create_user_select = "SELECT first_name, last_name, pass, email_address, contact_number, access FROM accounts WHERE email_address='$email_address'";
+    $create_user_select = "SELECT referralId, first_name, last_name, address, pass, email_address, contact_number, access, referralId FROM accounts WHERE email_address='$email_address'";
     $create_user_query = mysqli_query($conn, $create_user_select);
     $create_user_count = mysqli_num_rows($create_user_query);
 

@@ -16,9 +16,74 @@
   }
 }
 
+.pictureBadge {
+  height: 50px;
+  width: 50px;
+  background-color: #0C4223;
+  background-size: cover;
+  border-radius: 50%;
+  margin-right: 20px;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  font-size: 33px;
+  padding: auto 0;
+  font-weight: 500;
+}
+
 .user-dashboard {
   background-color: red;
 }
 .user-dashboard div .user-dashboard-content-container {
   background-color: aqua;
+}
+
+.bg-gradient {
+  background-image: url("../images/user/others/Green Gradient.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-gradient-transaction {
+  background-image: url("../images/user/others/Green Gradient2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.side-coffee {
+  background-image: url("../images/user/others/Cup of coffee.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.2;
+}
+
+.coffee-pattern {
+  background-image: url("../images/user/others/Coffee bean pattern.png");
+  background-repeat: repeat;
+  background-size: 300px;
+  opacity: 0.2;
+}
+
+.side-coffeebeans {
+  background-image: url("../images/user/others/Coffee beans.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.5;
+}
+
+.glow-font {
+  text-shadow: 1px 0 8px #01f5f1;
+}
+
+.initialsOfName {
+  height: 100%;
+  width: 100%;
+  border-radius: 20%;
+  margin-right: 20px;
+  text-align: center;
+  vertical-align: middle;
+  padding: auto 0;
+  font-weight: 500;
+  height: 100%;
+  background-size: cover;
 }/*# sourceMappingURL=styles.css.map */
