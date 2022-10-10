@@ -30,6 +30,7 @@ if(isset($_POST["login"])){
         $sql = "SELECT id, email_address, pass, first_name, last_name, permission, access, referralId FROM accounts WHERE email_address = ?";
         
         if($stmt = mysqli_prepare($conn, $sql)){
+            
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             
             $param_email = $email_address;

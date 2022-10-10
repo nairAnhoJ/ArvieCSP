@@ -275,14 +275,14 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
             </h1>
 
             <div class="relative text-center mt-3 lg:mt-1 h-10 lg:h-16">
-                <button type="button" data-modal-toggle="generateModal" class="genCode m-auto lg:absolute lg:right-0 text-white bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-lg px-5 py-3 mr-2 mb-2 focus:outline-none">Generate New Codes</button>
+            <button type="button" data-modal-toggle="generateModal" class="genCode m-auto lg:absolute lg:right-0 text-white bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-lg px-5 py-3 mr-2 mb-2 focus:outline-none">Generate New Codes</button>
             </div>
 
             <!-- Generate Code Modal -->
             <div id="generateModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
 
                 <!-- Error Message -->
-                <div style="transform: translate(-50%, 0);" id="errorIDNum" class="hidden absolute top-24 left-1/2  flex items-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-red-300 rounded-lg shadow" role="alert">
+                <div style="transform: translate(-50%, 0); z-index:99;" id="errorIDNum" class="hidden absolute top-24 left-1/2  flex items-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-red-300 rounded-lg shadow" role="alert">
                     <div class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-red-500 bg-red-300 rounded-lg">
                         <svg aria-hidden="true" class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                         <span class="sr-only">Error icon</span>
@@ -366,7 +366,7 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
                         <!-- i Loop lang yung data dito -->
                         <tr>
                             <td class="text-center">10/05/2022</td>
-                            <td class="text-center">10050003</td>
+                            <td class="text-center">RA-10050003</td>
                             <td class="text-center">John Arian Malondras</td>
                             <td class="text-center">Botanical</td>
                             <td class="text-center">20</td>
@@ -391,7 +391,7 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
 
                         <tr>
                             <td class="text-center">10/04/2022</td>
-                            <td class="text-center">10040002</td>
+                            <td class="text-center">RB-10040002</td>
                             <td class="text-center">Kevin Marero</td>
                             <td class="text-center">Kapenato & Cereal</td>
                             <td class="text-center">10</td>
@@ -415,7 +415,7 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
 
                         <tr>
                             <td class="text-center">10/03/2022</td>
-                            <td class="text-center">10030001</td>
+                            <td class="text-center">DI-10030001</td>
                             <td class="text-center">Cedrick Orozo</td>
                             <td class="text-center">Direct Invite</td>
                             <td class="text-center">5</td>
