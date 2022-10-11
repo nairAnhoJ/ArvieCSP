@@ -97,6 +97,15 @@ CREATE TABLE `relationship` (
 -- Dumping data for table `relationship`
 --
 
+CREATE TABLE referral_codes (
+  referral_codes varchar(255) not null primary key,
+  gen_date datetime not null,
+  referrer varchar(255) not null,
+  transfer_date datetime not null,
+  referee varchar(255),
+  transact_date datetime not null,
+  status varchar(255));
+
 LOCK TABLES `relationship` WRITE;
 /*!40000 ALTER TABLE `relationship` DISABLE KEYS */;
 INSERT INTO `relationship` VALUES

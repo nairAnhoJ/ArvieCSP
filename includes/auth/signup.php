@@ -7,6 +7,17 @@ $exists=false;
 if(isset($_POST["register"])){
     include "./includes/config/conn.php";
 
+
+
+    $Referral_ID = "SELECT referral_ID, referrer FROM referral_codes WHERE status = 'to_redeem'";
+    $Referral_query = mysqli_query($conn, $Referral_ID);
+    $Referral_count = mysqli_num_rows($Referral_query);
+
+    if ($Referral_count > 0) {
+        header("location: ./signup.php");
+        echo "<script> alert('The code has already been used, sorry!')</script>";
+    } else {
+
     $referralId = $_POST["ref_code"];
     $first_name = $_POST["first_name"];
     $last_name = $_POST["last_name"];
@@ -44,5 +55,6 @@ if(isset($_POST["register"])){
           $exists="Username already taken"; 
        } 
     }
+}
 }
 ?>
