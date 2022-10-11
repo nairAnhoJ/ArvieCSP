@@ -37,7 +37,7 @@ CREATE TABLE `accounts` (
   `tin_acct` varchar(255) NOT NULL,
   `sss_num` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +46,8 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
+INSERT INTO `accounts` VALUES
+(1,'Kevin Roy','Marero','marerokevin@gmail.com','$2y$10$MgbnTX/izVUCpeldQyhnceKlm9GLjWfzoefbO6cs4Jdqu46b2oqQu',927436714,'2022-09-18 22:49:40','approved','administ','DR1069420ADA','Blk. 6, Lt. 5, Villa Monteverde, Mulawin, Tanza','710-241-241','89-5834122-91');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,6 +82,36 @@ INSERT INTO `invites` VALUES
 UNLOCK TABLES;
 
 --
+-- Table structure for table `referral_codes`
+--
+
+DROP TABLE IF EXISTS `referral_codes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `referral_codes` (
+  `referral_codes` varchar(255) NOT NULL,
+  `gen_date` datetime NOT NULL,
+  `referrer` varchar(255) NOT NULL,
+  `transfer_date` datetime NOT NULL,
+  `referee` varchar(255) DEFAULT NULL,
+  `transact_date` datetime NOT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`referral_codes`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `referral_codes`
+--
+
+LOCK TABLES `referral_codes` WRITE;
+/*!40000 ALTER TABLE `referral_codes` DISABLE KEYS */;
+INSERT INTO `referral_codes` VALUES
+('DS1042069ADA','2022-10-11 22:44:25','John Arian Malondras','2022-10-11 22:44:25','','2022-10-11 22:44:25','to_redeem');
+/*!40000 ALTER TABLE `referral_codes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `relationship`
 --
 
@@ -96,15 +128,6 @@ CREATE TABLE `relationship` (
 --
 -- Dumping data for table `relationship`
 --
-
-CREATE TABLE referral_codes (
-  referral_codes varchar(255) not null primary key,
-  gen_date datetime not null,
-  referrer varchar(255) not null,
-  transfer_date datetime not null,
-  referee varchar(255),
-  transact_date datetime not null,
-  status varchar(255));
 
 LOCK TABLES `relationship` WRITE;
 /*!40000 ALTER TABLE `relationship` DISABLE KEYS */;
@@ -195,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-11  0:49:41
+-- Dump completed on 2022-10-12  0:02:52
