@@ -59,7 +59,7 @@ if(isset($_POST["login"])){
                                 }else {
                                     header("location: ./admin/index.php");
                                 }
-                            }elseif($access == "pending") {
+                            }else {
                                 echo "<script> alert('You do not have access in this website')</script>";
                             }
                         }else{

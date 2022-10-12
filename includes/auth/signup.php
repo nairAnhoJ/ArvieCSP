@@ -8,16 +8,6 @@ if(isset($_POST["register"])){
     include "./includes/config/conn.php";
 
 
-
-    $Referral_ID = "SELECT referral_ID, referrer FROM referral_codes WHERE status = 'to_redeem'";
-    $Referral_query = mysqli_query($conn, $Referral_ID);
-    $Referral_count = mysqli_num_rows($Referral_query);
-
-    if ($Referral_count > 0) {
-        header("location: ./signup.php");
-        echo "<script> alert('The code has already been used, sorry!')</script>";
-    } else {
-
     $referralId = $_POST["ref_code"];
     $first_name = $_POST["first_name"];
     $last_name = $_POST["last_name"];
@@ -30,6 +20,15 @@ if(isset($_POST["register"])){
     $tin_acct = $_POST["tin_acct"];
     $homeAddress = $_POST["homeAddress"];
 
+    $Referral_ID = "SELECT referral_ID, referrer FROM referral_codes WHERE status = 'to_redeem'";
+    $Referral_query = mysqli_query($conn, $Referral_ID);
+    $Referral_count = mysqli_num_rows($Referral_query);
+
+    if ($Referral_count > 0) {
+        header("location: ./signup.php");
+        echo "<script> alert('The code has already been used, sorry!')</script>";
+    } else {
+        
     $create_user_select = "SELECT referralId, first_name, last_name, pass, email_address, contact_number, access, sss_num, tin_acct, homeaddress FROM accounts WHERE email_address='$email_address'";
     $create_user_query = mysqli_query($conn, $create_user_select);
     $create_user_count = mysqli_num_rows($create_user_query);
