@@ -89,14 +89,15 @@ DROP TABLE IF EXISTS `referral_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `referral_codes` (
-  `referral_codes` varchar(255) NOT NULL,
   `gen_date` datetime NOT NULL,
   `referrer` varchar(255) NOT NULL,
   `transfer_date` datetime NOT NULL,
   `referee` varchar(255) DEFAULT NULL,
   `transact_date` datetime NOT NULL,
   `status` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`referral_codes`)
+  `generation_batch` varchar(255) NOT NULL,
+  `referral_codes` varchar(255) NOT NULL,
+  PRIMARY KEY (`generation_batch`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -107,7 +108,7 @@ CREATE TABLE `referral_codes` (
 LOCK TABLES `referral_codes` WRITE;
 /*!40000 ALTER TABLE `referral_codes` DISABLE KEYS */;
 INSERT INTO `referral_codes` VALUES
-('DS1042069ADA','2022-10-11 22:44:25','John Arian Malondras','2022-10-11 22:44:25','','2022-10-11 22:44:25','to_redeem');
+('2022-10-11 22:44:25','John Arian Malondras','2022-10-11 22:44:25','','2022-10-11 22:44:25','to_redeem','','');
 /*!40000 ALTER TABLE `referral_codes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,4 +219,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-12  0:02:52
+-- Dump completed on 2022-10-14  0:10:57
