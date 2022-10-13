@@ -29,31 +29,31 @@ if(isset($_POST["register"])){
         echo "<script> alert('The code has already been used, sorry!')</script>";
     } else {
         
-    $create_user_select = "SELECT referralId, first_name, last_name, pass, email_address, contact_number, access, sss_num, tin_acct, homeaddress FROM accounts WHERE email_address='$email_address'";
-    $create_user_query = mysqli_query($conn, $create_user_select);
-    $create_user_count = mysqli_num_rows($create_user_query);
+        $create_user_select = "SELECT referralId, first_name, last_name, pass, email_address, contact_number, access, sss_num, tin_acct, homeaddress FROM accounts WHERE email_address='$email_address'";
+        $create_user_query = mysqli_query($conn, $create_user_select);
+        $create_user_count = mysqli_num_rows($create_user_query);
 
 
-    if($create_user_count == 0) {
-        if(($pass == $confirm_pass)&& $exists==false) {
+        if($create_user_count == 0) {
+            if(($pass == $confirm_pass)&& $exists==false) {
 
-            $hash = password_hash($pass, PASSWORD_DEFAULT);
+                $hash = password_hash($pass, PASSWORD_DEFAULT);
 
-            $create_user_select2 = "INSERT INTO `accounts` (`admin`,`first_name`, `last_name`, `pass`, `email_address`, `contact_number`, `access`, `date`) VALUES ('0', '$first_name', '$last_name', '$hash', '$email_address', '$contact_number', false, current_timestamp)";
+                $create_user_select2 = "INSERT INTO `accounts` (`admin`,`first_name`, `last_name`, `pass`, `email_address`, `contact_number`, `access`, `date`) VALUES ('0', '$first_name', '$last_name', '$hash', '$email_address', '$contact_number', false, current_timestamp)";
 
-            $result = mysqli_query($conn, $create_user_select2);
-    
-            if ($result) {
-                $showAlert = true; 
+                $result = mysqli_query($conn, $create_user_select2);
+        
+                if ($result) {
+                    $showAlert = true; 
+                }
+                else {
+                    $showError = "Passwords do not match"; 
+                }
             }
-            else {
-                $showError = "Passwords do not match"; 
-            }
+            elseif ($create_user_count>0) {
+                $exists="Username already taken"; 
+            } 
         }
-       if($create_user_count>0) {
-          $exists="Username already taken"; 
-       } 
     }
-}
 }
 ?>
