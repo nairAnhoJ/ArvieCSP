@@ -2,7 +2,30 @@
 session_start();
 include_once ("../includes/config/conn.php");
 
+$first_name = $_SESSION["first_name"];
+$last_name = $_SESSION["last_name"];
+$user = "$first_name $last_name";
 
+if(isset($_POST["generate"])){
+    $req = 10;
+    for ($x = 1; $x <= $req; $x++) {
+        $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $code_type = "DI";
+        $get_month = date('m', strtotime("now"));
+        $rand4 = substr(str_shuffle($String_a), 0, 4);
+        $rand4_check = substr(str_shuffle($String_b), 0, 4);
+        $generated = "$code_type$get_month-$rand4-$rand4_check";
+        $generation_batch = substr(str_shuffle($String_a), 0, 16);
+
+        if ($rand4 != $rand4_check) {
+            $insert_generated = "INSERT INTO `referral_codes` (`referral_codes`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', $generation_batch)";
+        }
+    }
+}
+
+    $gen_start = '<a type=button-ongoing href="create_form.php?id=';
+    $gen_end = '">Generate</a>';
 
 ?>
 <!DOCTYPE html>
@@ -184,7 +207,7 @@ include_once ("../includes/config/conn.php");
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <form action="" class="p-6">
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="p-6">
                             <div class="relative mb-6">
                                 <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">ID Number</label>
                                 <input type="search" id="id-search" list="idList" autocomplete="false" class="block p-4 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" required>
@@ -218,7 +241,7 @@ include_once ("../includes/config/conn.php");
                         </form>
                         <!-- Modal footer -->
                         <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200">
-                            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Generate</button>
+                            <button type="button" name="generate"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"><?php echo $gen_start;$generation_batch;$gen_end; ?></button>
                             <button data-modal-toggle="generateModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Close</button>
                         </div>
                     </div>
