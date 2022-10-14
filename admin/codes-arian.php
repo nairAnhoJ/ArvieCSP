@@ -125,7 +125,7 @@ if(isset($_GET['Approve'])){
 }
 
 // Array ng ID Number at Name
-$idNum = array("123123123", "456456456", "789789789");
+$idNum = array("123123123", "456456456", "789789789"); //basura shit
 $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Orozo");
 
 ?>
