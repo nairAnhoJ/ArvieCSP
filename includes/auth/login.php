@@ -25,10 +25,12 @@ if(isset($_POST["login"])){
         $password = trim($_POST["password"]);
     }
 
+
     if(empty($email_address_err) && empty($password_err)){
         $sql = "SELECT id, email_address, pass, first_name, last_name, permission, access, referralId FROM accounts WHERE email_address = ?";
         
         if($stmt = mysqli_prepare($conn, $sql)){
+            
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             
             $param_email = $email_address;
@@ -50,19 +52,14 @@ if(isset($_POST["login"])){
                             $_SESSION["referralId"] = $referralId;
 
                             if($access == "approved") {
-
-
-                               
-
                                 if($permission == "administ") {
                                     header("location: ./admin/index.php");
                                 }elseif($permission == "userist") {
-
                                     header("location: ./user/index.php");
                                 }else {
                                     header("location: ./admin/index.php");
                                 }
-                            }elseif($access == "pending") {
+                            }else {
                                 echo "<script> alert('You do not have access in this website')</script>";
                             }
                         }else{
@@ -77,7 +74,9 @@ if(isset($_POST["login"])){
             }
             mysqli_stmt_close($stmt);
         }
+        echo 'test';
     }
     mysqli_close($conn);
+    echo 'test';
 }
 ?>

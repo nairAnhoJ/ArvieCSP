@@ -1,31 +1,132 @@
 <?php
 session_start();
 include_once ("../includes/config/conn.php");
+$db= $conn;
 
-$first_name = $_SESSION["first_name"];
-$last_name = $_SESSION["last_name"];
-$user = "$first_name $last_name";
+// code for getting the accounts//
+$tableNameAccount="accounts";
+$columnsAccounts= ['id', 'first_name','last_name','email_address','access'];
+$fetchDataAccounts= fetch_data_Account($db, $tableNameAccount, $columnsAccounts);
 
-if(isset($_POST["generate"])){
-    $req = 10;
-    for ($x = 1; $x <= $req; $x++) {
-        $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $code_type = "DI";
-        $get_month = date('m', strtotime("now"));
-        $rand4 = substr(str_shuffle($String_a), 0, 4);
-        $rand4_check = substr(str_shuffle($String_b), 0, 4);
-        $generated = "$code_type$get_month-$rand4-$rand4_check";
-        $generation_batch = substr(str_shuffle($String_a), 0, 16);
 
-        if ($rand4 != $rand4_check) {
-            $insert_generated = "INSERT INTO `referral_codes` (`referral_codes`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', $generation_batch)";
-        }
+function fetch_data_Account($db, $tableNameAccount, $columnsAccounts){
+
+
+ if(empty($db)){
+  $msg= "Database connection error";
+ }elseif (empty($columnsAccounts) || !is_array($columnsAccounts)) {
+  $msg="columns Name must be defined in an indexed array";
+ }elseif(empty($tableNameAccount)){
+   $msg= "Table Name is empty";
+}else{
+$columnName = implode(", ", $columnsAccounts);
+$query = "SELECT * FROM `accounts` WHERE `access` = False";
+
+//  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
+$result = $db->query($query);
+if($result== true){ 
+ if ($result->num_rows > 0) {
+    $row= mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $msg= $row;
+ } else {
+    $msg= "No Data Found"; 
+ }
+}else{
+  $msg= mysqli_error($db);
+}
+}
+return $msg;
+}
+// end of code for getting the accounts//
+
+
+if(isset($_GET['Approve'])){
+
+    $accountId = $_GET['Approve'];
+
+    $invitee="James Orozo";
+    $inviteeId="13";
+    $username="cedrickjames.orozo@cvsu.edu.ph";
+
+    $sqlSelectAccount ="SELECT * FROM `accounts` WHERE `id` = '$accountId';";
+    $resultAccount = mysqli_query($conn, $sqlSelectAccount);
+
+    while($userRow = mysqli_fetch_assoc($resultAccount)){
+        $fname = $userRow['first_name'];
+        $lname = $userRow['last_name'];
+        $inviteName = $fname." ".$lname;
+        $email = $userRow['email_address'];
     }
+    $sqlinsertInvite = "INSERT INTO `invites`(`name`, `idOfInvite` ,`invitee`,`inviteeID`) VALUES ('$inviteName','$accountId','$invitee','$inviteeId')";
+    mysqli_query($conn, $sqlinsertInvite);
+    
+    $sqlGetTotalBalance= "SELECT * FROM `totalbalance` WHERE `userID` = '$inviteeId'";
+    $resultTotalBalance = mysqli_query($conn, $sqlGetTotalBalance);
+    
+    $totalBalance = 0;
+    while($userRow = mysqli_fetch_assoc($resultTotalBalance)){
+        $totalBalance = $userRow['totalBalance'];
+    }
+    $updatedBalance = $totalBalance + 500;
+    $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance' WHERE `userID` = '$inviteeId'";
+    mysqli_query($conn, $sqlAddBalance);
+
+    $sqlinsertTransact= "INSERT INTO `transaction`(`type`,`userName`,`userId`, `inviteName`,`inviteeName`, `addedAmount`, `TotalBalance`) VALUES ('Direct Referral','$username','$inviteeId','$inviteName','$invitee','500','$updatedBalance')";
+    mysqli_query($conn, $sqlinsertTransact);
+
+    $sqlInsertUserInitialBalance= "INSERT INTO `totalbalance`(`userID`, `userName`, `totalBalance`) VALUES ('$accountId','$email','0');";
+    mysqli_query($conn, $sqlInsertUserInitialBalance);
+
+    $sqlUpdateAccess= "UPDATE `accounts` SET `access`= TRUE WHERE `id` = '$accountId'";
+    mysqli_query($conn, $sqlUpdateAccess);
+
+    
+    $_SESSION['updatedBalance'] = $updatedBalance;
+
+    $upline=$username;
+    $uplineId=$inviteeId;
+
+    for ($i = 1; $i<=10; $i++){
+
+        $sqlGetInvitee= "SELECT * FROM `invites` WHERE `idOfInvite` = '$uplineId'";
+        $resultInvitee = mysqli_query($conn, $sqlGetInvitee);
+        
+        $inviteeUpline = '';
+        $inviteeID = '';
+
+        while($userRow = mysqli_fetch_assoc($resultInvitee)){
+            $inviteeUpline = $userRow['invitee'];
+            $inviteeID = $userRow['inviteeID'];
+
+        }
+        $resultInviteeCount = mysqli_num_rows($resultInvitee);
+    if($resultInviteeCount>=1){
+      $sqlGetTotalBalance= "SELECT * FROM `totalbalance` WHERE `userID` = '$inviteeID'";
+      $resultTotalBalance = mysqli_query($conn, $sqlGetTotalBalance);
+      $totalBalance = 0;
+  
+      while($userRow = mysqli_fetch_assoc($resultTotalBalance)){
+      $totalBalance = $userRow['totalBalance'];
+      }
+      $updatedBalance = $totalBalance + 10;
+  
+      $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance' WHERE `userID` = '$inviteeID'";
+      mysqli_query($conn, $sqlAddBalance);
+
+      $sqlinsertTransact2= "INSERT INTO `transaction`(`type`,`userName`,`userId`, `inviteName`,`inviteeName`, `addedAmount`, `TotalBalance`) VALUES ('Indirect Referral','$inviteeUpline','$inviteeID','$inviteName','$invitee','10','$updatedBalance')";
+      mysqli_query($conn, $sqlinsertTransact2);
+
+      
+      $uplineId = $inviteeID;
+    }
+       
+    }
+
 }
 
-    $gen_start = '<a href="generated-codes';
-    $gen_end = '">Generate</a>';
+// Array ng ID Number at Name
+$idNum = array("123123123", "456456456", "789789789"); //basura shit
+$memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Orozo");
 
 ?>
 <!DOCTYPE html>
@@ -37,8 +138,6 @@ if(isset($_POST["generate"])){
     <link rel="stylesheet" href="../styles/styles.css">
     <!-- <link rel="stylesheet" href="./dist/output.css"> -->
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
-    <link rel="stylesheet" href="../node_modules/tw-elements/dist/css/index.min.css" />
-
     <!-- <link rel="stylesheet" href="http://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"> -->
 	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
 	<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
@@ -209,7 +308,7 @@ if(isset($_POST["generate"])){
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="p-6">
+                        <form action="" class="p-6">
                             <div class="relative mb-6">
                                 <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">ID Number</label>
                                 <input type="search" id="id-search" list="idList" autocomplete="false" class="block p-4 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" required>
@@ -243,7 +342,7 @@ if(isset($_POST["generate"])){
                         </form>
                         <!-- Modal footer -->
                         <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200">
-                            <button type="submit" name="generate" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Generate</button>
+                            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Generate</button>
                             <button data-modal-toggle="generateModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Close</button>
                         </div>
                     </div>
@@ -420,55 +519,6 @@ if(isset($_POST["generate"])){
         ?>
     <!-- END -->
 
-<!-- Modal -->
-<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog relative w-auto pointer-events-none">
-    <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-      <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-        <h3 class="text-xl font-semibold text-gray-900">
-                        Codes for Transaction #1003001<br>
-                        Date: 10/03/2022<br>
-                        Member Name: Cedrick Orozo<br>
-                        Code Type: Direct Invite<br>
-                        Total: 5
-        </h3>
-        <button type="button"  class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body relative p-4">
-        <div class="p-6 space-y-6">
-            <ul class="space-y-1 max-w-md list-inside text-gray-800 text-lg text-center">
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-1.5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                    DR10-QWER1234
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-1.5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                    DR10-Q1W2E3R4
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-1.5 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
-                    DR10-1Q2W3E4R
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-1.5 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
-                    DR10-F93M5HD8
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-1.5 text-gray-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
-                    DR10-73BL29DH
-                </li>
-            </ul>
-        </div>
-      </div>
-      <div
-        class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-        <button type="button" class="px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md  hover:bg-blue-700 hover:shadow-lg  focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
     <!-- View Modal -->
     <div id="viewModal" tabindex="-1" aria-hidden="false" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
         <div class="relative p-4 w-full max-w-lg h-full md:h-auto">

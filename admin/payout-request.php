@@ -123,6 +123,11 @@ if(isset($_GET['Approve'])){
     }
 
 }
+
+// Array ng ID Number at Name
+$idNum = array("123123123", "456456456", "789789789");
+$memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Orozo");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -208,12 +213,12 @@ if(isset($_GET['Approve'])){
 
 
         @media screen and (max-width: 1023px) {
-            .user-members-content-container{
+            .user-code-content-container{
                 min-height: calc(100vh - 65px);
             }
         }
         @media screen and (min-width: 1024px) {
-            .user-members-content-container {
+            .user-code-content-container {
                 width: calc(100vw - 256px);
             }
             .navbar div .nav-items ul li {
@@ -236,7 +241,7 @@ if(isset($_GET['Approve'])){
             }
         }
         @media screen and (min-width: 1280px) {
-            .user-members-content-container{
+            .user-code-content-container{
                 padding: 0 25px;
                 margin-left: 0 !important;
             }
@@ -259,42 +264,53 @@ if(isset($_GET['Approve'])){
     <div class="display-none lg:display-block lg:w-1/4 xl:w-1/5 2xl:w-1/5">
       <?php include_once "./admin-nav.php"; ?>
     </div>
-    <div class="user-members-content-container pt-5 px-6 pb-5 bg-emerald-100 w-full lg:w-3/4 xl:w-4/5 2xl:w-4/5">
+    <div class="user-code-content-container pt-5 px-6 pb-5 bg-emerald-100 w-full lg:w-3/4 xl:w-4/5 2xl:w-4/5">
         
         <!--Container-->
         <div class="container w-full mx-auto px-2">
 
             <!--Title-->
             <h1 class="font-sans font-bold text-black px-2 lg:mb-3 text-5xl text-center ">
-                Members
+                Payout Requests
             </h1>
 
             <!--Table-->
-            <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
-                <table id="membersTable" class="stripe hover nowrap row-border dt-body-center" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+            <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded-lg shadow bg-white">
+                <table id="payoutTable" class="stripe hover nowrap row-border dt-body-center" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                     <thead>
                         <tr>
-                            <th data-priority="1">Name</th>
-                            <th data-priority="2">Role</th>
-                            <th data-priority="3">Rebate Points</th>
-                            <th data-priority="4">Total Earnings</th>
-                            <th data-priority="5">Upline</th>
-                            <th data-priority="6">Action</th>
+                            <th data-priority="1">Date</th>
+                            <th data-priority="2">Tran. No.</th>
+                            <th data-priority="3">Member Name</th>
+                            <th data-priority="4">Amount</th>
+                            <th data-priority="5">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- i Loop lang yung data dito -->
+                        <!-- i Loop lang yung data dito (Hindi pa approved)-->
                         <tr>
-                            <td class="text-center">Cedrick Orozo</td>
-                            <td class="text-center">Stockist</td>
-                            <td class="text-center">3</td>
+                            <td class="text-center">10/05/2022</td>
+                            <td class="text-center">PR-10050003</td>
+                            <td class="text-center">John Arian Malondras</td>
                             <td class="text-center">₱ 999,999,999.00</td>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center"><a class="mr-2 text-blue-500 text-center" href="#" data-memberId="">Edit</a><a class="ml-2 text-red-500" href="#" data-memberId="">Remove</a></td>
+                            <td class="text-center">
+                                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-6 py-2.5 focus:outline-none">Approve</button>
+                            </td>
+                        </tr>
+                        <!-- end -->
+                        
+                        <!-- i Loop lang yung data dito (Approved na)-->
+                        <tr>
+                            <td class="text-center">10/05/2022</td>
+                            <td class="text-center">PR-10050003</td>
+                            <td class="text-center">John Arian Malondras</td>
+                            <td class="text-center">₱ 999,999,999.00</td>
+                            <td class="text-center">
+                                <button type="button" disabled class="text-gray-100 bg-gray-400 focus:ring-4 font-medium rounded-lg text-base px-5 py-2.5 focus:outline-none">Approved</button>
+                            </td>
                         </tr>
                         <!-- end -->
                     </tbody>
-
                 </table>
             </div>
             <!--/Table-->
@@ -305,16 +321,17 @@ if(isset($_GET['Approve'])){
 
     <script>
         $(document).ready(function(){
-            $("#members").addClass("bg-emerald-700");
-            $("#members").addClass("text-white");
-            $("#members").removeClass("text-gray-600");
+            $("#payout").addClass("bg-emerald-700");
+            $("#payout").addClass("text-white");
+            $("#payout").removeClass("text-gray-600");
 
-            var table = $('#membersTable').DataTable({
+            var table = $('#payoutTable').DataTable({
                 responsive: true
             })
             .columns.adjust()
             .responsive.recalc();
         });
     </script>
+
 </body>
 </html>
