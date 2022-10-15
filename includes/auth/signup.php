@@ -6,13 +6,15 @@ $exists=false;
 
     include "./includes/config/conn.php";
 
-    $referrer = $_POST["sponsor"];
-    $ref_code = $_POST["ref_code"];
+    if(isset($_POST["register"])){
+
+    $referrer_check = $_POST["sponsor"];
+    $ref_code_check = $_POST["ref_code"];
     $referral_check = "SELECT referrer, ref_code from referral_codes where referrer = '$referrer' and ref_code = '$ref_code'";
     $referral_query = mysqli_query($conn, $referral_check);
     $referral_count = mysqli_num_rows($referral_query);
     
-    if ($referral_count == "1") {
+    if ($referral_count == 1) {
         while ($referral_info = mysqli_fetch_assoc($referral_query)); {
             if ($referrer == $referral_info['referrer'] && $referral_codes == $referral_info['ref_code']) {
 
@@ -21,8 +23,11 @@ $exists=false;
                 $code = "ADS";
                 $get_month = date('m', strtotime("now"));
                 $number = 00001;
-            
+
                 $member_id = "$code$get_month-$number";
+                
+                $referrer = $_POST["sponsor"];
+                $ref_code = $_POST["ref_code"];
                 $first_name = $_POST["first_name"];
                 $last_name = $_POST["last_name"];
                 $email_address = $_POST["email_address"];
@@ -53,7 +58,7 @@ $exists=false;
             
                             $hash = password_hash($pass, PASSWORD_DEFAULT);
             
-                            $create_user_select2 = "INSERT INTO `accounts` (`admin`,`first_name`, `last_name`, `pass`, `email_address`, `contact_number`, `access`, `date` `member_id`) VALUES ('0', '$first_name', '$last_name', '$hash', '$email_address', '$contact_number', false, current_timestamp, '$member_id')";
+                            $create_user_select2 = "INSERT INTO `accounts` (`admin`,`first_name`, `last_name`, `pass`, `email_address`, `contact_number`, `access`, `date` `member_id`, `sponsor`, `ref_code`) VALUES ('0', '$first_name', '$last_name', '$hash', '$email_address', '$contact_number', false, current_timestamp, '$member_id', '$referrer', '$ref_code')";
             
                             $result = mysqli_query($conn, $create_user_select2);
                     
@@ -74,7 +79,7 @@ $exists=false;
             }
         }
     }
-
+    }
     
 }
 ?>
