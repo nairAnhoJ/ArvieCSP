@@ -38,14 +38,14 @@
             <!-- Sign up Form -->
             <form class="mt-5" action="signup.php" method="POST">
                 <div class="mb-6">
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">ID Number</label>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">Referral Code</label>
                     <input type="search" id="id-search" list="idList" autocomplete="false" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
 
                 </div>
                 <div class="relative mb-6">
                     <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">Sponsor</label>
-                    <input type="text" id="name-input" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    <button type="button" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check ID Number</button>
+                    <input type="text" id="name-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <button type="button" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check Referral Code</button>
                 </div>
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="mb-6">
                     <label for="address" class="block mb-2 text-sm font-medium text-gray-900 ">Address</label>
-                    <input type="text" name="address" id="homeAddress" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" maxlength="11" required="">
+                    <input type="text" name="address" id="homeAddress" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                 </div>
                 <div class="mb-6">
                     <label for="birthday" class="block mb-2 text-sm font-medium text-gray-900 ">Birthday</label>

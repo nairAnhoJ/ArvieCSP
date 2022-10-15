@@ -10,15 +10,13 @@ $exists=false;
 
     $referrer_check = $_POST["sponsor"];
     $ref_code_check = $_POST["ref_code"];
-    $referral_check = "SELECT referrer, ref_code from referral_codes where referrer = '$referrer' and ref_code = '$ref_code'";
+    $referral_check = "SELECT referrer, ref_code from referral_codes where referrer = '$referrer_check' and ref_code = '$ref_code_check'";
     $referral_query = mysqli_query($conn, $referral_check);
     $referral_count = mysqli_num_rows($referral_query);
     
     if ($referral_count == 1) {
         while ($referral_info = mysqli_fetch_assoc($referral_query)); {
             if ($referrer == $referral_info['referrer'] && $referral_codes == $referral_info['ref_code']) {
-
-                if(isset($_POST["register"])){
 
                 $code = "ADS";
                 $get_month = date('m', strtotime("now"));
@@ -79,7 +77,5 @@ $exists=false;
             }
         }
     }
-    }
-    
 }
 ?>
