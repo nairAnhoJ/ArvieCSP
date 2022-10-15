@@ -41,6 +41,17 @@
                     <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Referral Code</label>
                     <input type="text" name="ref_code" id="ref_code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
                 </div>
+                <div class="mb-6">
+                    <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Sponsor</label>
+                    <input type="text" name="sponsor" id="sponsor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                    <br>
+                <div class="mb-6 border border-gray-300 w-full">
+                </div>
+                </div>
+                <div class="mb-6">
+                    <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Member ID</label>
+                    <input type="text" name="member_id" id="member_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+                </div>
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">First name</label>
@@ -49,7 +60,7 @@
                     <div>
                         <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Last name</label>
                         <input type="text" id="last_name" name="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
-                    </div> 
+                    </div>
                 </div>
                 <div class="mb-6">
                     <label for="address" class="block mb-2 text-sm font-medium text-gray-900 ">Address</label>

@@ -36,6 +36,7 @@ CREATE TABLE `accounts` (
   `homeaddress` varchar(255) NOT NULL,
   `tin_acct` varchar(255) NOT NULL,
   `sss_num` varchar(255) NOT NULL,
+  `member_id` varchar(12) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -47,7 +48,7 @@ CREATE TABLE `accounts` (
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
 INSERT INTO `accounts` VALUES
-(1,'Kevin Roy','Marero','marerokevin@gmail.com','$2y$10$MgbnTX/izVUCpeldQyhnceKlm9GLjWfzoefbO6cs4Jdqu46b2oqQu',927436714,'2022-09-18 22:49:40','approved','administ','DR1069420ADA','Blk. 6, Lt. 5, Villa Monteverde, Mulawin, Tanza','710-241-241','89-5834122-91');
+(1,'Kevin Roy','Marero','marerokevin@gmail.com','$2y$10$MgbnTX/izVUCpeldQyhnceKlm9GLjWfzoefbO6cs4Jdqu46b2oqQu',927436714,'2022-09-18 22:49:40','approved','administ','DR1069420ADA','Blk. 6, Lt. 5, Villa Monteverde, Mulawin, Tanza','710-241-241','89-5834122-91','');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +97,7 @@ CREATE TABLE `referral_codes` (
   `transact_date` datetime NOT NULL,
   `status` varchar(255) DEFAULT NULL,
   `generation_batch` varchar(255) NOT NULL,
-  `referral_codes` varchar(255) NOT NULL,
+  `ref_code` varchar(14) NOT NULL,
   PRIMARY KEY (`generation_batch`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -108,7 +109,7 @@ CREATE TABLE `referral_codes` (
 LOCK TABLES `referral_codes` WRITE;
 /*!40000 ALTER TABLE `referral_codes` DISABLE KEYS */;
 INSERT INTO `referral_codes` VALUES
-('2022-10-11 22:44:25','John Arian Malondras','2022-10-11 22:44:25','','2022-10-11 22:44:25','to_redeem','','');
+('2022-10-11 22:44:25','John Arian Malondras','2022-10-11 22:44:25','','2022-10-11 22:44:25','to_redeem','','asd12-12345');
 /*!40000 ALTER TABLE `referral_codes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,4 +220,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-14  0:10:57
+-- Dump completed on 2022-10-15  1:38:14
