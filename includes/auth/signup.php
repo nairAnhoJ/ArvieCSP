@@ -10,13 +10,14 @@ $exists=false;
 
     $referrer_check = $_POST["sponsor"];
     $ref_code_check = $_POST["ref_code"];
-    $referral_check = "SELECT referrer, ref_code from referral_codes where referrer = '$referrer_check' and ref_code = '$ref_code_check'";
+    $referral_check = "SELECT referrer_id, ref_code from referral_codes where referrer_id = '$referrer_check' and ref_code = '$ref_code_check'";
     $referral_query = mysqli_query($conn, $referral_check);
     $referral_count = mysqli_num_rows($referral_query);
     
+
     if ($referral_count == 1) {
-        while ($referral_info = mysqli_fetch_assoc($referral_query)); {
-            if ($referrer == $referral_info['referrer'] && $referral_codes == $referral_info['ref_code']) {
+        while ($referral_info = mysqli_fetch_assoc($referral_query)) {
+            if ($referrer == $referral_info['referrer_id'] && $referral_codes == $referral_info['ref_code']) {
 
                 $code = "ADS";
                 $get_month = date('m', strtotime("now"));
@@ -35,9 +36,9 @@ $exists=false;
                 $confirm_pass = $_POST["confirm_pass"];
                 $sss_num = $_POST["sss_num"];
                 $tin_acct = $_POST["tin_acct"];
-                $homeAddress = $_POST["homeAddress"];
+                $homeaddress = $_POST["homeAddress"];
             
-                $Referral_ID = "SELECT ref_code, referrer FROM referral_codes WHERE status = 'to_redeem'";
+                $Referral_ID = "SELECT ref_code, referrer FROM referral_codes WHERE `status` = 'to_redeem'";
                 $Referral_query = mysqli_query($conn, $Referral_ID);
                 $Referral_count = mysqli_num_rows($Referral_query);
             
@@ -45,8 +46,7 @@ $exists=false;
                     header("location: ./signup.php");
                     echo "<script> alert('The code has already been used, sorry!')</script>";
                 } else {
-                    
-                    $create_user_select = "SELECT referralId, first_name, last_name, pass, email_address, contact_number, access, sss_num, tin_acct, homeaddress, member_id FROM accounts WHERE email_address='$email_address'";
+                    $create_user_select = "SELECT * FROM accounts WHERE email_address='$email_address'";
                     $create_user_query = mysqli_query($conn, $create_user_select);
                     $create_user_count = mysqli_num_rows($create_user_query);
             
@@ -56,7 +56,7 @@ $exists=false;
             
                             $hash = password_hash($pass, PASSWORD_DEFAULT);
             
-                            $create_user_select2 = "INSERT INTO `accounts` (`admin`,`first_name`, `last_name`, `pass`, `email_address`, `contact_number`, `access`, `date` `member_id`, `sponsor`, `ref_code`) VALUES ('0', '$first_name', '$last_name', '$hash', '$email_address', '$contact_number', false, current_timestamp, '$member_id', '$referrer', '$ref_code')";
+                            $create_user_select2 = "INSERT INTO `accounts` (`first_name`, `last_name`, `email_address`, `pass`, `contact_number`, `date` `access`, `permission`, `homeaddress`, `tin_acct`, `sss_num`, `member_id`, `sponsor`, `ref_code`) VALUES ('$first_name', '$last_name', '$email_address', '$hash', '$contact_number', current_timestamp, false, false '$homeaddress', '$tin_acct', '$sss_num', '$member_id', '$referrer', '$ref_code')";
             
                             $result = mysqli_query($conn, $create_user_select2);
                     
