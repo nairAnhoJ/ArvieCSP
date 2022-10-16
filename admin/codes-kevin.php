@@ -20,6 +20,8 @@ if(isset($_POST["generate"])){
 
         if ($rand4 != $rand4_check) {
             $insert_generated = "INSERT INTO `referral_codes` (`referral_codes`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', $generation_batch)";
+
+            echo $generated;
         }
     }
 }

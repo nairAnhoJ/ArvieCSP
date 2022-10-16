@@ -27,7 +27,7 @@ if(isset($_POST["login"])){
 
 
     if(empty($email_address_err) && empty($password_err)){
-        $sql = "SELECT id, email_address, pass, first_name, last_name, permission, access, referralId FROM accounts WHERE email_address = ?";
+        $sql = "SELECT id, email_address, pass, first_name, last_name, permission, access, ref_code FROM accounts WHERE email_address = ?";
         
         if($stmt = mysqli_prepare($conn, $sql)){
             
@@ -39,7 +39,7 @@ if(isset($_POST["login"])){
                 mysqli_stmt_store_result($stmt);
                 
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    mysqli_stmt_bind_result($stmt, $id, $email_address, $hashed_password, $first_name, $last_name, $permission, $access, $referralId);
+                    mysqli_stmt_bind_result($stmt, $id, $email_address, $hashed_password, $first_name, $last_name, $permission, $access, $ref_code);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             $_SESSION["loggedin"] = true;
@@ -49,7 +49,7 @@ if(isset($_POST["login"])){
                             $_SESSION["last_name"] = $last_name;
                             $_SESSION["permission"] = $permission;
                             $_SESSION["access"] = $access;
-                            $_SESSION["referralId"] = $referralId;
+                            $_SESSION["ref_code"] = $ref_code;
 
                             if($access == "approved") {
                                 if($permission == "administ") {
