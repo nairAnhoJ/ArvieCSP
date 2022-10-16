@@ -9,6 +9,16 @@ $dateNow  = $dateNow->format('M d, Y');
 
 $email = $_SESSION["email_address"];
 $id = $_SESSION["id"];
+$SelectInfo ="SELECT * FROM `accounts` WHERE `email_address` = '$email';";
+$resultInfo= mysqli_query($conn, $SelectInfo);
+$fname="";
+$lname="";
+while($userRow = mysqli_fetch_assoc($resultInfo)){
+    $fname = $userRow['first_name'];
+    $lname = $userRow['last_name'];
+
+
+}
 $SelectPresentBalance ="SELECT * FROM `totalbalance` WHERE `userID` = '$id';";
 $resultPresentBalance = mysqli_query($conn, $SelectPresentBalance);
 
@@ -295,9 +305,9 @@ return $msg;
             <div class="absolute top-0 z-20 h-60 md:h-40 xl:h-48 rounded-2xl" >
                 <div class="h-full pl-5 py-5 md:pl-3 md:py-2 grid grid-rows-9 text-white items-center">
                     <div class="font-medium text-xl md:text-lg xl:text-xl">Overall Income</div>
-                    <div class="row-span-2 text-3xl md:text-2xl xl:text-3xl font-black">₱ 169,000,069.00</div>
+                    <div class="row-span-2 text-3xl md:text-2xl xl:text-3xl font-black">₱ <?php $totalincome = number_format($totalBalance, 2);echo $totalincome; //cedrick code?></div>
                     <div class="row-span-2 text-xl md:text-2xl xl:text-3xl font-medium">Available Balance as of <?php echo $dateNow; ?></div>
-                    <div class="row-span-4 text-5xl md:text-4xl xl:text-5xl font-black glow-font">₱ <?php $totalBalance = number_format($totalBalance, 2);echo $totalBalance; //cedrick code?></div>
+                    <div class="row-span-4 text-5xl md:text-4xl xl:text-5xl font-black glow-font">₱ <?php $totalBalance2 = number_format($totalBalance, 2);echo $totalBalance2; //cedrick code?></div>
                 </div>
             </div>
             </div>

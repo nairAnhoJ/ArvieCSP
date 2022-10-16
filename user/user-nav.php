@@ -6,7 +6,7 @@
                 <div class="initialsOfName"style=" background-image: url('../images/user/profile-pic/5R (3).jpg')"></div>
             </div>
             <div class="table col-span-3 row-span-2 md:pl-2 text-xl md:text-base">
-                <b class="table-cell align-bottom whitespace-nowrap"><?php echo $_SESSION["first_name"]." ". $_SESSION["last_name"];?></b>
+                <b class="table-cell align-bottom whitespace-nowrap"><?php echo $fname." ". $lname;?></b>
             </div>
             <div class="col-span-3 pl-2 md:text-base">
                 <span class=""><?php echo $_SESSION["id"]; ?></span>
