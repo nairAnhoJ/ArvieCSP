@@ -20,6 +20,7 @@ include_once ("./includes/config/conn.php");
             $referrer =$referral_info['referrer'];
             $ref_code = $referral_info['ref_code'];
 
+
                 $code = "ADS";
                 $get_month = date('m', strtotime("now"));
                 $number = 00001;
@@ -37,9 +38,10 @@ include_once ("./includes/config/conn.php");
                 $confirm_pass = $_POST["confirm_pass"];
                 $sss_num = $_POST["sss_num"];
                 $tin_acct = $_POST["tin_acct"];
-                $homeAddress = $_POST["homeAddress"];
+                $homeaddress = $_POST["homeAddress"];
             
                 $Referral_ID = "SELECT ref_code, referrer FROM referral_codes WHERE `status` != 'to_redeem'";
+
                 $Referral_query = mysqli_query($conn, $Referral_ID);
                 $Referral_count = mysqli_num_rows($Referral_query);
             
@@ -48,7 +50,6 @@ include_once ("./includes/config/conn.php");
                     header("location: ./signup.php");
 
                 } else {
-                    
                     $create_user_select = "SELECT * FROM accounts WHERE email_address='$email_address'";
                     $create_user_query = mysqli_query($conn, $create_user_select);
                     $create_user_count = mysqli_num_rows($create_user_query);
@@ -58,6 +59,7 @@ include_once ("./includes/config/conn.php");
                         if(($pass == $confirm_pass)) {
                             // echo "orayt3";
                             $hash = password_hash($pass, PASSWORD_DEFAULT);
+                            
                             $create_user_select2 = "INSERT INTO `accounts`(`first_name`, `last_name`, `sponsor`, `email_address`, `pass`, `contact_number`, `date`, `access`, `permission`, `referralId`, `homeaddress`, `tin_acct`, `sss_num`, `member_id`) VALUES ('$first_name', '$last_name','$referrer','$email_address','$hash','$contact_number',current_timestamp,'approved','userist','$ref_code','$homeAddress','$tin_acct','$sss_num','$member_id')";
                             
                             mysqli_query($conn, $create_user_select2);

@@ -26,8 +26,8 @@ if(isset($_POST["login"])){
     }
 
     if(empty($email_address_err) && empty($password_err)){
+
         $sql = "SELECT id, email_address, pass, first_name, last_name, permission, access FROM accounts WHERE email_address = ?";
-        
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             
