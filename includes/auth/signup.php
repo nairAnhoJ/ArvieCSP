@@ -56,7 +56,7 @@ include_once ("./includes/config/conn.php");
             
                     if($create_user_count == 0) {
                         if(($pass == $confirm_pass)) {
-                            echo "orayt3";
+                            // echo "orayt3";
                             $hash = password_hash($pass, PASSWORD_DEFAULT);
                             $create_user_select2 = "INSERT INTO `accounts`(`first_name`, `last_name`, `sponsor`, `email_address`, `pass`, `contact_number`, `date`, `access`, `permission`, `referralId`, `homeaddress`, `tin_acct`, `sss_num`, `member_id`) VALUES ('$first_name', '$last_name','$referrer','$email_address','$hash','$contact_number',current_timestamp,'approved','userist','$ref_code','$homeAddress','$tin_acct','$sss_num','$member_id')";
                             
