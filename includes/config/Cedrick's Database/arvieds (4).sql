@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2022 at 02:59 AM
+-- Generation Time: Oct 16, 2022 at 03:34 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `arviedsproject`
+-- Database: `arvieds`
 --
 
 -- --------------------------------------------------------
@@ -31,30 +31,28 @@ CREATE TABLE `accounts` (
   `id` int(60) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
+  `sponsor` varchar(100) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `pass` varchar(255) NOT NULL,
   `contact_number` int(15) NOT NULL,
   `date` datetime NOT NULL,
   `access` varchar(8) NOT NULL,
-  `permission` varchar(8) NOT NULL
+  `permission` varchar(8) NOT NULL,
+  `referralId` varchar(16) NOT NULL,
+  `homeaddress` varchar(255) NOT NULL,
+  `tin_acct` varchar(255) NOT NULL,
+  `sss_num` varchar(255) NOT NULL,
+  `member_id` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `first_name`, `last_name`, `email_address`, `pass`, `contact_number`, `date`, `access`, `permission`) VALUES
-(1, 'test', 'test', 'test@glory.com.ph', '$2y$10$sEWksoBuM7DPCeHAZywmo.pIyU6qGfRufSF/28lPniQBm.W6FveS.', 123123123, '2022-09-18 15:04:41', '', ''),
-(2, 'Cedrick James', 'Domo', 'test@glory.com', '$2y$10$X9GEBKzy1YYUq5K010m.M.k7NdLUCn57X6bPVX1E0baev7s5MvDh6', 123123123, '2022-09-18 15:17:13', '', ''),
-(3, 'read', 'me', 'readme@gmail.com', '$2y$10$zZJRgeINR/yYpXgI5O9skONZou79fYF96Nf5cP/uJv2ICFMgrNrry', 123123123, '2022-09-18 22:35:05', '', ''),
-(4, 'Marero', '123', 'marerokevin@gmail.com', '$2y$10$MgbnTX/izVUCpeldQyhnceKlm9GLjWfzoefbO6cs4Jdqu46b2oqQu', 123123, '2022-09-18 22:49:40', 'approved', 'administ'),
-(5, 'test', 'test', 'test@gmail.com.ph', '$2y$10$Xks2lk2/VZAoMWautPTKB.aAJODfpYqil9nLe3.MjakZLQUW1nqPq', 123123123, '2022-09-18 23:15:57', '', ''),
-(6, 'kevin', 'marero', 'test@tmail.com', '$2y$10$5CJfQLwRqp.PD3ClnQkFJuV893QopQet7t.txh6YAW/vAsN3fsML6', 123123123, '2022-09-18 23:19:36', '', ''),
-(7, 'toys', 'lol', 'latoy@gmail.com', '$2y$10$7R.bKBPMqK2GlsvQ464GVu52uyFZzCPU8pDANZ5geh5m9nhdfNlkS', 123123132, '2022-09-18 23:20:48', '', ''),
-(8, 'test', 'sdaasd', 'rwqer@gmail.com', '$2y$10$46uNbWFECLnPmngFX0jFD.hI2bV96OdqNCSYw6ALqkdPOwL3EVk12', 123123123, '2022-09-18 23:30:43', '', ''),
-(11, 'Kevin Roy', 'marero', 'marero@gmail.com', '$2y$10$wX0.cTEeBO1P/wujdA6gtu5cchj.7WD9S7J1qS1oYg7kGTK.VD3yO', 123123, '2022-09-20 00:16:50', 'approved', 'user'),
-(13, 'Cedrick', 'Pogi', 'cedrickjames.orozo@cvsu.edu.ph', '$2y$10$S2.vwY8Dc6OOPEVYpKdV6uCJKrac1TU46lkGnzlBPK3Otb/fXggDO', 123123345, '2022-09-19 23:15:26', 'approved', 'user'),
-(17, 'arian', 'malondras', 'arian@gmail.com', '$2y$10$yP8UwkcmHJrIj4rdJ4OZZO5mjb9n5eT3TEl7QZQ4anD01gAWiDOvu', 123456, '2022-09-19 23:16:41', '', '');
+INSERT INTO `accounts` (`id`, `first_name`, `last_name`, `sponsor`, `email_address`, `pass`, `contact_number`, `date`, `access`, `permission`, `referralId`, `homeaddress`, `tin_acct`, `sss_num`, `member_id`) VALUES
+(1, 'Kevin Roy', 'Marero', '', 'marerokevin@gmail.com', '$2y$10$MgbnTX/izVUCpeldQyhnceKlm9GLjWfzoefbO6cs4Jdqu46b2oqQu', 927436714, '2022-09-18 22:49:40', 'approved', 'administ', 'DR1069420ADA', 'Blk. 6, Lt. 5, Villa Monteverde, Mulawin, Tanza', '710-241-241', '89-5834122-91', 'ADSkSD123'),
+(2, 'Cedrick James', 'Orozo', 'John Arian Malondras', 'cedrickorozo@gmail.com', '$2y$10$yFe7t7Z8vp9sXNr6U9BE5ueaVanhI088/KVhz.qACqzehTGIkbLtK', 0, '2022-10-15 22:56:26', 'approved', 'userist', 'asd12-12345', '0233 Palangue 2 Naic Cavite', 'lkj', 'lkj', 'ADS10-1'),
+(3, 'Chrisostomo', 'Ibarra', 'ADSkSD123', 'cedrickjames.orozo@cvsu.edu.ph', '$2y$10$jhb3zIrMGSXk8Lm31QX6we271/zT53he0l36ESU1WMq308SHP5XIi', 1929129812, '2022-10-16 00:03:23', 'approved', 'userist', 'asd12-12345', 'Las Filipinas', '0329302', '92382', 'ADS10-1');
 
 -- --------------------------------------------------------
 
@@ -81,7 +79,7 @@ CREATE TABLE `generated_code` (
 INSERT INTO `generated_code` (`code_id`, `type`, `userNameOfSponsor`, `userIdOfSponsor`, `code`, `validity`, `date_created`, `userNameOfCodeOwner`, `userIdOfCodeOwner`) VALUES
 (1, 'RA', 'James Orozo', '13', 'DR10SKDJFH498', '2022-11-01', '2022-10-01', 'marero@gmail.com', 11),
 (2, 'RA', 'James Orozo', '13', 'DR10DKFJS', '2022-11-10', '2022-10-10', 'marero@gmail.com', 11),
-(3, 'RA', 'James Orozo', '13', 'DR10DKFJSLKJL', '2022-11-10', '2022-10-10', 'marero@gmail.com', 11);
+(3, 'RA', 'James Orozo', '13', 'RA10DKFJSLKJL', '2022-11-10', '2022-10-10', 'marero@gmail.com', 11);
 
 -- --------------------------------------------------------
 
@@ -102,13 +100,10 @@ CREATE TABLE `invites` (
 --
 
 INSERT INTO `invites` (`invitesID`, `name`, `idOfInvite`, `invitee`, `inviteeID`) VALUES
-(32, 'Cedrick Pogi', 13, 'Kevin Roy marero', 11),
+(32, 'James Orozo', 13, 'Kevin Roy marero', 11),
 (41, 'Cedrick James Orozo', 12, 'James Orozo', 13),
-(43, 'Kevin Roy marero', 11, 'Arian Malondras', 17),
-(44, 'Arian Malondras', 17, 'test', 1),
-(45, 'test', 1, 'test2', 2),
-(46, 'test2', 2, 'test3', 3),
-(47, 'test3', 3, 'test4', 4);
+(43, 'q e', 17, 'James Orozo', 13),
+(44, 'ChrisostomoIbarra', 0, 'Kevin Roy Marero', 0);
 
 -- --------------------------------------------------------
 
@@ -128,7 +123,31 @@ CREATE TABLE `rebates_points` (
 --
 
 INSERT INTO `rebates_points` (`rebates_points_id`, `user_id`, `email_address`, `pointsEarned`) VALUES
-(1, 11, 'marero@gmail.com', 3);
+(1, 11, 'marero@gmail.com', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `referral_codes`
+--
+
+CREATE TABLE `referral_codes` (
+  `gen_date` datetime NOT NULL,
+  `referrer` varchar(255) NOT NULL,
+  `transfer_date` datetime NOT NULL,
+  `referee` varchar(255) DEFAULT NULL,
+  `transact_date` datetime NOT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `generation_batch` varchar(255) NOT NULL,
+  `ref_code` varchar(14) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `referral_codes`
+--
+
+INSERT INTO `referral_codes` (`gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`, `ref_code`) VALUES
+('2022-10-11 22:44:25', 'ADSkSD123', '2022-10-11 22:44:25', '', '2022-10-11 22:44:25', 'to_redeem', '', 'asd12-12345');
 
 -- --------------------------------------------------------
 
@@ -176,14 +195,12 @@ CREATE TABLE `totalbalance` (
 --
 
 INSERT INTO `totalbalance` (`totalBalanceId`, `userID`, `userName`, `totalBalance`) VALUES
-(27, 13, 'cedrickjames.orozo@cvsu.edu.ph', 1000),
-(28, 11, 'marero@gmail.com', 840),
+(27, 2, 'cedrickjames.orozo@cvsu.edu.ph', 1000),
+(28, 11, 'marero@gmail.com', 520),
 (39, 12, 'cedrickorozo@gmail.com', 0),
-(40, 17, 'arian@gmail.com', 360),
-(41, 1, 'test@glory.com.ph', 180),
-(42, 2, 'test@glory.com', 180),
-(43, 3, 'readme@gmail.com', 180),
-(44, 4, 'marerokevin@gmail.com', 150);
+(40, 17, 'arian@gmail.com', 0),
+(41, 0, 'cedrickjames.orozo@cvsu.edu.ph', 100),
+(42, 0, 'marerokevin@gmail.com', 100);
 
 -- --------------------------------------------------------
 
@@ -212,7 +229,7 @@ CREATE TABLE `transaction` (
 --
 
 INSERT INTO `transaction` (`transactionId`, `type`, `userName`, `userId`, `inviteName`, `inviteeName`, `packageType`, `codeOwner`, `codeOwnerId`, `addedAmount`, `TotalBalance`, `addedPoints`, `totalPoints`) VALUES
-(69, 'Direct Referral', 'cedrickjames.orozo@cvsu.edu.ph', 13, 'Cedrick James Orozo', 'James Orozo', '', '', '', 500, 500, 0, 0),
+(69, 'Direct Referral', 'cedrickjames.orozo@cvsu.edu.ph', 2, 'Cedrick James Orozo', 'James Orozo', '', '', '', 500, 500, 0, 0),
 (70, 'Indirect Referral', 'Kevin Roy marero', 11, 'Cedrick James Orozo', 'James Orozo', '', '', '', 10, 510, 0, 0),
 (73, 'Direct Referral', 'cedrickjames.orozo@cvsu.edu.ph', 13, 'q e', 'James Orozo', '', '', '', 500, 1000, 0, 0),
 (74, 'Indirect Referral', 'Kevin Roy marero', 11, 'q e', 'James Orozo', '', '', '', 10, 520, 0, 0),
@@ -243,7 +260,42 @@ INSERT INTO `transaction` (`transactionId`, `type`, `userName`, `userId`, `invit
 (99, 'Rebates', 'test@glory.com.ph', 1, '', '', 'RA', 'marero@gmail.com', '11', 30, 180, 0, 0),
 (100, 'Rebates', 'test@glory.com', 2, '', '', 'RA', 'marero@gmail.com', '11', 30, 180, 0, 0),
 (101, 'Rebates', 'readme@gmail.com', 3, '', '', 'RA', 'marero@gmail.com', '11', 30, 180, 0, 0),
-(102, 'Rebates', 'marerokevin@gmail.com', 4, '', '', 'RA', 'marero@gmail.com', '11', 30, 150, 0, 0);
+(102, 'Rebates', 'marerokevin@gmail.com', 4, '', '', 'RA', 'marero@gmail.com', '11', 30, 150, 0, 0),
+(103, 'Points', 'marero@gmail.com', 11, '', '', 'RA', '', '', 0, 0, 1, 4),
+(104, 'Rebates', 'arian@gmail.com', 17, '', '', 'RA', 'marero@gmail.com', '11', 80, 440, 0, 0),
+(105, 'Rebates', 'test@glory.com.ph', 1, '', '', 'RA', 'marero@gmail.com', '11', 30, 210, 0, 0),
+(106, 'Rebates', 'test@glory.com', 2, '', '', 'RA', 'marero@gmail.com', '11', 30, 210, 0, 0),
+(107, 'Rebates', 'readme@gmail.com', 3, '', '', 'RA', 'marero@gmail.com', '11', 30, 210, 0, 0),
+(108, 'Rebates', 'marerokevin@gmail.com', 4, '', '', 'RA', 'marero@gmail.com', '11', 30, 180, 0, 0),
+(109, 'Points', 'marero@gmail.com', 11, '', '', 'RA', '', '', 0, 0, 1, 5),
+(110, 'Rebates', 'arian@gmail.com', 17, '', '', 'RA', 'marero@gmail.com', '11', 80, 520, 0, 0),
+(111, 'Rebates', 'test@glory.com.ph', 1, '', '', 'RA', 'marero@gmail.com', '11', 30, 240, 0, 0),
+(112, 'Rebates', 'test@glory.com', 2, '', '', 'RA', 'marero@gmail.com', '11', 30, 240, 0, 0),
+(113, 'Rebates', 'readme@gmail.com', 3, '', '', 'RA', 'marero@gmail.com', '11', 30, 240, 0, 0),
+(114, 'Rebates', 'marerokevin@gmail.com', 4, '', '', 'RA', 'marero@gmail.com', '11', 30, 210, 0, 0),
+(115, 'Points', 'marero@gmail.com', 11, '', '', 'RA', '', '', 0, 0, 1, 6),
+(116, 'Rebates', 'arian@gmail.com', 17, '', '', 'RA', 'marero@gmail.com', '11', 80, 600, 0, 0),
+(117, 'Rebates', 'test@glory.com.ph', 1, '', '', 'RA', 'marero@gmail.com', '11', 30, 270, 0, 0),
+(118, 'Rebates', 'test@glory.com', 2, '', '', 'RA', 'marero@gmail.com', '11', 30, 270, 0, 0),
+(119, 'Rebates', 'readme@gmail.com', 3, '', '', 'RA', 'marero@gmail.com', '11', 30, 270, 0, 0),
+(120, 'Rebates', 'marerokevin@gmail.com', 4, '', '', 'RA', 'marero@gmail.com', '11', 30, 240, 0, 0),
+(121, 'Points', 'marero@gmail.com', 11, '', '', 'RA', '', '', 0, 0, 1, 7),
+(122, 'Rebates', 'arian@gmail.com', 17, '', '', 'RA', 'marero@gmail.com', '11', 80, 680, 0, 0),
+(123, 'Rebates', 'test@glory.com.ph', 1, '', '', 'RA', 'marero@gmail.com', '11', 30, 300, 0, 0),
+(124, 'Rebates', 'test@glory.com', 2, '', '', 'RA', 'marero@gmail.com', '11', 30, 300, 0, 0),
+(125, 'Rebates', 'readme@gmail.com', 3, '', '', 'RA', 'marero@gmail.com', '11', 30, 300, 0, 0),
+(126, 'Rebates', 'marerokevin@gmail.com', 4, '', '', 'RA', 'marero@gmail.com', '11', 30, 270, 0, 0),
+(127, 'Direct Referral', 'cedrickjames.orozo@cvsu.edu.ph', 0, '', 'Kevin Roy Marero', '', '', '', 500, 500, 0, 0),
+(128, 'Indirect Referral', 'Kevin Roy Marero', 0, '', 'Kevin Roy Marero', '', '', '', 10, 10, 0, 0),
+(129, 'Indirect Referral', 'Kevin Roy Marero', 0, '', 'Kevin Roy Marero', '', '', '', 10, 20, 0, 0),
+(130, 'Indirect Referral', 'Kevin Roy Marero', 0, '', 'Kevin Roy Marero', '', '', '', 10, 30, 0, 0),
+(131, 'Indirect Referral', 'Kevin Roy Marero', 0, '', 'Kevin Roy Marero', '', '', '', 10, 40, 0, 0),
+(132, 'Indirect Referral', 'Kevin Roy Marero', 0, '', 'Kevin Roy Marero', '', '', '', 10, 50, 0, 0),
+(133, 'Indirect Referral', 'Kevin Roy Marero', 0, '', 'Kevin Roy Marero', '', '', '', 10, 60, 0, 0),
+(134, 'Indirect Referral', 'Kevin Roy Marero', 0, '', 'Kevin Roy Marero', '', '', '', 10, 70, 0, 0),
+(135, 'Indirect Referral', 'Kevin Roy Marero', 0, '', 'Kevin Roy Marero', '', '', '', 10, 80, 0, 0),
+(136, 'Indirect Referral', 'Kevin Roy Marero', 0, '', 'Kevin Roy Marero', '', '', '', 10, 90, 0, 0),
+(137, 'Indirect Referral', 'Kevin Roy Marero', 0, '', 'Kevin Roy Marero', '', '', '', 10, 100, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -275,6 +327,12 @@ ALTER TABLE `rebates_points`
   ADD PRIMARY KEY (`rebates_points_id`);
 
 --
+-- Indexes for table `referral_codes`
+--
+ALTER TABLE `referral_codes`
+  ADD PRIMARY KEY (`generation_batch`);
+
+--
 -- Indexes for table `totalbalance`
 --
 ALTER TABLE `totalbalance`
@@ -294,7 +352,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `generated_code`
@@ -306,7 +364,7 @@ ALTER TABLE `generated_code`
 -- AUTO_INCREMENT for table `invites`
 --
 ALTER TABLE `invites`
-  MODIFY `invitesID` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `invitesID` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `rebates_points`
@@ -318,13 +376,13 @@ ALTER TABLE `rebates_points`
 -- AUTO_INCREMENT for table `totalbalance`
 --
 ALTER TABLE `totalbalance`
-  MODIFY `totalBalanceId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `totalBalanceId` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transactionId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `transactionId` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
