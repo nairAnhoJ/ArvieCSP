@@ -1,132 +1,42 @@
 <?php
 session_start();
 include_once ("../includes/config/conn.php");
-$db= $conn;
 
-// code for getting the accounts//
-$tableNameAccount="accounts";
-$columnsAccounts= ['id', 'first_name','last_name','email_address','access'];
-$fetchDataAccounts= fetch_data_Account($db, $tableNameAccount, $columnsAccounts);
+if(isset($_POST["check"])){
 
-
-function fetch_data_Account($db, $tableNameAccount, $columnsAccounts){
-
-
- if(empty($db)){
-  $msg= "Database connection error";
- }elseif (empty($columnsAccounts) || !is_array($columnsAccounts)) {
-  $msg="columns Name must be defined in an indexed array";
- }elseif(empty($tableNameAccount)){
-   $msg= "Table Name is empty";
-}else{
-$columnName = implode(", ", $columnsAccounts);
-$query = "SELECT * FROM `accounts` WHERE `access` = False";
-
-//  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
-$result = $db->query($query);
-if($result== true){ 
- if ($result->num_rows > 0) {
-    $row= mysqli_fetch_all($result, MYSQLI_ASSOC);
-    $msg= $row;
- } else {
-    $msg= "No Data Found"; 
- }
-}else{
-  $msg= mysqli_error($db);
-}
-}
-return $msg;
-}
-// end of code for getting the accounts//
-
-
-if(isset($_GET['Approve'])){
-
-    $accountId = $_GET['Approve'];
-
-    $invitee="James Orozo";
-    $inviteeId="13";
-    $username="cedrickjames.orozo@cvsu.edu.ph";
-
-    $sqlSelectAccount ="SELECT * FROM `accounts` WHERE `id` = '$accountId';";
-    $resultAccount = mysqli_query($conn, $sqlSelectAccount);
-
-    while($userRow = mysqli_fetch_assoc($resultAccount)){
-        $fname = $userRow['first_name'];
-        $lname = $userRow['last_name'];
-        $inviteName = $fname." ".$lname;
-        $email = $userRow['email_address'];
-    }
-    $sqlinsertInvite = "INSERT INTO `invites`(`name`, `idOfInvite` ,`invitee`,`inviteeID`) VALUES ('$inviteName','$accountId','$invitee','$inviteeId')";
-    mysqli_query($conn, $sqlinsertInvite);
-    
-    $sqlGetTotalBalance= "SELECT * FROM `totalbalance` WHERE `userID` = '$inviteeId'";
-    $resultTotalBalance = mysqli_query($conn, $sqlGetTotalBalance);
-    
-    $totalBalance = 0;
-    while($userRow = mysqli_fetch_assoc($resultTotalBalance)){
-        $totalBalance = $userRow['totalBalance'];
-    }
-    $updatedBalance = $totalBalance + 500;
-    $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance' WHERE `userID` = '$inviteeId'";
-    mysqli_query($conn, $sqlAddBalance);
-
-    $sqlinsertTransact= "INSERT INTO `transaction`(`type`,`userName`,`userId`, `inviteName`,`inviteeName`, `addedAmount`, `TotalBalance`) VALUES ('Direct Referral','$username','$inviteeId','$inviteName','$invitee','500','$updatedBalance')";
-    mysqli_query($conn, $sqlinsertTransact);
-
-    $sqlInsertUserInitialBalance= "INSERT INTO `totalbalance`(`userID`, `userName`, `totalBalance`) VALUES ('$accountId','$email','0');";
-    mysqli_query($conn, $sqlInsertUserInitialBalance);
-
-    $sqlUpdateAccess= "UPDATE `accounts` SET `access`= TRUE WHERE `id` = '$accountId'";
-    mysqli_query($conn, $sqlUpdateAccess);
-
-    
-    $_SESSION['updatedBalance'] = $updatedBalance;
-
-    $upline=$username;
-    $uplineId=$inviteeId;
-
-    for ($i = 1; $i<=10; $i++){
-
-        $sqlGetInvitee= "SELECT * FROM `invites` WHERE `idOfInvite` = '$uplineId'";
-        $resultInvitee = mysqli_query($conn, $sqlGetInvitee);
-        
-        $inviteeUpline = '';
-        $inviteeID = '';
-
-        while($userRow = mysqli_fetch_assoc($resultInvitee)){
-            $inviteeUpline = $userRow['invitee'];
-            $inviteeID = $userRow['inviteeID'];
-
-        }
-        $resultInviteeCount = mysqli_num_rows($resultInvitee);
-    if($resultInviteeCount>=1){
-      $sqlGetTotalBalance= "SELECT * FROM `totalbalance` WHERE `userID` = '$inviteeID'";
-      $resultTotalBalance = mysqli_query($conn, $sqlGetTotalBalance);
-      $totalBalance = 0;
-  
-      while($userRow = mysqli_fetch_assoc($resultTotalBalance)){
-      $totalBalance = $userRow['totalBalance'];
-      }
-      $updatedBalance = $totalBalance + 10;
-  
-      $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance' WHERE `userID` = '$inviteeID'";
-      mysqli_query($conn, $sqlAddBalance);
-
-      $sqlinsertTransact2= "INSERT INTO `transaction`(`type`,`userName`,`userId`, `inviteName`,`inviteeName`, `addedAmount`, `TotalBalance`) VALUES ('Indirect Referral','$inviteeUpline','$inviteeID','$inviteName','$invitee','10','$updatedBalance')";
-      mysqli_query($conn, $sqlinsertTransact2);
-
-      
-      $uplineId = $inviteeID;
-    }
-       
-    }
-
-}
+$member_id_concat = "SELECT ARRAY_CONCAT(member_id) FROM accounts"; 
+$member_id_query = mysqli_query($conn, $member_id_concat);
+$member_name = "SELECT ARRAY_CONCAT(first_name, ' ',last_name) FROM accounts";
+$member_name = mysqli_query($conn, $member_name);
 
 // Array ng ID Number at Name
-$idNum = array("123123123", "456456456", "789789789"); //basura shit
-$memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Orozo");
+$idNum = array($member_id_query);
+$memName = array($member_name);
+}
+
+if(isset($_POST["check"])){
+
+$first_name = $_SESSION["first_name"];
+$last_name = $_SESSION["last_name"];
+$user = "$first_name $last_name";
+
+if(isset($_POST["generate"])){
+    $count = $_POST["count"];
+
+    for ($x = 1; $x <= $count; $x++) {
+        $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $code_type = "DI";
+        $get_month = date('m', strtotime("now"));
+        $rand4 = substr(str_shuffle($String_a), 0, 4);
+        $rand4_check = substr(str_shuffle($String_b), 0, 4);
+        $generated = "$code_type$get_month-$rand4-$rand4_check";
+        $generation_batch = substr(str_shuffle($String_a), 0, 16);
+
+            $insert_generated = "INSERT INTO `referral_codes` (`ref_codes`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`, ) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', $generation_batch)";
+        }
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -308,11 +218,12 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <form action="" class="p-6">
+                        <form id="generate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="p-6">
+                        <form id="check" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="p-6">
                             <div class="relative mb-6">
                                 <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">ID Number</label>
                                 <input type="search" id="id-search" list="idList" autocomplete="false" class="block p-4 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" required>
-                                <button type="button" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check ID Number</button>
+                                <button type="button" name="check" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check ID Number</button>
                                 <datalist class="text-lg bg-blue-500" id="idList">
                                     <?php
                                         foreach($idNum as $x) {
@@ -366,7 +277,7 @@ $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Oroz
                         <!-- i Loop lang yung data dito -->
                         <tr>
                             <td class="text-center">10/05/2022</td>
-                            <td class="text-center">RA-10050003</td>
+                            <td class="text-center"><?php echo $member_name; ?></td>
                             <td class="text-center">John Arian Malondras</td>
                             <td class="text-center">Botanical</td>
                             <td class="text-center">20</td>

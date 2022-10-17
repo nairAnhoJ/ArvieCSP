@@ -7,8 +7,9 @@ $last_name = $_SESSION["last_name"];
 $user = "$first_name $last_name";
 
 if(isset($_POST["generate"])){
-    $req = 10;
-    for ($x = 1; $x <= $req; $x++) {
+    $count = $_POST["count"];
+
+    for ($x = 1; $x <= $count; $x++) {
         $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $code_type = "DI";
@@ -18,16 +19,9 @@ if(isset($_POST["generate"])){
         $generated = "$code_type$get_month-$rand4-$rand4_check";
         $generation_batch = substr(str_shuffle($String_a), 0, 16);
 
-        if ($rand4 != $rand4_check) {
-            $insert_generated = "INSERT INTO `referral_codes` (`referral_codes`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', $generation_batch)";
-
-            echo $generated;
+            $insert_generated = "INSERT INTO `referral_codes` (`ref_codes`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`, ) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', $generation_batch)";
         }
     }
-}
-
-    $gen_start = '<a href="generated-codes';
-    $gen_end = '">Generate</a>';
 
 ?>
 <!DOCTYPE html>
@@ -212,14 +206,21 @@ if(isset($_POST["generate"])){
                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="p-6">
                             <div class="relative mb-6">
                                 <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">ID Number</label>
-                                <input type="search" id="id-search" list="idList" autocomplete="false" class="block p-4 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" required>
-                                <button type="button" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check ID Number</button>
+                                <input type="search" name="member_id" id="id-search" list="idList" autocomplete="false" class="block p-4 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" required>
+                                <button type="button" name="check" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check ID Number</button>
                                 <datalist class="text-lg bg-blue-500" id="idList">
                                     <?php
-                                        foreach($idNum as $x) {
-                                            ?>
-                                                <option value="<?php echo $x; ?>" class="bg-white"><?php echo $x; ?></option>
+                                        if(isset($_POST['check'])){
+                                            $member_id = $_POST["member_id"];
+
+                                            $member_select = "SELECT * from account where member_id = '$member_id'";
+                                            $member_query = mysqli_query($conn, $member_select);
+
+                                            while ($member_info = mysqli_fetch_assoc($member_query)) {
+                                    ?>
+                                                <option value="<?php echo $member_info['first_name']; echo $member_info['last_name']; ?>" class="bg-white"><?php echo $member_info['first_name']; echo $member_info['last_name']; ?></option>
                                             <?php
+                                            }
                                         }
                                     ?> 
                                 </datalist>
@@ -238,7 +239,7 @@ if(isset($_POST["generate"])){
                             </div>
                             <div class="mb-6">
                                 <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">Count</label>
-                                <input type="number" min="1" max="99" value="1" id="count-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <input type="number" name="count" min="1" max="99" value="1" id="count-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             </div>
                         </form>
                         <!-- Modal footer -->
