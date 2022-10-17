@@ -10,8 +10,8 @@
       <li>Products</li>
       <li>About</li>
       <li>Contact</li>
-      <li>Login - Done ⭐</li>
-      <li>Signup - Done ⭐</li>
+      <li>Login - Done ⭐ //not really</li>
+      <li>Signup - Done ⭐//not really</li>
     </ul>
   <li>Footer</li>
   <li>Member Page</li>
