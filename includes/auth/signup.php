@@ -1,6 +1,7 @@
 <?php
 
 include_once ("./includes/config/conn.php");
+date_default_timezone_set("Asia/Singapore");
 
     if(isset($_POST['register'])){
 
@@ -18,9 +19,20 @@ include_once ("./includes/config/conn.php");
 
             $code = "ADS";
             $get_month = date('m', strtotime("now"));
-            $number = 00001;
 
-            $member_id = "$code$get_month-$number";
+            $sqlLastID = "SELECT MAX(number_basis) as 'idnumber' FROM `accounts` WHERE 1";//select the highest number_basis
+            $getLastId = mysqli_query($conn, $sqlLastID);
+            while($userRow = mysqli_fetch_assoc($getLastId)){
+                $lastId = $userRow['idnumber'];
+                $lastId++; //increment the number_basis
+            }
+
+            $getDateNow = new DateTime();
+            $getYearNow  = $getDateNow->format('Y'); 
+            $getMonthNow  = $getDateNow->format('m'); 
+
+
+            $member_id = $code.$getYearNow."-".$getMonthNow."-".$lastId;
             
             $referrer = $_POST["sponsor"];
             $ref_code = $_POST["ref_code"];
@@ -44,29 +56,102 @@ include_once ("./includes/config/conn.php");
                 if(($pass == $confirm_pass)) {
 
                     $hash = password_hash($pass, PASSWORD_DEFAULT);
-                    
-                    $create_user_select = "INSERT INTO `accounts`(`first_name`, `last_name`, `sponsor`, `email_address`, `pass`, `contact_number`, `date`, `access`, `permission`, `referralId`, `homeaddress`, `tin_acct`, `sss_num`, `member_id`) VALUES ('$first_name', '$last_name','$referrer','$email_address','$hash','$contact_number',current_timestamp,'approved','userist','$ref_code','$homeaddress','$tin_acct','$sss_num','$member_id')";
-                    
-                    $successmydick = mysqli_query($conn, $create_user_select);
+                    $create_user_select_name1 = "SELECT * FROM `accounts` WHERE `member_id` = '$referrer'";
+                    $create_user_query_name1 = mysqli_query($conn, $create_user_select_name1);
+                    $fnameNaginvite1 = "";
+                    $lnameNaginvite1 = "";
 
-                    if ($successmydick) { //Just to confirm if may nainsert, and nag success.
-                        $sqlInsertUserInitialBalance= "INSERT INTO `totalbalance`(`userID`, `userName`, `totalBalance`) VALUES ('$member_id','$email_address','0');";
 
-                        $sqlupdatecodestatus ="UPDATE `referral_codes` SET `status`='used' WHERE `ref_code` = '$ref_code'";
-                            mysqli_query($conn, $sqlupdatecodestatus);
+                    while($userRow = mysqli_fetch_assoc($create_user_query_name1)){
+                        $fnameNaginvite1 = $userRow['first_name'];
+                        $lnameNaginvite1=$userRow['last_name'];
 
-                        mysqli_query($conn, $sqlInsertUserInitialBalance);
-                        $sqlSelectAccount1 ="SELECT * FROM `accounts` WHERE `member_id` = '$referrer';";
-                        $resultAccount1 = mysqli_query($conn, $sqlSelectAccount1);
-                        while($userRow = mysqli_fetch_assoc($resultAccount1)){
-                            $fname = $userRow['first_name'];
-                            $lname = $userRow['last_name'];
-                            $sponsorName = $fname." ".$lname;
-                            $email = $userRow['email_address'];
-                        }
                     }
-                    header("location: ./login.php");
-                    echo "<script> alert('You are now registered!')</script>";
+                    $create_user_select = "INSERT INTO `accounts`(`first_name`, `last_name`, `referralId`, `sponsor`, `sponsorName`, `email_address`, `pass`, `contact_number`, `date`, `access`, `permission`, `homeaddress`, `tin_acct`, `sss_num`, `member_id`, `number_basis`) VALUES ('$first_name', '$last_name','$member_id','$referrer',' $fnameNaginvite1  $lnameNaginvite1','$email_address','$hash','$contact_number',current_timestamp,'approved','userist','$ref_code','$homeaddress','$tin_acct','$sss_num', '$lastId')";
+                    $success = mysqli_query($conn, $create_user_select);
+
+                    if ($success) { //Just to confirm if may nainsert, and nag success.
+                        $sqlInsertUserInitialBalance= "INSERT INTO `totalbalance`(`userID`, `userName`, `totalBalance`) VALUES ('$member_id','$email_address','0');";
+                        mysqli_query($conn, $sqlInsertUserInitialBalance);
+
+                        $create_user_select_name = "SELECT * FROM `accounts` WHERE `member_id` = '$referrer'";
+                        $create_user_query_name = mysqli_query($conn, $create_user_select_name);
+                        $fnameNaginvite = "";
+                        $lnameNaginvite = "";
+                        $emailNaginvite = "";
+
+
+                        while($userRow = mysqli_fetch_assoc($create_user_query_name)){
+                            $fnameNaginvite = $userRow['first_name'];
+                            $lnameNaginvite=$userRow['last_name'];
+                            $emailNaginvite=$userRow['email_address'];
+
+                        }
+                        $sqlupdatecodestatus ="UPDATE `referral_codes` SET `status`='used', `referee` = '$member_id' WHERE `ref_code` = '$ref_code'";
+                        mysqli_query($conn, $sqlupdatecodestatus);
+
+                        //start of passive
+                        $sqlGetTotalBalance= "SELECT * FROM `totalbalance` WHERE `userID` = '$referrer'";
+                        $resultTotalBalance = mysqli_query($conn, $sqlGetTotalBalance);
+                        
+                        $totalBalance = 0;
+                        while($userRow = mysqli_fetch_assoc($resultTotalBalance)){
+                            $totalBalance = $userRow['totalBalance'];
+                        }
+                        $updatedBalance = $totalBalance + 500;
+                        $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance' WHERE `userID` = '$referrer'";
+                        mysqli_query($conn, $sqlAddBalance);
+                    
+                        $sqlinsertTransact= "INSERT INTO `transaction`(`type`,`userName`,`userId`, `inviteName`,`inviteeName`, `addedAmount`, `TotalBalance`) VALUES ('Direct Referral','$emailNaginvite','$referrer','$first_name $last_name','$fnameNaginvite $lnameNaginvite','500','$updatedBalance')";
+                        mysqli_query($conn, $sqlinsertTransact);
+                        
+                        //start of loop max of 10th level
+
+                        $upline=$emailNaginvite;
+                        $uplineId=$referrer;
+                    
+                        for ($i = 1; $i<=10; $i++){
+                    
+                            $sqlGetInvitee= "SELECT * FROM `accounts` WHERE `member_id` = '$uplineId'";
+                            $resultInvitee = mysqli_query($conn, $sqlGetInvitee);
+                            
+                             $inviteeUpline = '';
+                            $inviteeID = '';
+                    
+                            while($userRow = mysqli_fetch_assoc($resultInvitee)){
+                                $inviteeUpline = $userRow['sponsorName'];
+                                $inviteeID = $userRow['sponsor'];
+                    
+                            }
+                            $resultInviteeCount = mysqli_num_rows($resultInvitee);
+                        if($resultInviteeCount>=1){
+                          $sqlGetTotalBalance= "SELECT * FROM `totalbalance` WHERE `userID` = '$inviteeID'";
+                          $resultTotalBalance = mysqli_query($conn, $sqlGetTotalBalance);
+                          $totalBalance = 0;
+                      
+                          while($userRow = mysqli_fetch_assoc($resultTotalBalance)){
+                          $totalBalance = $userRow['totalBalance'];
+                          }
+                          $updatedBalance = $totalBalance + 10;
+                      
+                          $sqlAddBalance= "UPDATE `totalbalance` SET `totalBalance`='$updatedBalance' WHERE `userID` = '$inviteeID'";
+                          mysqli_query($conn, $sqlAddBalance);
+                    
+                          $sqlinsertTransact2= "INSERT INTO `transaction`(`type`,`userName`,`userId`, `inviteName`,`inviteeName`, `addedAmount`, `TotalBalance`) VALUES ('Indirect Referral','$inviteeUpline','$inviteeID','$first_name $last_name','$fnameNaginvite $lnameNaginvite','10','$updatedBalance')";
+                          mysqli_query($conn, $sqlinsertTransact2);
+                    
+                          
+                          $uplineId = $inviteeID;
+                        }
+                        else{
+                            $i=$i+10;
+                        }
+                           
+                        }
+                        echo "<script> alert('You are now registered!')</script>";
+                        // header("location: ./login.php");
+                    }
+                   
                 }
                 else{
                     echo "<script> alert('Password not match')</script>";
@@ -79,7 +164,8 @@ include_once ("./includes/config/conn.php");
         }
     }
     else{
-        echo "<script> alert('The code you doesn't exist or already been used.')</script>";
+        // echo "<script> alert('Email address is already taken.')</script>";
+        echo "<script> alert('This code does not exist or already been used.')</script>";
     }
 }
 ?>
