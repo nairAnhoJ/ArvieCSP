@@ -27,7 +27,7 @@ if(isset($_POST["login"])){
 
     if(empty($email_address_err) && empty($password_err)){
 
-        $sql = "SELECT id, email_address, pass, first_name, last_name, permission, access FROM accounts WHERE email_address = ?";
+        $sql = "SELECT id, member_id, email_address, pass, first_name, last_name, permission, access FROM accounts WHERE email_address = ?";
         if($stmt = mysqli_prepare($conn, $sql)){
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             
@@ -37,7 +37,7 @@ if(isset($_POST["login"])){
                 mysqli_stmt_store_result($stmt);
                 
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    mysqli_stmt_bind_result($stmt, $id, $email_address, $hashed_password, $first_name, $last_name, $permission, $access);
+                    mysqli_stmt_bind_result($stmt, $id, $member_id, $email_address, $hashed_password, $first_name, $last_name, $permission, $access);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             $_SESSION["loggedin"] = true;
@@ -47,6 +47,7 @@ if(isset($_POST["login"])){
                             $_SESSION["last_name"] = $last_name;
                             $_SESSION["permission"] = $permission;
                             $_SESSION["access"] = $access;
+                            $_SESSION["member_id"] = $member_id;
 
                             if($access == "approved") {
                                 echo "<script> alert('You do not have access in this website')</script>";

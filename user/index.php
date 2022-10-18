@@ -7,9 +7,10 @@ date_default_timezone_set("Asia/Singapore");
 $dateNow = new DateTime(); 
 $dateNow  = $dateNow->format('M d, Y'); 
 
+$member_id = $_SESSION["member_id"];
 $email = $_SESSION["email_address"];
 $id = $_SESSION["id"];
-$SelectInfo ="SELECT * FROM `accounts` WHERE `email_address` = '$email';";
+$SelectInfo ="SELECT * FROM `accounts` WHERE `member_id` = '$member_id';";
 $resultInfo= mysqli_query($conn, $SelectInfo);
 $fname="";
 $lname="";
@@ -19,7 +20,7 @@ while($userRow = mysqli_fetch_assoc($resultInfo)){
 
 
 }
-$SelectPresentBalance ="SELECT * FROM `totalbalance` WHERE `userID` = '$id';";
+$SelectPresentBalance ="SELECT * FROM `totalbalance` WHERE `userID` = '$member_id';";
 $resultPresentBalance = mysqli_query($conn, $SelectPresentBalance);
 
 while($userRow = mysqli_fetch_assoc($resultPresentBalance)){
@@ -149,8 +150,8 @@ function fetch_transaction($db, $tableNameTransaction, $columnsTransaction){
    $msg= "Table Name is empty";
 }else{
 $columnName = implode(", ", $columnsTransaction);
-$id = $_SESSION["id"];
-$query = "SELECT * FROM `transaction` WHERE `userId` = '$id'";
+$member_id = $_SESSION["member_id"];
+$query = "SELECT * FROM `transaction` WHERE `userId` = '$member_id'";
 
 //  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
 $result = $db->query($query);
