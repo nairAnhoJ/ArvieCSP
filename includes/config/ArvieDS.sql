@@ -162,6 +162,8 @@ CREATE TABLE `referral_codes` (
   `status` varchar(255) DEFAULT NULL,
   `generation_batch` varchar(255) NOT NULL,
   `ref_code` varchar(14) NOT NULL,
+  `referrer_id` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
   PRIMARY KEY (`generation_batch`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -173,7 +175,7 @@ CREATE TABLE `referral_codes` (
 LOCK TABLES `referral_codes` WRITE;
 /*!40000 ALTER TABLE `referral_codes` DISABLE KEYS */;
 INSERT INTO `referral_codes` VALUES
-('2022-10-11 22:44:25','ADSkSD123','2022-10-11 22:44:25','','2022-10-11 22:44:25','used','','asd12-12345');
+('2022-10-11 22:44:25','Saul Goodman','2022-10-11 22:44:25','','2022-10-11 22:44:25','to_redeem','','asd12-12345','ASD10-00001','');
 /*!40000 ALTER TABLE `referral_codes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,4 +322,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-18  0:37:32
+-- Dump completed on 2022-10-19  0:38:52
