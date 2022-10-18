@@ -2,10 +2,6 @@
 session_start();
 include_once ("../includes/config/conn.php");
 
-$first_name = $_SESSION["first_name"];
-$last_name = $_SESSION["last_name"];
-$user = "$first_name $last_name";
-
 // if(isset($_POST["generate"])){
 //     $count = $_POST["count"];
 
@@ -22,39 +18,30 @@ $user = "$first_name $last_name";
         $insert_generated = "INSERT INTO `referral_codes` (`ref_codes`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`, ) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', $generation_batch)";
     }
 // }
-// if(isset($_POST["check"])){
 
-//     $member_id_select = "SELECT member_id FROM accounts";
-//     $member_id_query = mysqli_query($conn, $member_id_query);
-//     $member_id_fetch = mysqli_fetch_all($member_id_query, MYSQLI_ASSOC);
-
-//     $idNum = array_map(function($member_id) {
-//         return $member_id['member_id'];
-//     }, $member_id_fetch);
-
-//     $member_name_select = "SELECT GROUP_CONCAT(`first_name`, ' ',`last_name`) as full_name FROM accounts";
-//     $member_name_query = mysqli_query($conn, $member_name_query);
-//     $member_name_fetch = mysqli_fetch_all($member_name_query, MYSQLI_ASSOC);
-
-//     $memName = array_map(function($member_name) {
-//         return $member_name['full_name'];
-//     }, $member_name_fetch);
-// }
     // $member_id_concat = "SELECT GROUP_CONCAT('x', member_id, '' SEPARATOR ', ') FROM accounts";
     // $member_id_concat = "SELECT GROUP_CONCAT('x', member_id, '' SEPARATOR ', ') FROM accounts";
     // $member_id_query = mysqli_query($conn, $member_id_concat);
     // $member_name_concat = "SELECT GROUP_CONCAT(`first_name`, ' ',`last_name`) FROM accounts"; 
     // $member_name_query = mysqli_query($conn, $member_name_concat);
 
-    $idNum = array("123123123", "456456456", "789789789"); //basura shit
-
-    $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Orozo");
+    // $idNum = array("123123123", "456456456", "789789789"); //basura shit
+    // $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Orozo");
 
     // Array ng ID Number at Name
     // $memName = array($member_name_query);
+// if(isset($_POST["check"])){
 
+//     $member_id = $_POST['member_id'];
+//     $select_member_id ="SELECT * FROM accounts WHERE `member_id` = '$member_id'";
+//     $query_member_id = mysqli_query($conn, $select_member_id);
 
-
+//     while($fetch_id = mysqli_fetch_assoc($query_member_id)){
+//         $first_name = $fetch_id['first_name'];
+//         $last_name = $fetch_id['last_name'];
+//     }
+//     $full_name = "$last_name $first_name";
+// }
 
 ?>
 <!DOCTYPE html>
@@ -253,7 +240,7 @@ $user = "$first_name $last_name";
                                 </datalist>
                             </div>
                             <div class="mb-6">
-                                <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">Name</label>
+                                <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">Name <?php echo $x; ?></label>
                                 <input type="text" id="name-input" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             </div>
                             <div class="mb-6">
@@ -404,7 +391,7 @@ $user = "$first_name $last_name";
                 var idNum = $('#id-search').val();
                 var idNumArray = <?php echo json_encode($idNum); ?>;
                 var memNameArray = <?php echo json_encode($memName); ?>;
-                console.log(idNumArray);1
+                console.log(idNumArray);
                 console.log(memNameArray);
                 let indexNum = idNumArray.indexOf(idNum);
                 if(indexNum == "-1"){
@@ -437,7 +424,7 @@ $user = "$first_name $last_name";
         <?php
             if(isset($_GET['tranNum'])){
                 // Dito yung code sa pag query ng codes
-
+                
                 
                 echo '
                     <script type="text/JavaScript">
