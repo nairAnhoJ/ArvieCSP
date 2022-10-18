@@ -2,26 +2,12 @@
 session_start();
 include_once ("../includes/config/conn.php");
 
-if(isset($_POST["check"])){
-
-$member_id_concat = "SELECT ARRAY_CONCAT(member_id) FROM accounts"; 
-$member_id_query = mysqli_query($conn, $member_id_concat);
-$member_name = "SELECT ARRAY_CONCAT(first_name, ' ',last_name) FROM accounts";
-$member_name = mysqli_query($conn, $member_name);
-
-// Array ng ID Number at Name
-$idNum = array($member_id_query);
-$memName = array($member_name);
-}
-
-if(isset($_POST["check"])){
-
 $first_name = $_SESSION["first_name"];
 $last_name = $_SESSION["last_name"];
 $user = "$first_name $last_name";
 
-if(isset($_POST["generate"])){
-    $count = $_POST["count"];
+// if(isset($_POST["generate"])){
+//     $count = $_POST["count"];
 
     for ($x = 1; $x <= $count; $x++) {
         $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -33,10 +19,42 @@ if(isset($_POST["generate"])){
         $generated = "$code_type$get_month-$rand4-$rand4_check";
         $generation_batch = substr(str_shuffle($String_a), 0, 16);
 
-            $insert_generated = "INSERT INTO `referral_codes` (`ref_codes`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`, ) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', $generation_batch)";
-        }
+        $insert_generated = "INSERT INTO `referral_codes` (`ref_codes`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`, ) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', $generation_batch)";
     }
-}
+// }
+// if(isset($_POST["check"])){
+
+//     $member_id_select = "SELECT member_id FROM accounts";
+//     $member_id_query = mysqli_query($conn, $member_id_query);
+//     $member_id_fetch = mysqli_fetch_all($member_id_query, MYSQLI_ASSOC);
+
+//     $idNum = array_map(function($member_id) {
+//         return $member_id['member_id'];
+//     }, $member_id_fetch);
+
+//     $member_name_select = "SELECT GROUP_CONCAT(`first_name`, ' ',`last_name`) as full_name FROM accounts";
+//     $member_name_query = mysqli_query($conn, $member_name_query);
+//     $member_name_fetch = mysqli_fetch_all($member_name_query, MYSQLI_ASSOC);
+
+//     $memName = array_map(function($member_name) {
+//         return $member_name['full_name'];
+//     }, $member_name_fetch);
+// }
+    // $member_id_concat = "SELECT GROUP_CONCAT('x', member_id, '' SEPARATOR ', ') FROM accounts";
+    // $member_id_concat = "SELECT GROUP_CONCAT('x', member_id, '' SEPARATOR ', ') FROM accounts";
+    // $member_id_query = mysqli_query($conn, $member_id_concat);
+    // $member_name_concat = "SELECT GROUP_CONCAT(`first_name`, ' ',`last_name`) FROM accounts"; 
+    // $member_name_query = mysqli_query($conn, $member_name_concat);
+
+    $idNum = array("123123123", "456456456", "789789789"); //basura shit
+
+    $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Orozo");
+
+    // Array ng ID Number at Name
+    // $memName = array($member_name_query);
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -219,11 +237,11 @@ if(isset($_POST["generate"])){
                         </div>
                         <!-- Modal body -->
                         <form id="generate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="p-6">
-                        <form id="check" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="p-6">
                             <div class="relative mb-6">
                                 <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">ID Number</label>
                                 <input type="search" id="id-search" list="idList" autocomplete="false" class="block p-4 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" required>
                                 <button type="button" name="check" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check ID Number</button>
+                        
                                 <datalist class="text-lg bg-blue-500" id="idList">
                                     <?php
                                         foreach($idNum as $x) {
@@ -277,7 +295,7 @@ if(isset($_POST["generate"])){
                         <!-- i Loop lang yung data dito -->
                         <tr>
                             <td class="text-center">10/05/2022</td>
-                            <td class="text-center"><?php echo $member_name; ?></td>
+                            <td class="text-center"><?php echo json_encode($memName); ?></td>
                             <td class="text-center">John Arian Malondras</td>
                             <td class="text-center">Botanical</td>
                             <td class="text-center">20</td>
@@ -386,6 +404,8 @@ if(isset($_POST["generate"])){
                 var idNum = $('#id-search').val();
                 var idNumArray = <?php echo json_encode($idNum); ?>;
                 var memNameArray = <?php echo json_encode($memName); ?>;
+                console.log(idNumArray);1
+                console.log(memNameArray);
                 let indexNum = idNumArray.indexOf(idNum);
                 if(indexNum == "-1"){
                     $('#errorIDNum').removeClass('opacity-0');
