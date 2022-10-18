@@ -315,21 +315,22 @@ for ($x = 1; $x <= $count; $x++) {
                     <!-- Codes -->
                     <div class="px-20 py-10 text-3xl font-medium grid grid-cols-3 gap-5 text-gray-700 justify-items-center">
                     <?php
-                            $req = 10;
-                            for ($x = 1; $x <= $req; $x++) {
-                                $Strings='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                                $code_type = "DI";
-                                $get_month = date('mm', strtotime("now"));
-                                $rand4 = substr(str_shuffle($Strings), 0, 4);
-                                $rands4 = substr(str_shuffle($Strings), 0, 4);
-                                $rand6_check = substr(str_shuffle($Strings), 0, 8);
-                                $generated = "$code_type$get_month-$rand4-$rands4";
-
-                                if ($rand6 != $rand6_check) {
-                                    echo "<div>$generated</div>";
-                                }
+                        $count = 10;
+                        do {
+                            for ($x = 1; $x <= $count; $x++) {
+                                $codetype = "DI";
+                                $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                $get_month = date('m', strtotime("now"));
+                                $rand4 = substr(str_shuffle($String_a), 0, 4);
+                                $rand4_check = substr(str_shuffle($String_b), 0, 4);
+                                $generated = "$codetype$get_month-$rand4-$rand4_check";
+                                $generation_batch = substr(str_shuffle($String_a), 0, 16);
+                                
+                                echo "$generated <br>";
                             }
-                        ?>
+                        } while ($x <= $count);
+                    ?>
                     </div>
                 </div>
             <!-- End Content -->

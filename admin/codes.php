@@ -124,31 +124,31 @@ if(isset($_GET['Approve'])){
 
 }
 
-// cedie check codes
+if(isset($_POST["generate"])){
 
-// $member_id_select = "SELECT member_id FROM accounts";
-// $member_id_query = mysqli_query($conn, $member_id_query);
-// $member_id_fetch = mysqli_fetch_all($member_id_query, MYSQLI_ASSOC);
-
-// $idNum = array_map(function($member_id) {
-//     return $member_id['member_id'];
-// }, $member_id_fetch);
-
-// $member_name_select = "SELECT GROUP_CONCAT(`first_name`, ' ',`last_name`) as full_name FROM accounts";
-// $member_name_query = mysqli_query($conn, $member_name_query);
-// $member_name_fetch = mysqli_fetch_all($member_name_query, MYSQLI_ASSOC);
-
-// $memName = array_map(function($member_name) {
-//     return $member_name['full_name'];
-// }, $member_name_fetch);
-// Array ng ID Number at Name
-// $idNum = array("123123123", "456456456", "789789789");
-// $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Orozo");
-
-//test 2
-
+    $user = $_POST["member_name"];
     $member_id = $_POST['member_id'];
-    $select_member_id ="SELECT * FROM accounts WHERE `member_id` = 'ADS10-1'";
+    $codetype = $_POST['codetype'];
+    $count = $_POST["count"];
+
+    do {
+        for ($x = 1; $x <= $count; $x++) {
+            $codetype = "DI";
+            $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $get_month = date('m', strtotime("now"));
+            $rand4 = substr(str_shuffle($String_a), 0, 4);
+            $rand4_check = substr(str_shuffle($String_b), 0, 4);
+            $generated = "$codetype$get_month-$rand4-$rand4_check";
+            $generation_batch = substr(str_shuffle($String_a), 0, 16);
+        }
+        $insert_generated = "INSERT INTO `referral_codes` (`ref_codes`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`, `type`) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', '$generation_batch', '$codetype')";
+        mysqli_query($conn, $insert_generated);
+    } while ($x <= $count);
+}
+//Working
+    $member_id = $_POST['member_id'];
+    $select_member_id ="SELECT * FROM accounts";
     $query_member_id = mysqli_query($conn, $select_member_id);
 
     while($fetch_id = mysqli_fetch_assoc($query_member_id)){
@@ -344,8 +344,8 @@ if(isset($_GET['Approve'])){
                         <form action="" class="p-6">
                             <div class="relative mb-6">
                                 <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">ID Number</label>
-                                <input type="search" id="id-search" list="idList" autocomplete="false" class="block p-4 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" required>
-                                <button type="button" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check ID Number</button>
+                                <input type="search" id="id-search" name="member_id" list="idList" autocomplete="false" class="block p-4 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" required>
+                                <button type="button" name="check" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check ID Number</button>
                                 <datalist class="text-lg bg-blue-500" id="idList">
                                     <?php
                                         foreach($idNum as $x) {
@@ -358,11 +358,11 @@ if(isset($_GET['Approve'])){
                             </div>
                             <div class="mb-6">
                                 <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">Name</label>
-                                <input type="text" id="name-input" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <input type="text" id="name-input" name="member_name" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             </div>
                             <div class="mb-6">
                                 <label for="codeType" class="block mb-2 text-lg font-medium text-gray-900">Type</label>
-                                <select id="codeType" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <select id="codeType" name="codetype" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                     <option value="DI" selected>Direct Invite</option>
                                     <option value="RA">Botanical</option>
                                     <option value="RB">Kapenato & Cereal</option>
@@ -370,12 +370,12 @@ if(isset($_GET['Approve'])){
                             </div>
                             <div class="mb-6">
                                 <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">Count</label>
-                                <input type="number" min="1" max="99" value="1" id="count-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <input type="number" name="count" min="1" max="99" value="1" id="count-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             </div>
                         </form>
                         <!-- Modal footer -->
                         <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200">
-                            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Generate</button>
+                            <button type="submit" value="generate" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Generate</button>
                             <button data-modal-toggle="generateModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Close</button>
                         </div>
                     </div>
@@ -396,11 +396,15 @@ if(isset($_GET['Approve'])){
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- i Loop lang yung data dito -->
+                    <?php
+                    $referral_list = "SELECT * from referral_codes"; //select all referral codes
+                    $referral_query = mysqli_query($conn, $referral_list);
+                    while ($referral = mysqli_fetch_assoc($referral_query)) {
+                            ?>
                         <tr>
-                            <td class="text-center">10/05/2022</td>
-                            <td class="text-center"><?php echo json_encode($memName); ?> </td>
-                            <td class="text-center">John Arian Malondras</td>
+                            <td class="text-center"><?php echo $referral['gen_date']; ?></td>
+                            <td class="text-center"><?php echo $referral['generation_batch']; ?></td>
+                            <td class="text-center"><?php echo $referral['referrer']; ?></td>
                             <td class="text-center">Botanical</td>
                             <td class="text-center">20</td>
                             <td class="text-center">
@@ -419,6 +423,7 @@ if(isset($_GET['Approve'])){
                                     </svg>
                                 </button>
                             </td>
+                            <?php } ?>
                         </tr>
                         <!-- end -->
 

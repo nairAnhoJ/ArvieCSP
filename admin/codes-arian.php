@@ -2,9 +2,10 @@
 session_start();
 include_once ("../includes/config/conn.php");
 
-// if(isset($_POST["generate"])){
-//     $count = $_POST["count"];
-
+if(isset($_POST["generate"])){
+$first_name = $_SESSION["first_name"];
+$last_name = $_SESSION["last_name"];
+$user = "$first_name $last_name";
     for ($x = 1; $x <= $count; $x++) {
         $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -17,7 +18,7 @@ include_once ("../includes/config/conn.php");
 
         $insert_generated = "INSERT INTO `referral_codes` (`ref_codes`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`, ) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', $generation_batch)";
     }
-// }
+}
 
     // $member_id_concat = "SELECT GROUP_CONCAT('x', member_id, '' SEPARATOR ', ') FROM accounts";
     // $member_id_concat = "SELECT GROUP_CONCAT('x', member_id, '' SEPARATOR ', ') FROM accounts";
@@ -28,9 +29,25 @@ include_once ("../includes/config/conn.php");
     // $idNum = array("123123123", "456456456", "789789789"); //basura shit
     // $memName = array("John Arian Malondras", "Kevin Roy Marero", "Cedrick James Orozo");
 
+    $member_id_select = "SELECT member_id FROM accounts";
+    $member_id_query = mysqli_query($conn, $member_id_query);
+    $member_id_fetch = mysqli_fetch_all($member_id_query, MYSQLI_ASSOC);
+
+    $idNum = array_map(function($member_id) {
+        return $member_id['member_id'];
+    }, $member_id_fetch);
+
+    $member_name_select = "SELECT GROUP_CONCAT(`first_name`, ' ',`last_name`) as full_name FROM accounts";
+    $member_name_query = mysqli_query($conn, $member_name_query);
+    $member_name_fetch = mysqli_fetch_all($member_name_query, MYSQLI_ASSOC);
+
+    $memName = array_map(function($member_name) {
+        return $member_name['full_name'];
+    }, $member_name_fetch);
+
     // Array ng ID Number at Name
-    // $memName = array($member_name_query);
-// if(isset($_POST["check"])){
+    $memName = array($member_name_query);
+    $memName = array($member_name_query);
 
 //     $member_id = $_POST['member_id'];
 //     $select_member_id ="SELECT * FROM accounts WHERE `member_id` = '$member_id'";
