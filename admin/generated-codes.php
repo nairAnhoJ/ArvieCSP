@@ -329,7 +329,7 @@ for ($x = 1; $x <= $count; $x++) {
                                 
                                 echo "$generated <br>";
                             }
-                        } while ($x <= $count);
+                            } while ($x <= $count);
                     ?>
                     </div>
                 </div>
