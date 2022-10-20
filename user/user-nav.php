@@ -1,4 +1,4 @@
-<div id="drawer-navigation" class="hidden overflow-hidden md:block pt-24 drop-shadow-2xl border br-2 fixed z-40 h-screen p-4 overflow-y-auto bg-white w-80 md:w-64 xl:w-72" tabindex="-1" aria-labelledby="drawer-navigation-label">
+<div id="drawer-navigation" class="hidden overflow-hidden lg:block pt-24 drop-shadow-2xl border br-2 fixed z-40 h-screen p-4 overflow-y-auto bg-white w-80 md:w-64 xl:w-72" tabindex="-1" aria-labelledby="drawer-navigation-label">
     <div class="w-full h-16 md:h-14 xl:h-16 mb-5">
         <div class="grid grid-rows-3 grid-cols-4 h-full w-full">
             <div class="row-span-3 w-16 md:w-14  xl:w-16">
