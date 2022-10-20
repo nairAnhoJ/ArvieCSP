@@ -316,6 +316,42 @@ for ($x = 1; $x <= $count; $x++) {
                     <div class="px-20 py-10 text-3xl font-medium grid grid-cols-3 gap-5 text-gray-700 justify-items-center">
                     <?php
                         $count = 10;
+
+                    //     <?php
+                    //     $count = 10;
+
+                    //     for ($x = 1; $x <= $count;) {
+                    //         $step = $x;
+                    //         do {
+                    //             if ($count > $step) {
+                    //                 $step++;
+                    //             }elseif ($count <= $step) {
+                    //                 if ($account_count == 1) {
+                    //                     if(isset($_POST["generate"])){
+                    //                         $codetype = $_POST['codetype'];
+                    //                         $codetype = $_POST['codetype'];
+                    //                         $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //base of first 4 chars
+                    //                         $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //base of second 4 chars
+                    //                         $get_month = date('m', strtotime("now")); //month
+                    //                         $rand4 = substr(str_shuffle($String_a), 0, 4); //rand first 4 characters
+                    //                         $rand4_check = substr(str_shuffle($String_b), 0, 4); //rand second 4 characters
+                    //                         $generated = "$codetype$get_month-$rand4-$rand4_check"; //generated codes
+                    //                         $generation_batch_a = substr(str_shuffle($String_a), 0, 4); //transaction number a
+                    //                         $generation_batch_b = substr(str_shuffle($String_b), 0, 4); //transaction number b
+                    //                         $transaction = "$codetype$get_month-$generation_batch_a-$generation_batch_a"; //transaction number
+                                        
+                    //                         $code_list = array($push_list);
+                    //                         if ($count != $step ) {
+                    //                         $push_list = array_push($code_list, $code_list);
+                    //                     }
+                    //                 }
+                    //                 }
+                    //             }
+                    //             echo "$generated <br>";
+                    //         } while ($x <= $count);
+                    //     }
+                    // ?>
+                        
                         do {
                             for ($x = 1; $x <= $count; $x++) {
                                 $codetype = "DI";

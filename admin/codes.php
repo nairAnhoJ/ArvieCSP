@@ -17,30 +17,41 @@ while($fetch_id = mysqli_fetch_assoc($query_member_id)){
     $full_name = "$first_name $last_name";
 
     $idNum = array($id);
-    $memName = array($full_name); 
+    $memName = array($full_name);
+}
+
     $count = $_POST["count"];
-    for ($x = 1; $x <= $count; $x++) {
-
+    
+    for ($x = 1; $x <= $count;) {
+        $step = $x;
         do {
-
-            $user = $_POST["member_name"];
-            $member_id = $_POST['member_id'];
-            $account_select = "SELECT * from accounts where `first_name` = '$first_name' and `last_name` = '$last_name' and `member_id` = '$id'";
-            $account_query = mysqli_query($conn, $account_select);
-            $account_count = mysqli_num_rows($account_query);
-            if ($account_count == 1) {
-                if(isset($_POST["generate"])){
-                    $codetype = $_POST['codetype'];
-                    $codetype = $_POST['codetype'];
-                    $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //base of first 4 chars
-                    $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //base of second 4 chars
-                    $get_month = date('m', strtotime("now")); //month
-                    $rand4 = substr(str_shuffle($String_a), 0, 4); //rand first 4 characters
-                    $rand4_check = substr(str_shuffle($String_b), 0, 4); //rand second 4 characters
-                    $generated = "$codetype$get_month-$rand4-$rand4_check"; //generated codes
-                    $generation_batch_a = substr(str_shuffle($String_a), 0, 4); //transaction number a
-                    $generation_batch_b = substr(str_shuffle($String_b), 0, 4); //transaction number b
-                    $transaction = "$codetype$get_month-$generation_batch_a-$generation_batch_a"; //transaction number
+            if ($count > $step) {
+                $step++;
+            }elseif ($count <= $step) {
+                $user = $_POST["member_name"];
+                $member_id = $_POST['member_id'];
+                $account_select = "SELECT * from accounts where `first_name` = '$first_name' and `last_name` = '$last_name' and `member_id` = '$id'";
+                $account_query = mysqli_query($conn, $account_select);
+                $account_count = mysqli_num_rows($account_query);
+                if ($account_count == 1) {
+                    if(isset($_POST["generate"])){
+                        $codetype = $_POST['codetype'];
+                        $codetype = $_POST['codetype'];
+                        $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //base of first 4 chars
+                        $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //base of second 4 chars
+                        $get_month = date('m', strtotime("now")); //month
+                        $rand4 = substr(str_shuffle($String_a), 0, 4); //rand first 4 characters
+                        $rand4_check = substr(str_shuffle($String_b), 0, 4); //rand second 4 characters
+                        $generated = "$codetype$get_month-$rand4-$rand4_check"; //generated codes
+                        $generation_batch_a = substr(str_shuffle($String_a), 0, 4); //transaction number a
+                        $generation_batch_b = substr(str_shuffle($String_b), 0, 4); //transaction number b
+                        $transaction = "$codetype$get_month-$generation_batch_a-$generation_batch_a"; //transaction number
+                    
+                        $code_list = array($push_list);
+                        if ($count != $step ) {
+                        $push_list = array_push($code_list, $code_list);
+                        }
+                }
 
                     $insert_generated = "INSERT INTO `referral_codes` (`ref_code`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`, `type`, `referrer_id`) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', '$generation_batch', '$codetype', '$member_id')";
                     mysqli_query($conn, $insert_generated);
@@ -48,7 +59,6 @@ while($fetch_id = mysqli_fetch_assoc($query_member_id)){
             }
         } while ($x <= $count);
     }
-}
 
 ?>
 <!DOCTYPE html>
@@ -276,7 +286,7 @@ while($fetch_id = mysqli_fetch_assoc($query_member_id)){
                 <table id="codeTable" class="stripe hover nowrap row-border dt-body-center" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                     <thead>
                         <tr>
-                            <th data-priority="1">Date</th>
+                            <th data-priority="1"><?php json_encode($array_list); ?>Date</th>
                             <th data-priority="2">Tran. No.</th>
                             <th data-priority="3">Member Name</th>
                             <th data-priority="4">Type</th>
