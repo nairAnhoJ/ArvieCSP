@@ -164,7 +164,7 @@ CREATE TABLE `referral_codes` (
   `generation_batch` varchar(255) NOT NULL,
   `transaction_id` int(255) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`transaction_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,25 +174,17 @@ CREATE TABLE `referral_codes` (
 LOCK TABLES `referral_codes` WRITE;
 /*!40000 ALTER TABLE `referral_codes` DISABLE KEYS */;
 INSERT INTO `referral_codes` VALUES
-('2022-10-21 13:50:39','Kevin Roy Marero','2022-10-21 13:50:39',NULL,'2022-10-21 13:50:39','to_redeem','ADS10-1','$generation_batchasd',1),
-('2022-10-21 14:16:08','Kevin Roy Marero','2022-10-21 14:16:08',NULL,'2022-10-21 14:16:08','to_redeem','DI10-PbNT-Knpo','ATOSfqcHwEKxaibYTu',2),
-('2022-10-21 14:16:08','Kevin Roy Marero','2022-10-21 14:16:08',NULL,'2022-10-21 14:16:08','to_redeem','DI10-HMiu-10xp','ATOSfqcHwEKxaibYTu',3),
-('2022-10-21 14:16:08','Kevin Roy Marero','2022-10-21 14:16:08',NULL,'2022-10-21 14:16:08','to_redeem','DI10-W7IM-q4Fp','ATOSfqcHwEKxaibYTu',4),
-('2022-10-21 14:16:08','Kevin Roy Marero','2022-10-21 14:16:08',NULL,'2022-10-21 14:16:08','to_redeem','DI10-FyNX-EH2k','ATOSfqcHwEKxaibYTu',5),
-('2022-10-21 14:16:08','Kevin Roy Marero','2022-10-21 14:16:08',NULL,'2022-10-21 14:16:08','to_redeem','DI10-DS96-vEKN','ATOSfqcHwEKxaibYTu',6),
-('2022-10-21 14:16:08','Kevin Roy Marero','2022-10-21 14:16:08',NULL,'2022-10-21 14:16:08','to_redeem','DI10-rRuS-xf8g','ATOSfqcHwEKxaibYTu',7),
-('2022-10-21 14:16:08','Kevin Roy Marero','2022-10-21 14:16:08',NULL,'2022-10-21 14:16:08','to_redeem','DI10-Xqa5-UCRN','ATOSfqcHwEKxaibYTu',8),
-('2022-10-21 14:16:08','Kevin Roy Marero','2022-10-21 14:16:08',NULL,'2022-10-21 14:16:08','to_redeem','DI10-e6dp-i29d','ATOSfqcHwEKxaibYTu',9),
-('2022-10-21 14:16:08','Kevin Roy Marero','2022-10-21 14:16:08',NULL,'2022-10-21 14:16:08','to_redeem','DI10-JYko-Ge6r','ATOSfqcHwEKxaibYTu',10),
-('2022-10-21 14:16:31','Kevin Roy Marero','2022-10-21 14:16:31',NULL,'2022-10-21 14:16:31','to_redeem','DI10-Hk9Q-fZMW','AT10epXMK56zT7wUsrJ4',11),
-('2022-10-21 14:16:31','Kevin Roy Marero','2022-10-21 14:16:31',NULL,'2022-10-21 14:16:31','to_redeem','DI10-FOQg-KqAU','AT10epXMK56zT7wUsrJ4',12),
-('2022-10-21 14:16:31','Kevin Roy Marero','2022-10-21 14:16:31',NULL,'2022-10-21 14:16:31','to_redeem','DI10-Cgtm-Xdf5','AT10epXMK56zT7wUsrJ4',13),
-('2022-10-21 14:16:31','Kevin Roy Marero','2022-10-21 14:16:31',NULL,'2022-10-21 14:16:31','to_redeem','DI10-wB4P-DyrO','AT10epXMK56zT7wUsrJ4',14),
-('2022-10-21 14:16:31','Kevin Roy Marero','2022-10-21 14:16:31',NULL,'2022-10-21 14:16:31','to_redeem','DI10-FZYm-pJqW','AT10epXMK56zT7wUsrJ4',15),
-('2022-10-21 14:16:31','Kevin Roy Marero','2022-10-21 14:16:31',NULL,'2022-10-21 14:16:31','to_redeem','DI10-fFZ4-lmhF','AT10epXMK56zT7wUsrJ4',16),
-('2022-10-21 14:16:31','Kevin Roy Marero','2022-10-21 14:16:31',NULL,'2022-10-21 14:16:31','to_redeem','DI10-yuXw-bVi8','AT10epXMK56zT7wUsrJ4',17),
-('2022-10-21 14:16:31','Kevin Roy Marero','2022-10-21 14:16:31',NULL,'2022-10-21 14:16:31','to_redeem','DI10-59cM-cFYA','AT10epXMK56zT7wUsrJ4',18),
-('2022-10-21 14:16:31','Kevin Roy Marero','2022-10-21 14:16:31',NULL,'2022-10-21 14:16:31','to_redeem','DI10-qeoy-eCGp','AT10epXMK56zT7wUsrJ4',19);
+('2022-10-21 15:58:09','Kevin Roy Marero','2022-10-21 15:58:09',NULL,'2022-10-21 15:58:09','to_redeem','DI10-jlkg-mKg8','ATTzDM7mbZorw6ejxi',1),
+('2022-10-21 15:58:31','Kevin Roy Marero','2022-10-21 15:58:31',NULL,'2022-10-21 15:58:31','to_redeem','DI10-ZP5M-sNwi','ATkxuEPmNKaLXVOI81',2),
+('2022-10-21 15:58:31','Kevin Roy Marero','2022-10-21 15:58:31',NULL,'2022-10-21 15:58:31','to_redeem','DI10-CXW5-Nsog','ATkxuEPmNKaLXVOI81',3),
+('2022-10-21 15:58:31','Kevin Roy Marero','2022-10-21 15:58:31',NULL,'2022-10-21 15:58:31','to_redeem','DI10-8RlB-0bej','ATkxuEPmNKaLXVOI81',4),
+('2022-10-21 15:58:31','Kevin Roy Marero','2022-10-21 15:58:31',NULL,'2022-10-21 15:58:31','to_redeem','DI10-vVFN-6H8F','ATkxuEPmNKaLXVOI81',5),
+('2022-10-21 15:58:31','Kevin Roy Marero','2022-10-21 15:58:31',NULL,'2022-10-21 15:58:31','to_redeem','DI10-0v2i-uCIx','ATkxuEPmNKaLXVOI81',6),
+('2022-10-21 15:58:31','Kevin Roy Marero','2022-10-21 15:58:31',NULL,'2022-10-21 15:58:31','to_redeem','DI10-fJHx-bwDi','ATkxuEPmNKaLXVOI81',7),
+('2022-10-21 15:58:31','Kevin Roy Marero','2022-10-21 15:58:31',NULL,'2022-10-21 15:58:31','to_redeem','DI10-FqLX-Ln9H','ATkxuEPmNKaLXVOI81',8),
+('2022-10-21 15:58:31','Kevin Roy Marero','2022-10-21 15:58:31',NULL,'2022-10-21 15:58:31','to_redeem','DI10-UMJL-4vKP','ATkxuEPmNKaLXVOI81',9),
+('2022-10-21 15:58:31','Kevin Roy Marero','2022-10-21 15:58:31',NULL,'2022-10-21 15:58:31','to_redeem','DI10-rexB-seUz','ATkxuEPmNKaLXVOI81',10),
+('2022-10-21 15:58:31','Kevin Roy Marero','2022-10-21 15:58:31',NULL,'2022-10-21 15:58:31','to_redeem','DI10-k7OX-0lW3','ATkxuEPmNKaLXVOI81',11);
 /*!40000 ALTER TABLE `referral_codes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,4 +331,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-21 14:17:50
+-- Dump completed on 2022-10-21 16:01:26
