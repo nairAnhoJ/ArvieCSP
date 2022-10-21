@@ -39,7 +39,7 @@ if(isset($_POST['generate'])){
                 $user = $_POST["member_name"];
                 $member_id = $_POST['member_id'];
                 $turon = $gen[$x-1];
-                $transaction = "$transaction_code$generation_batch";
+                $transaction = "$transaction_code$get_month$generation_batch";
                 
                 $insert_generated = "INSERT INTO `referral_codes` (`ref_code`, `gen_date`, `referrer`, `transfer_date`, `transact_date`, `status`, `generation_batch`) VALUES ('$turon', current_timestamp(), '$user', current_timestamp(), current_timestamp(), 'to_redeem', '$transaction')";
                 mysqli_query($conn, $insert_generated);
