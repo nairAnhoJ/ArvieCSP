@@ -2,19 +2,6 @@
 session_start();
 include_once ("../includes/config/conn.php");
 
-for ($x = 1; $x <= $count; $x++) {
-    $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $code_type = "DI";
-    $get_month = date('m', strtotime("now"));
-    $rand4 = substr(str_shuffle($String_a), 0, 4);
-    $rand4_check = substr(str_shuffle($String_b), 0, 4);
-    $generated = "$code_type$get_month-$rand4-$rand4_check";
-    $generation_batch = substr(str_shuffle($String_a), 0, 16);
-
-    $insert_generated = "INSERT INTO `referral_codes` (`ref_codes`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`, ) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', $generation_batch)";
-}
-
 // $db= $conn;
 
 // // code for getting the accounts//
@@ -237,7 +224,7 @@ for ($x = 1; $x <= $count; $x++) {
             }
             .navbar div .nav-items ul li {
                 position: relative;
-                padding: 0 25px;
+                padding: 0 25px;    
                 margin-left: 0 !important;
             }
             .navbar div .nav-items ul li:not(:last-child):after {
@@ -316,44 +303,12 @@ for ($x = 1; $x <= $count; $x++) {
                     <div class="px-20 py-10 text-3xl font-medium grid grid-cols-3 gap-5 text-gray-700 justify-items-center">
                     <?php
                         $count = 10;
-
-                    //     <?php
-                    //     $count = 10;
-
-                    //     for ($x = 1; $x <= $count;) {
-                    //         $step = $x;
-                    //         do {
-                    //             if ($count > $step) {
-                    //                 $step++;
-                    //             }elseif ($count <= $step) {
-                    //                 if ($account_count == 1) {
-                    //                     if(isset($_POST["generate"])){
-                    //                         $codetype = $_POST['codetype'];
-                    //                         $codetype = $_POST['codetype'];
-                    //                         $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //base of first 4 chars
-                    //                         $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //base of second 4 chars
-                    //                         $get_month = date('m', strtotime("now")); //month
-                    //                         $rand4 = substr(str_shuffle($String_a), 0, 4); //rand first 4 characters
-                    //                         $rand4_check = substr(str_shuffle($String_b), 0, 4); //rand second 4 characters
-                    //                         $generated = "$codetype$get_month-$rand4-$rand4_check"; //generated codes
-                    //                         $generation_batch_a = substr(str_shuffle($String_a), 0, 4); //transaction number a
-                    //                         $generation_batch_b = substr(str_shuffle($String_b), 0, 4); //transaction number b
-                    //                         $transaction = "$codetype$get_month-$generation_batch_a-$generation_batch_a"; //transaction number
-                                        
-                    //                         $code_list = array($push_list);
-                    //                         if ($count != $step ) {
-                    //                         $push_list = array_push($code_list, $code_list);
-                    //                     }
-                    //                 }
-                    //                 }
-                    //             }
-                    //             echo "$generated <br>";
-                    //         } while ($x <= $count);
-                    //     }
-                    // ?>
+                        $gen = array();
+                        echo "<script>console.log('nagana ako 2');</script>";
                         
                         do {
-                            for ($x = 1; $x <= $count; $x++) {
+                            for ($x = 1; $x <=$count; $x++) {
+                                echo "<script>console.log('nagana ako 2');</script>";
                                 $codetype = "DI";
                                 $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                                 $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -362,10 +317,13 @@ for ($x = 1; $x <= $count; $x++) {
                                 $rand4_check = substr(str_shuffle($String_b), 0, 4);
                                 $generated = "$codetype$get_month-$rand4-$rand4_check";
                                 $generation_batch = substr(str_shuffle($String_a), 0, 16);
-                                
-                                echo "$generated <br>";
+                                array_push($gen, $generated);
+                                $arrLength = count($gen);
+                                echo $arrLength;
+                                echo $gen[$x-1];
+                                echo "<br>";
                             }
-                            } while ($x <= $count);
+                        } while ($x <= $count);
                     ?>
                     </div>
                 </div>

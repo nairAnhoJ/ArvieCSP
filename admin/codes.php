@@ -1,8 +1,6 @@
 <?php
 session_start();
-include_once ("../includes/config/conn.php");
-
-include "./includes/config/conn.php";
+include "/var/www/html/ArvieCSP/includes/config/conn.php";
 
 //Working
 $member_id = $_POST['member_id'];
@@ -20,46 +18,34 @@ while($fetch_id = mysqli_fetch_assoc($query_member_id)){
     $memName = array($full_name);
 }
 
-    $count = $_POST["count"];
-    
-    for ($x = 1; $x <= $count;) {
-        $step = $x;
-        do {
-            if ($count > $step) {
-                $step++;
-            }elseif ($count <= $step) {
+if(isset($_POST['generate'])){
+    $String_c='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $transaction_code = "AT";
+    $generation_batch = substr(str_shuffle($String_c), 0, 16);
+    $count = $_POST['count'];
+    $gen = array();
+
+    // do {
+            for ($x = 1; $x < $count; $x++) {
+                $codetype = $_POST['codetype'];
+                $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $get_month = date('m', strtotime("now"));
+                $rand4 = substr(str_shuffle($String_a), 0, 4);
+                $rand4_check = substr(str_shuffle($String_b), 0, 4);
+                $generated = "$codetype$get_month-$rand4-$rand4_check";
+                array_push($gen, $generated);
+                $arrLength = count($gen);
                 $user = $_POST["member_name"];
                 $member_id = $_POST['member_id'];
-                $account_select = "SELECT * from accounts where `first_name` = '$first_name' and `last_name` = '$last_name' and `member_id` = '$id'";
-                $account_query = mysqli_query($conn, $account_select);
-                $account_count = mysqli_num_rows($account_query);
-                if ($account_count == 1) {
-                    if(isset($_POST["generate"])){
-                        $codetype = $_POST['codetype'];
-                        $codetype = $_POST['codetype'];
-                        $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //base of first 4 chars
-                        $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; //base of second 4 chars
-                        $get_month = date('m', strtotime("now")); //month
-                        $rand4 = substr(str_shuffle($String_a), 0, 4); //rand first 4 characters
-                        $rand4_check = substr(str_shuffle($String_b), 0, 4); //rand second 4 characters
-                        $generated = "$codetype$get_month-$rand4-$rand4_check"; //generated codes
-                        $generation_batch_a = substr(str_shuffle($String_a), 0, 4); //transaction number a
-                        $generation_batch_b = substr(str_shuffle($String_b), 0, 4); //transaction number b
-                        $transaction = "$codetype$get_month-$generation_batch_a-$generation_batch_a"; //transaction number
-                    
-                        $code_list = array($push_list);
-                        if ($count != $step ) {
-                        $push_list = array_push($code_list, $code_list);
-                        }
-                }
-
-                    $insert_generated = "INSERT INTO `referral_codes` (`ref_code`, `gen_date`, `referrer`, `transfer_date`, `referee`, `transact_date`, `status`, `generation_batch`, `type`, `referrer_id`) VALUES ('$generated', current_timestamp(), '$user', current_timestamp(), '$generated', current_timestamp(), 'to_redeem', '$generation_batch', '$codetype', '$member_id')";
-                    mysqli_query($conn, $insert_generated);
-                }
+                $turon = $gen[$x-1];
+                $transaction = "$transaction_code$generation_batch";
+                
+                $insert_generated = "INSERT INTO `referral_codes` (`ref_code`, `gen_date`, `referrer`, `transfer_date`, `transact_date`, `status`, `generation_batch`) VALUES ('$turon', current_timestamp(), '$user', current_timestamp(), current_timestamp(), 'to_redeem', '$transaction')";
+                mysqli_query($conn, $insert_generated);
             }
-        } while ($x <= $count);
-    }
-
+    // } while ($x <= $count);e
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -212,7 +198,7 @@ while($fetch_id = mysqli_fetch_assoc($query_member_id)){
 
             <!-- Generate Code Modal -->
             <div id="generateModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-
+                
                 <!-- Error Message -->
                 <div style="transform: translate(-50%, 0); z-index:99;" id="errorIDNum" class="hidden absolute top-24 left-1/2  flex items-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-red-300 rounded-lg shadow" role="alert">
                     <div class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-red-500 bg-red-300 rounded-lg">
@@ -240,11 +226,11 @@ while($fetch_id = mysqli_fetch_assoc($query_member_id)){
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="p-6">
+                        <form method="POST" action="codes.php" class="p-6">
                             <div class="relative mb-6">
                                 <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">ID Number</label>
                                 <input type="search" id="id-search" name="member_id" list="idList" autocomplete="false" class="block p-4 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" required>
-                                <button type="button" name="check" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check ID Number</button>
+                                <button type="button" class="checkID text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Check ID Number</button>
                                 <datalist class="text-lg bg-blue-500" id="idList">
                                     <?php
                                         foreach($idNum as $x) {
@@ -271,12 +257,12 @@ while($fetch_id = mysqli_fetch_assoc($query_member_id)){
                                 <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">Count</label>
                                 <input type="number" name="count" min="1" max="99" value="1" id="count-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             </div>
+                            <!-- Modal footer -->
+                            <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200">
+                                <button type="submit" name="generate" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Generate</button>
+                                <button data-modal-toggle="generateModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Close</button>
+                            </div>
                         </form>
-                        <!-- Modal footer -->
-                        <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200">
-                            <a type="submit" value="generate" name="generate" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" href="#">Generate</a>  
-                            <button data-modal-toggle="generateModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Close</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -286,7 +272,7 @@ while($fetch_id = mysqli_fetch_assoc($query_member_id)){
                 <table id="codeTable" class="stripe hover nowrap row-border dt-body-center" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                     <thead>
                         <tr>
-                            <th data-priority="1"><?php json_encode($array_list); ?>Date</th>
+                            <th data-priority="1">Date</th>
                             <th data-priority="2">Tran. No.</th>
                             <th data-priority="3">Member Name</th>
                             <th data-priority="4">Type</th>
@@ -325,54 +311,6 @@ while($fetch_id = mysqli_fetch_assoc($query_member_id)){
                             <?php } ?>
                         </tr>
                         <!-- end -->
-
-                        <tr>
-                            <td class="text-center">10/04/2022</td>
-                            <td class="text-center">RB-10040002</td>
-                            <td class="text-center">Kevin Marero</td>
-                            <td class="text-center">Kapenato & Cereal</td>
-                            <td class="text-center">10</td>
-                            <td class="text-center">
-                                <button class="text-blue-500" data-tran-num="10040002" type="button" data-modal-toggle="viewModal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
-                                            <path d="M2486 5097 c-70 -40 -76 -63 -76 -302 0 -236 6 -260 69 -302 71 -48 175 -20 213 57 15 30 18 65 18 243 0 240 -8 270 -80 307 -51 26 -95 25 -144 -3z"/>
-                                            <path d="M1345 4893 c-91 -23 -131 -132 -84 -226 47 -92 193 -343 213 -365 49 -55 134 -69 194 -32 44 27 76 98 67 148 -7 36 -202 389 -239 431 -37 41 -94 58 -151 44z"/>
-                                            <path d="M3675 4886 c-16 -7 -39 -24 -51 -37 -37 -42 -232 -395 -239 -431 -9 -50 23 -121 67 -148 60 -37 145 -23 194 32 20 22 166 273 213 365 38 76 23 159 -38 202 -38 27 -107 35 -146 17z"/>
-                                            <path d="M2320 3874 c-14 -2 -65 -9 -115 -15 -708 -86 -1481 -485 -2027 -1047 -236 -243 -236 -261 0 -504 526 -541 1204 -903 1938 -1035 137 -24 171 -27 429 -27 293 -1 340 3 579 50 516 102 1051 361 1521 737 132 106 426 400 454 454 47 93 25 137 -157 325 -570 586 -1337 972 -2107 1058 -83 9 -458 12 -515 4z m445 -313 c383 -79 681 -364 787 -752 19 -72 23 -109 23 -249 0 -140 -4 -177 -23 -249 -101 -371 -376 -647 -741 -743 -97 -25 -299 -35 -401 -19 -505 78 -870 502 -870 1011 0 498 350 917 845 1008 89 17 282 13 380 -7z m1150 -347 c248 -137 540 -352 740 -546 l110 -106 -55 -57 c-190 -197 -518 -442 -798 -599 -128 -72 -296 -150 -286 -133 5 6 27 41 50 77 93 146 161 322 189 490 19 122 19 330 -1 445 -29 168 -97 342 -188 485 -23 36 -45 71 -50 77 -9 16 160 -62 289 -133z m-2425 131 c0 -2 -20 -35 -44 -72 -63 -99 -103 -181 -141 -296 -47 -141 -65 -257 -65 -417 0 -264 67 -496 204 -710 23 -36 45 -70 49 -77 11 -17 -184 76 -321 153 -249 141 -518 342 -712 531 l-105 103 95 93 c260 254 622 506 943 658 82 38 97 43 97 34z"/>
-                                            <path d="M2433 3055 c-226 -61 -383 -264 -383 -495 0 -279 231 -510 510 -510 329 0 577 318 495 635 -71 272 -356 441 -622 370z m205 -301 c78 -32 132 -111 132 -194 0 -113 -97 -210 -210 -210 -146 0 -250 155 -194 288 44 107 168 160 272 116z"/>
-                                            <path d="M1525 860 c-35 -14 -70 -62 -157 -215 -119 -209 -128 -229 -128 -275 0 -133 163 -199 252 -102 38 41 236 394 243 434 9 50 -23 121 -67 148 -34 21 -105 26 -143 10z"/>
-                                            <path d="M3452 850 c-44 -27 -76 -98 -67 -148 7 -40 205 -393 243 -434 49 -53 133 -60 194 -16 60 42 75 125 37 201 -47 92 -193 343 -213 365 -49 55 -134 69 -194 32z"/>
-                                            <path d="M2479 627 c-63 -42 -69 -66 -69 -302 0 -239 6 -262 76 -302 49 -28 93 -29 144 -3 72 37 80 67 80 307 0 178 -3 213 -18 243 -25 50 -75 80 -132 80 -32 0 -58 -7 -81 -23z"/>
-                                        </g>
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center">10/03/2022</td>
-                            <td class="text-center">DI-10030001</td>
-                            <td class="text-center">Cedrick Orozo</td>
-                            <td class="text-center">Direct Invite</td>
-                            <td class="text-center">5</td>
-                            <td class="text-center">
-                                <button class="text-blue-500" data-tran-num="10030001" type="button" data-modal-toggle="viewModal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
-                                            <path d="M2486 5097 c-70 -40 -76 -63 -76 -302 0 -236 6 -260 69 -302 71 -48 175 -20 213 57 15 30 18 65 18 243 0 240 -8 270 -80 307 -51 26 -95 25 -144 -3z"/>
-                                            <path d="M1345 4893 c-91 -23 -131 -132 -84 -226 47 -92 193 -343 213 -365 49 -55 134 -69 194 -32 44 27 76 98 67 148 -7 36 -202 389 -239 431 -37 41 -94 58 -151 44z"/>
-                                            <path d="M3675 4886 c-16 -7 -39 -24 -51 -37 -37 -42 -232 -395 -239 -431 -9 -50 23 -121 67 -148 60 -37 145 -23 194 32 20 22 166 273 213 365 38 76 23 159 -38 202 -38 27 -107 35 -146 17z"/>
-                                            <path d="M2320 3874 c-14 -2 -65 -9 -115 -15 -708 -86 -1481 -485 -2027 -1047 -236 -243 -236 -261 0 -504 526 -541 1204 -903 1938 -1035 137 -24 171 -27 429 -27 293 -1 340 3 579 50 516 102 1051 361 1521 737 132 106 426 400 454 454 47 93 25 137 -157 325 -570 586 -1337 972 -2107 1058 -83 9 -458 12 -515 4z m445 -313 c383 -79 681 -364 787 -752 19 -72 23 -109 23 -249 0 -140 -4 -177 -23 -249 -101 -371 -376 -647 -741 -743 -97 -25 -299 -35 -401 -19 -505 78 -870 502 -870 1011 0 498 350 917 845 1008 89 17 282 13 380 -7z m1150 -347 c248 -137 540 -352 740 -546 l110 -106 -55 -57 c-190 -197 -518 -442 -798 -599 -128 -72 -296 -150 -286 -133 5 6 27 41 50 77 93 146 161 322 189 490 19 122 19 330 -1 445 -29 168 -97 342 -188 485 -23 36 -45 71 -50 77 -9 16 160 -62 289 -133z m-2425 131 c0 -2 -20 -35 -44 -72 -63 -99 -103 -181 -141 -296 -47 -141 -65 -257 -65 -417 0 -264 67 -496 204 -710 23 -36 45 -70 49 -77 11 -17 -184 76 -321 153 -249 141 -518 342 -712 531 l-105 103 95 93 c260 254 622 506 943 658 82 38 97 43 97 34z"/>
-                                            <path d="M2433 3055 c-226 -61 -383 -264 -383 -495 0 -279 231 -510 510 -510 329 0 577 318 495 635 -71 272 -356 441 -622 370z m205 -301 c78 -32 132 -111 132 -194 0 -113 -97 -210 -210 -210 -146 0 -250 155 -194 288 44 107 168 160 272 116z"/>
-                                            <path d="M1525 860 c-35 -14 -70 -62 -157 -215 -119 -209 -128 -229 -128 -275 0 -133 163 -199 252 -102 38 41 236 394 243 434 9 50 -23 121 -67 148 -34 21 -105 26 -143 10z"/>
-                                            <path d="M3452 850 c-44 -27 -76 -98 -67 -148 7 -40 205 -393 243 -434 49 -53 133 -60 194 -16 60 42 75 125 37 201 -47 92 -193 343 -213 365 -49 55 -134 69 -194 32z"/>
-                                            <path d="M2479 627 c-63 -42 -69 -66 -69 -302 0 -239 6 -262 76 -302 49 -28 93 -29 144 -3 72 37 80 67 80 307 0 178 -3 213 -18 243 -25 50 -75 80 -132 80 -32 0 -58 -7 -81 -23z"/>
-                                        </g>
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
                     </tbody>
                     <!-- <button class="viewCodeBtn" type="button" data-modal-toggle="viewModal"></button> -->
                 </table>
