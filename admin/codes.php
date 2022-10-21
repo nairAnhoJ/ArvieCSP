@@ -24,27 +24,30 @@ if(isset($_POST['generate'])){
     $generation_batch = substr(str_shuffle($String_c), 0, 16);
     $count = $_POST['count'];
     $gen = array();
+    $transaction = "$transaction_code$get_month$generation_batch";
 
-    // do {
-            for ($x = 1; $x < $count; $x++) {
-                $codetype = $_POST['codetype'];
-                $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                $String_b='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                $get_month = date('m', strtotime("now"));
-                $rand4 = substr(str_shuffle($String_a), 0, 4);
-                $rand4_check = substr(str_shuffle($String_b), 0, 4);
-                $generated = "$codetype$get_month-$rand4-$rand4_check";
-                array_push($gen, $generated);
-                $arrLength = count($gen);
-                $user = $_POST["member_name"];
-                $member_id = $_POST['member_id'];
-                $turon = $gen[$x-1];
-                $transaction = "$transaction_code$get_month$generation_batch";
-                
-                $insert_generated = "INSERT INTO `referral_codes` (`ref_code`, `gen_date`, `referrer`, `transfer_date`, `transact_date`, `status`, `generation_batch`) VALUES ('$turon', current_timestamp(), '$user', current_timestamp(), current_timestamp(), 'to_redeem', '$transaction')";
-                mysqli_query($conn, $insert_generated);
-            }
-    // } while ($x <= $count);e
+    $transaction_select = "SELECT `generation_batch` FROM referral_codes where `generation_batch` = '$transaction'";
+    $transaction_query = mysqli_query($conn, $transaction_select);
+    $transaction_count = mysqli_num_rows($transaction_query);
+
+    if ($transaction_count == 0) {
+        for ($x = 0; $x < $count; $x++) {
+            $codetype = $_POST['codetype'];
+            $String_a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $get_month = date('m', strtotime("now"));
+            $rand4 = substr(str_shuffle($String_a), 0, 4);
+            $rand4_check = substr(str_shuffle($String_a), 0, 4);
+            $generated = "$codetype$get_month-$rand4-$rand4_check";
+            array_push($gen, $generated);
+            $arrLength = count($gen);
+            $user = $_POST["member_name"];
+            $member_id = $_POST['member_id'];
+            $turon = $gen[$x];
+            
+            $insert_generated = "INSERT INTO `referral_codes` (`ref_code`, `gen_date`, `referrer`, `transfer_date`, `transact_date`, `status`, `generation_batch`) VALUES ('$turon', current_timestamp(), '$user', current_timestamp(), current_timestamp(), 'to_redeem', '$transaction')";
+            mysqli_query($conn, $insert_generated);
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -248,14 +251,14 @@ if(isset($_POST['generate'])){
                             <div class="mb-6">
                                 <label for="codeType" class="block mb-2 text-lg font-medium text-gray-900">Type</label>
                                 <select id="codeType" name="codetype" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                    <option value="DI" selected>Direct Invite</option>
+                                    <option value="DI">Direct Invite</option>
                                     <option value="RA">Botanical</option>
                                     <option value="RB">Kapenato & Cereal</option>
                                 </select>
                             </div>
                             <div class="mb-6">
                                 <label for="base-input" class="block mb-2 text-lg font-medium text-gray-900">Count</label>
-                                <input type="number" name="count" min="1" max="99" value="1" id="count-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <input type="number" name="count" min="1" max="99" id="count-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             </div>
                             <!-- Modal footer -->
                             <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200">
@@ -282,7 +285,7 @@ if(isset($_POST['generate'])){
                     </thead>
                     <tbody>
                     <?php
-                    $referral_list = "SELECT * from referral_codes"; //select all referral codes
+                    $referral_list = "SELECT DISTINCT generation_batch, gen_date from referral_codes"; //select all referral codes
                     $referral_query = mysqli_query($conn, $referral_list);
                     while ($referral = mysqli_fetch_assoc($referral_query)) {
                             ?>
@@ -290,7 +293,15 @@ if(isset($_POST['generate'])){
                             <td class="text-center"><?php echo $referral['gen_date']; ?></td>
                             <td class="text-center"><?php echo $referral['generation_batch']; ?></td>
                             <td class="text-center"><?php echo $referral['referrer']; ?></td>
-                            <td class="text-center">Botanical</td>
+                            <td class="text-center">
+                                <?php if (substr($referral['ref_code'],0, 2) == "DI") {
+                                        echo "Direct Sales";
+                                    } elseif (substr($referral['ref_code'],0, 2) == "RA") {
+                                        echo "Botanical";
+                                    } elseif (substr($referral['ref_code'],0, 2) == "RB") {
+                                        echo "Kapenato & Cereal";
+                                    }?>
+                            </td>
                             <td class="text-center">20</td>
                             <td class="text-center">
                                 <button class="text-blue-500" data-tran-num="10050003" type="button" data-modal-toggle="viewModal">
