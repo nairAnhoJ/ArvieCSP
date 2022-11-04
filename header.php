@@ -1,4 +1,4 @@
-<nav class="navbar px-2 sm:px-4 py-2.5 sm:pt-2.5 bg-emerald-800 fixed w-full z-50 top-0 left-0 border-b border-gray-600">
+<nav style="background-color: hsla(0,0%,96%,.3);" class="navbar px-2 sm:px-4 py-2.5 sm:pt-2.5 bg-black bg-opacity-20 shadow fixed w-full z-50 top-0 left-0">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
 
     <div class="w-2/6 md:hidden flex">
@@ -17,7 +17,7 @@
 
     <div class="w-2/6 md:order-2">
         <div class="grid justify-items-end <?php if($loginPage == true || isset($_SESSION["id"])){ echo 'hidden';} ?>">
-            <a href="./login.php" class="text-neutral-300 hover:text-white border border-neutral-300 hover:border-white font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-3 md:mr-0">Sign In</a>
+            <a href="./login.php" class="text-neutral-500 hover:text-neutral-700 border border-neutral-500 hover:border-neutral-700 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-3 md:mr-0">Sign In</a>
         </div>
 
         <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName" class="<?php if(!isset($_SESSION["id"])){ echo 'hidden';} ?> float-right flex items-center text-sm font-medium text-neutral-400 rounded-full hover:text-white md:mr-0" type="button">
@@ -34,15 +34,15 @@
             <div class="truncate"><?php echo $_SESSION["email_address"];?></div>
             </div>
             <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
-            <li>
-                <a href="<?php if($admin==true){echo './admin/index.php';}else{echo './user/index.php';} ?>" class="block py-2 px-4 hover:bg-gray-200 bg-gray-300">Dashboard</a>
-            </li>
-            <li>
-                <a href="#" class="block py-2 px-4 hover:bg-gray-200">Edit Profile</a>
-            </li>
-            <li>
-                <a href="#" class="block py-2 px-4 hover:bg-gray-200">Earnings</a>
-            </li>
+                <li>
+                    <a href="<?php if($admin==true){echo './admin/index.php';}else{echo './user/index.php';} ?>" class="block py-2 px-4 hover:bg-gray-200 bg-gray-300">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 px-4 hover:bg-gray-200">Edit Profile</a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 px-4 hover:bg-gray-200">Earnings</a>
+                </li>
             </ul>
             <div class="py-1">
             <a href="./includes/auth/signout.php" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-200">Sign out</a>
@@ -52,20 +52,20 @@
 
     <div class="w-full md:w-2/6 md:order-1 md:flex md:items-center">
         <div class="nav-items hidden justify-between items-center md:flex md:m-auto" id="navbar-sticky">
-            <ul class="flex flex-col md:py-4 pt-6 pb-3 mt-3 bg-emerald-800 border-t border-gray-800 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
+            <!-- <ul class="flex flex-col md:py-4 pt-6 pb-3 mt-3 bg-transparent border-t border-gray-800 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
                 <li>
-                    <a href="#" class="block py-2 pr-4 pl-3 text-white bg-emerald-700 rounded md:bg-transparent md:text-white md:p-0" aria-current="page">Home</a>
+                    <a href="#" id="homeBtn" class="block py-2 pr-4 pl-3 text-neutral-700 hover:text-neutral-600 rounded md:bg-transparent md:p-0" aria-current="page">Home</a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 pr-4 pl-3 text-neutral-400 hover:text-white rounded hover:bg-emerald-700 md:hover:bg-transparent md:p-0">Products</a>
+                    <a href="#" id="productsBtn" class="block py-2 pr-4 pl-3 text-neutral-400 hover:text-neutral-600 rounded md:hover:bg-transparent md:p-0">Products</a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 pr-4 pl-3 text-neutral-400 hover:text-white rounded hover:bg-emerald-700 md:hover:bg-transparent md:p-0">About</a>
+                    <a href="#" id="aboutBtn" class="block py-2 pr-4 pl-3 text-neutral-400 hover:text-neutral-600 rounded md:hover:bg-transparent md:p-0">About</a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 pr-4 pl-3 text-neutral-400 hover:text-white rounded hover:bg-emerald-700 md:hover:bg-transparent md:p-0">Contact</a>
+                    <a href="#" id="contactBtn" class="block py-2 pr-4 pl-3 text-neutral-400 hover:text-neutral-600 rounded md:hover:bg-transparent md:p-0">Contact</a>
                 </li>
-            </ul>
+            </ul> -->
         </div>
     </div>
 
